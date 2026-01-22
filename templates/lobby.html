@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feriando.uy - Ferias de Montevideo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='lobby.css') }}">
+</head>
+<body>
+    <div class="lobby-container">
+        <header class="lobby-header">
+            <h1 class="logo">Feriando.uy</h1>
+            <p class="subtitulo">Tu guía de ferias en Montevideo</p>
+        </header>
+
+        <div class="opciones-menu">
+            <a href="/mapa" class="opcion-card">
+                <div class="icono">🗺️</div>
+                <h2>Mapa</h2>
+                <p>Explora todas las ferias en el mapa interactivo</p>
+            </a>
+
+            <a href="/tristan-narvaja" class="opcion-card proximo">
+                <div class="icono">📚</div>
+                <h2>Tristán Narvaja</h2>
+                <p>Guía completa de la feria más famosa</p>
+                <span class="badge">Próximamente</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
