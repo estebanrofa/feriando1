@@ -188,6 +188,28 @@ ferias = [
                 }
             }
         ]
+    },
+    {
+        'nombre': 'Feria Vecinal Juan Paullier',
+        'barrio': 'Tres Cruces',
+        'lat': -34.9015,
+        'lng': -56.1680,
+        'cuadras': [
+            {
+                'nombre': 'Juan Paullier - Tramo completo',
+                'coordenadas': [
+                    [-34.90207878883594, -56.16795659065247],
+                    [-34.9011724814482, -56.16802096366883],
+                    [-34.90049494414942, -56.16809606552125],
+                    [-34.900219968001814, -56.168133616447456]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Frutas', 'Verduras', 'Productos orgánicos'],
+                    'Ropa': ['Ropa usada', 'Accesorios']
+                }
+            }
+        ]
     }
 ]
 
@@ -215,6 +237,24 @@ def tristan_narvaja():
     
     return render_template('tristan_narvaja.html', 
                          feria=feria_tristan, 
+                         categorias_colores=categorias_colores,
+                         limites_feria=limites_feria)
+
+@app.route('/juan-paullier')
+def juan_paullier():
+    # Filtrar solo la feria de Juan Paullier
+    feria_juan = [feria for feria in ferias if feria['nombre'] == 'Feria Vecinal Juan Paullier'][0]
+    
+    # Límites del área de la feria
+    limites_feria = [
+        [-34.90250, -56.16750],
+        [-34.90250, -56.16850],
+        [-34.90000, -56.16850],
+        [-34.90000, -56.16750]
+    ]
+    
+    return render_template('juan_paullier.html', 
+                         feria=feria_juan, 
                          categorias_colores=categorias_colores,
                          limites_feria=limites_feria)
 

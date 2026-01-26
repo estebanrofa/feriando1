@@ -6,7 +6,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #7BB662 0%, #88C9A1 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -23,20 +23,30 @@ body {
     text-align: center;
     margin-bottom: 50px;
     color: white;
+    background: url('tristan-bg.jpg') center/cover no-repeat;
+    padding: 50px 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
 .logo {
     font-size: 3.5em;
     font-weight: bold;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
     letter-spacing: -1px;
+    position: relative;
+    z-index: 2;
 }
 
 .subtitulo {
     font-size: 1.2em;
-    opacity: 0.95;
+    opacity: 0.98;
     font-weight: 300;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 2;
 }
 
 .opciones-menu {
@@ -50,25 +60,34 @@ body {
     padding: 30px;
     border-radius: 15px;
     text-decoration: none;
-    color: #333;
+    color: #4A4A48;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     position: relative;
     overflow: hidden;
+    border-left: 5px solid #7BB662;
 }
 
 .opcion-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    border-left-color: #D9822B;
 }
 
-.opcion-card.proximo {
-    opacity: 0.7;
-    cursor: default;
+.opcion-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(123, 182, 98, 0.05) 0%, rgba(217, 130, 43, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-.opcion-card.proximo:hover {
-    transform: none;
+.opcion-card:hover::before {
+    opacity: 1;
 }
 
 .icono {
@@ -79,21 +98,30 @@ body {
 .opcion-card h2 {
     font-size: 1.8em;
     margin-bottom: 10px;
-    color: #667eea;
+    color: #7BB662;
 }
 
 .opcion-card p {
-    color: #666;
+    color: #4A4A48;
     font-size: 1em;
     line-height: 1.5;
+}
+
+.opcion-card .barrio {
+    color: #D9822B;
+    font-size: 0.85em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .badge {
     position: absolute;
     top: 15px;
     right: 15px;
-    background: #FFA500;
-    color: white;
+    background: #F6E27F;
+    color: #4A4A48;
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.75em;

@@ -10,7 +10,7 @@ html {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #F5F5F5;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -66,16 +66,17 @@ body {
     z-index: 1001;
     text-align: center;
     min-width: 300px;
+    border-top: 4px solid #7BB662;
 }
 
 .header-feria h1 {
-    color: #667eea;
+    color: #7BB662;
     font-size: 1.5em;
     margin: 0 0 5px 0;
 }
 
 .header-feria p {
-    color: #666;
+    color: #4A4A48;
     font-size: 0.9em;
     margin: 0;
 }
@@ -92,7 +93,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #f0f0f0;
+    background: #F6E27F;
     padding: 15px 25px;
     border-radius: 8px;
 }
@@ -100,13 +101,13 @@ body {
 .stat-numero {
     font-size: 2em;
     font-weight: bold;
-    color: #667eea;
+    color: #D9822B;
     line-height: 1;
 }
 
 .stat-label {
     font-size: 0.85em;
-    color: #666;
+    color: #4A4A48;
     margin-top: 5px;
 }
 
@@ -121,7 +122,7 @@ body {
     top: 10px;
     left: 10px;
     background: white;
-    color: #667eea;
+    color: #7BB662;
     text-decoration: none;
     padding: 10px 15px;
     border-radius: 8px;
@@ -133,12 +134,14 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
+    border: 2px solid transparent;
 }
 
 .boton-volver:hover {
-    background: #667eea;
+    background: #7BB662;
     color: white;
     transform: scale(1.05);
+    border-color: #D9822B;
 }
 
 /* Botón modo nocturno */
@@ -147,8 +150,8 @@ body {
     top: 10px;
     right: 10px;
     background: white;
-    color: #333;
-    border: none;
+    color: #4A4A48;
+    border: 2px solid #7BB662;
     padding: 10px 15px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
@@ -160,13 +163,15 @@ body {
 }
 
 .boton-nocturno:hover {
-    background: #f0f0f0;
+    background: #7BB662;
+    color: white;
     transform: scale(1.05);
 }
 
 .boton-nocturno.activo {
     background: #2c3e50;
     color: white;
+    border-color: #34495e;
 }
 
 .boton-nocturno.activo:hover {
@@ -180,7 +185,7 @@ body {
     right: 0;
     transform: translateY(-50%);
     background: white;
-    color: #667eea;
+    color: #7BB662;
     padding: 20px 8px;
     border-radius: 8px 0 0 8px;
     box-shadow: -3px 0 10px rgba(0,0,0,0.3);
@@ -193,10 +198,11 @@ body {
     justify-content: center;
     gap: 8px;
     width: 40px;
+    border-left: 3px solid #D9822B;
 }
 
 .barra-info-toggle:hover {
-    background: #667eea;
+    background: #7BB662;
     color: white;
 }
 
@@ -230,6 +236,7 @@ body {
     z-index: 1000;
     min-width: 160px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-top: 3px solid #7BB662;
 }
 
 .leyenda-header {
@@ -245,14 +252,14 @@ body {
 }
 
 .leyenda-flotante h3 {
-    color: #667eea;
+    color: #7BB662;
     margin: 0;
     font-size: 1em;
     font-weight: bold;
 }
 
 .flecha-toggle {
-    color: #667eea;
+    color: #D9822B;
     font-size: 1.2em;
     transition: transform 0.3s ease;
 }
@@ -274,7 +281,7 @@ body {
     transform: translateY(0);
     margin-top: 10px;
     padding-top: 10px;
-    border-top: 2px solid #667eea;
+    border-top: 2px solid #F6E27F;
 }
 
 .leyenda-item-flotante {
@@ -290,11 +297,11 @@ body {
 }
 
 .leyenda-item-flotante:hover {
-    background-color: #f0f0f0;
+    background-color: #F6E27F;
 }
 
 .leyenda-item-flotante.active {
-    background-color: #667eea;
+    background-color: #7BB662;
     color: white;
     font-weight: bold;
 }
@@ -342,12 +349,12 @@ body {
     padding: 10px;
     background: white;
     border-radius: 8px;
-    border-bottom: 3px solid #667eea;
+    border-bottom: 3px solid #7BB662;
     margin-bottom: 15px;
 }
 
 .info-panel h2 {
-    color: #667eea;
+    color: #7BB662;
     margin: 0;
     font-size: 1.3em;
 }
@@ -367,7 +374,7 @@ body {
 }
 
 .info-panel h3 {
-    color: #764ba2;
+    color: #D9822B;
     margin-bottom: 15px;
     font-size: 1.3em;
 }
@@ -378,23 +385,24 @@ body {
 }
 
 .categoria-principal {
-    background: #f0f0f0;
+    background: #F6E27F;
     padding: 10px;
     border-radius: 5px;
     margin: 15px 0;
     font-size: 1.1em;
+    color: #4A4A48;
 }
 
 .negocios-section {
-    background: #fff9e6;
+    background: #FFF9E6;
     padding: 15px;
     border-radius: 8px;
     margin-bottom: 15px;
-    border-left: 4px solid #FFA500;
+    border-left: 4px solid #D9822B;
 }
 
 .negocios-section h5 {
-    color: #ff8c00;
+    color: #D9822B;
     margin-bottom: 15px;
     font-size: 1.1em;
 }
@@ -405,6 +413,7 @@ body {
     margin-bottom: 12px;
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-left: 3px solid #7BB662;
 }
 
 .negocio-item:last-child {
@@ -412,21 +421,21 @@ body {
 }
 
 .negocio-item h6 {
-    color: #333;
+    color: #4A4A48;
     margin-bottom: 8px;
     font-size: 1em;
     font-weight: bold;
 }
 
 .negocio-desc {
-    color: #666;
+    color: #4A4A48;
     font-size: 0.9em;
     margin-bottom: 8px;
     line-height: 1.4;
 }
 
 .negocio-especialidad {
-    color: #FFA500;
+    color: #D9822B;
     font-size: 0.85em;
     margin: 0;
 }
@@ -436,7 +445,7 @@ body {
 }
 
 .resumen-item {
-    background: #f9f9f9;
+    background: #F9F9F9;
     padding: 10px 15px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -444,32 +453,33 @@ body {
 }
 
 .categoria-stats {
-    background: #e8f4f8;
+    background: #E8F5E9;
     padding: 15px;
     border-radius: 8px;
     margin-top: 15px;
     text-align: center;
+    border: 2px solid #7BB662;
 }
 
 .categoria-stats p {
     margin: 0;
     font-size: 1.1em;
-    color: #333;
+    color: #4A4A48;
 }
 
 .productos-section h5 {
-    color: #667eea;
+    color: #7BB662;
     margin-top: 15px;
     margin-bottom: 10px;
     font-size: 1.1em;
 }
 
 .categoria-section {
-    background: #f9f9f9;
+    background: #F9F9F9;
     padding: 15px;
     margin-bottom: 15px;
     border-radius: 8px;
-    border-left: 4px solid #667eea;
+    border-left: 4px solid #7BB662;
 }
 
 .categoria-section h5 {
@@ -493,7 +503,7 @@ body {
     content: "✓";
     position: absolute;
     left: 0;
-    color: #667eea;
+    color: #7BB662;
     font-weight: bold;
 }
 
