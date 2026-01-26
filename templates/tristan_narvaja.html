@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa de Ferias - Montevideo</title>
+    <title>Feria Tristán Narvaja - Feriando.uy</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -13,10 +13,15 @@
         <div class="main-content">
             <div class="map-container">
                 <a href="/" class="boton-volver">
-                    ← Volver
+                    ← Volver al Lobby
                 </a>
                 
-                <div class="leyenda-flotante" id="leyendaBox" style="display: none;">
+                <div class="header-feria">
+                    <h1>📚 Feria Tristán Narvaja</h1>
+                    <p>La feria más tradicional de Montevideo</p>
+                </div>
+                
+                <div class="leyenda-flotante" id="leyendaBox">
                     <div class="leyenda-header" onclick="toggleLeyenda()">
                         <h3>Categorías</h3>
                         <span class="flecha-toggle" id="flechaLeyenda">▲</span>
@@ -53,8 +58,19 @@
                 </div>
                 <div class="info-contenido abierto" id="infoContenido">
                     <div id="feria-info">
-                        <p>Haz click en cualquier feria del mapa para ver su información básica.</p>
-                        <p style="margin-top: 15px; color: #666; font-size: 0.9em;">💡 Para ver detalles completos de cada feria, visita sus páginas dedicadas desde el lobby.</p>
+                        <h3>{{ feria.nombre }}</h3>
+                        <p>Haz click en cualquier cuadra del mapa para ver sus productos y negocios.</p>
+                        
+                        <div class="estadisticas-feria">
+                            <div class="stat-item">
+                                <span class="stat-numero">{{ feria.cuadras|length }}</span>
+                                <span class="stat-label">Cuadras</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-numero">{{ categorias_colores|length }}</span>
+                                <span class="stat-label">Categorías</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -70,37 +86,26 @@
         var modoNocturno = false;
         var todasLasLineas = [];
         var categoriaActual = 'Todas';
-        var ferias = {{ ferias | tojson }};
+        var feria = {{ feria | tojson }};
         var categoriasColores = {{ categorias_colores | tojson }};
+        var limitesFeria = {{ limites_feria | tojson }};
         
         // Función para cambiar entre modo día y noche
         function toggleModoNocturno() {
             var boton = document.getElementById('botonModo');
             
             if (!modoNocturno) {
-                // Cambiar a modo noche
                 map.removeLayer(capaDia);
                 capaNoche.addTo(map);
                 boton.innerHTML = '☀️ Modo Día';
                 boton.classList.add('activo');
                 modoNocturno = true;
-                
-                // Actualizar colores de las líneas a celeste claro
-                todasLasLineas.forEach(function(linea) {
-                    linea.setStyle({ color: linea.colorNoche });
-                });
             } else {
-                // Cambiar a modo día
                 map.removeLayer(capaNoche);
                 capaDia.addTo(map);
                 boton.innerHTML = '🌙 Modo Nocturno';
                 boton.classList.remove('activo');
                 modoNocturno = false;
-                
-                // Actualizar colores de las líneas a azul oscuro
-                todasLasLineas.forEach(function(linea) {
-                    linea.setStyle({ color: linea.colorDia });
-                });
             }
         }
         
@@ -129,7 +134,6 @@
             var flecha = barra.querySelector('.flecha-barra');
             
             if (infoPanel.classList.contains('visible')) {
-                // Ocultar panel
                 infoPanel.classList.remove('visible');
                 mainContent.classList.remove('panel-visible');
                 flecha.innerHTML = '◀';
@@ -140,7 +144,6 @@
                     }
                 }, 500);
             } else {
-                // Mostrar panel
                 infoPanel.style.display = 'block';
                 mainContent.classList.add('panel-visible');
                 requestAnimationFrame(function() {
@@ -154,7 +157,6 @@
         function filtrarCategoria(categoria) {
             categoriaActual = categoria;
             
-            // Actualizar estilos de los items de la leyenda
             document.querySelectorAll('.categoria-filtro').forEach(function(item) {
                 if (item.dataset.categoria === categoria) {
                     item.classList.add('active');
@@ -163,7 +165,6 @@
                 }
             });
 
-            // Mostrar/ocultar líneas según la categoría
             todasLasLineas.forEach(function(linea) {
                 if (categoria === 'Todas' || linea.categoria === categoria) {
                     linea.setStyle({ opacity: 0.9 });
@@ -173,11 +174,9 @@
                 }
             });
             
-            // Solo mostrar panel si NO es "Todas"
             if (categoria !== 'Todas') {
                 mostrarInfoCategoria(categoria);
             } else {
-                // Usar la misma función de ocultar que cuando se hace click en el mapa
                 ocultarPanel();
             }
         }
@@ -187,44 +186,25 @@
             var infoDiv = document.getElementById('feria-info');
             var infoPanel = document.querySelector('.info-panel');
             var mainContent = document.querySelector('.main-content');
-            var boton = document.getElementById('botonInfoToggle');
             
-            // Actualizar contenido primero
             var html = '<h3>Categoría: ' + categoria + '</h3>';
+            var color = categoriasColores[categoria];
+            html += '<p style="color: ' + color + '">Filtrando por: <strong>' + categoria + '</strong></p>';
+            html += '<p>Las cuadras destacadas en el mapa pertenecen a esta categoría. Haz click en una para ver más detalles.</p>';
             
-            if (categoria === 'Todas') {
-                html += '<p>Mostrando todas las categorías de la feria. Haz click en una cuadra del mapa para ver detalles específicos.</p>';
-                html += '<div class="categoria-resumen">';
-                for (var cat in categoriasColores) {
-                    var color = categoriasColores[cat];
-                    html += '<div class="resumen-item" style="border-left-color: ' + color + '">';
-                    html += '<strong style="color: ' + color + '">' + cat + '</strong>';
-                    html += '</div>';
+            var contador = 0;
+            feria.cuadras.forEach(function(cuadra) {
+                if (cuadra.categoria_principal === categoria) {
+                    contador++;
                 }
-                html += '</div>';
-            } else {
-                var color = categoriasColores[categoria];
-                html += '<p style="color: ' + color + '">Filtrando por: <strong>' + categoria + '</strong></p>';
-                html += '<p>Las cuadras destacadas en el mapa pertenecen a esta categoría. Haz click en una para ver más detalles.</p>';
-                
-                // Contar cuántas cuadras tienen esta categoría
-                var contador = 0;
-                ferias.forEach(function(feria) {
-                    feria.cuadras.forEach(function(cuadra) {
-                        if (cuadra.categoria_principal === categoria) {
-                            contador++;
-                        }
-                    });
-                });
-                
-                html += '<div class="categoria-stats">';
-                html += '<p>📍 <strong>' + contador + '</strong> cuadra(s) encontrada(s)</p>';
-                html += '</div>';
-            }
+            });
+            
+            html += '<div class="categoria-stats">';
+            html += '<p>📍 <strong>' + contador + '</strong> cuadra(s) encontrada(s)</p>';
+            html += '</div>';
             
             infoDiv.innerHTML = html;
             
-            // Mostrar el panel automáticamente
             var barra = document.getElementById('barraInfoToggle');
             var flecha = barra.querySelector('.flecha-barra');
             
@@ -241,11 +221,9 @@
             var infoPanel = document.querySelector('.info-panel');
             var mainContent = document.querySelector('.main-content');
             
-            // Quitar ambas clases para animación suave
             infoPanel.classList.remove('visible');
             mainContent.classList.remove('panel-visible');
             
-            // Ocultar completamente después de la animación
             setTimeout(function() {
                 if (!infoPanel.classList.contains('visible')) {
                     infoPanel.style.display = 'none';
@@ -253,50 +231,17 @@
             }, 500);
         }
         
-        // Función para mostrar información de la feria
-        function mostrarInfoFeria(feria) {
-            var infoDiv = document.getElementById('feria-info');
-            var infoPanel = document.querySelector('.info-panel');
-            var mainContent = document.querySelector('.main-content');
-            
-            var html = '<h3>' + feria.nombre + '</h3>';
-            html += '<p>Esta es una de las ferias tradicionales de Montevideo.</p>';
-            
-            html += '<div class="estadisticas-feria">';
-            html += '<div class="stat-item">';
-            html += '<span class="stat-numero">' + feria.cuadras.length + '</span>';
-            html += '<span class="stat-label">Cuadras</span>';
-            html += '</div>';
-            html += '</div>';
-            
-            html += '<p style="margin-top: 20px;">Para ver más detalles de esta feria, visita su página dedicada desde el lobby.</p>';
-            
-            infoDiv.innerHTML = html;
-            
-            var barra = document.getElementById('barraInfoToggle');
-            var flecha = barra.querySelector('.flecha-barra');
-            
-            infoPanel.style.display = 'block';
-            mainContent.classList.add('panel-visible');
-            requestAnimationFrame(function() {
-                infoPanel.classList.add('visible');
-                flecha.innerHTML = '▶';
-            });
-        }
-        
         // Función para mostrar información de la cuadra
-        function mostrarInfoCuadra(cuadra, nombreFeria) {
+        function mostrarInfoCuadra(cuadra) {
             var infoDiv = document.getElementById('feria-info');
             var infoPanel = document.querySelector('.info-panel');
             var mainContent = document.querySelector('.main-content');
-            var boton = document.getElementById('botonInfoToggle');
             var color = categoriasColores[cuadra.categoria_principal];
             
-            var html = '<h3>' + nombreFeria + '</h3>';
+            var html = '<h3>' + feria.nombre + '</h3>';
             html += '<h4 style="color:' + color + '">📍 ' + cuadra.nombre + '</h4>';
             html += '<p class="categoria-principal">Categoría principal: <strong style="color:' + color + '">' + cuadra.categoria_principal + '</strong></p>';
             
-            // Mostrar negocios si existen
             if (cuadra.negocios && cuadra.negocios.length > 0) {
                 html += '<div class="negocios-section">';
                 html += '<h5>🏪 Negocios destacados:</h5>';
@@ -310,7 +255,6 @@
                 html += '</div>';
             }
             
-            // Mostrar productos por categoría
             html += '<div class="productos-section">';
             html += '<h5>📦 Productos disponibles:</h5>';
             for (var categoria in cuadra.productos) {
@@ -328,7 +272,6 @@
             
             infoDiv.innerHTML = html;
             
-            // Mostrar el panel automáticamente
             var barra = document.getElementById('barraInfoToggle');
             var flecha = barra.querySelector('.flecha-barra');
             
@@ -340,53 +283,42 @@
             });
         }
         
-        // Inicializar el mapa
-        var montevideoLimites = [
-            [-34.95, -56.30],
-            [-34.80, -56.05]
-        ];
+        // Calcular el centro y bounds de la feria
+        var polygon = L.polygon(limitesFeria);
+        var bounds = polygon.getBounds();
 
+        // Inicializar el mapa con zoom controlado
         map = L.map('map', {
-            center: [-34.9015, -56.1785],
-            zoom: 15.2,
-            maxBounds: montevideoLimites,
-            maxBoundsViscosity: 1.0,
-            minZoom: 12,
+            center: bounds.getCenter(),
+            zoom: 16.2,
+            minZoom: 16.2,
             maxZoom: 18,
-            zoomAnimation: true,
-            fadeAnimation: true,
-            markerZoomAnimation: true,
-            preferCanvas: true
+            zoomControl: true,
+            scrollWheelZoom: true,
+            doubleClickZoom: true,
+            touchZoom: true,
+            dragging: true
         });
 
         capaDia = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '© OpenStreetMap contributors, © CARTO',
             subdomains: 'abcd',
-            maxZoom: 18,
-            updateWhenIdle: false,
-            updateWhenZooming: false,
-            keepBuffer: 2
+            maxZoom: 18
         });
         
         capaNoche = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '© OpenStreetMap contributors, © CARTO',
             subdomains: 'abcd',
-            maxZoom: 18,
-            updateWhenIdle: false,
-            updateWhenZooming: false,
-            keepBuffer: 2
+            maxZoom: 18
         });
         
         capaDia.addTo(map);
         
-        // Forzar que el mapa se renderice correctamente
         setTimeout(function() {
             map.invalidateSize();
         }, 100);
 
-        // Agregar evento click al mapa para cerrar el panel
         map.on('click', function(e) {
-            // Solo cerrar si no se hizo click en una línea
             var clickEnLinea = false;
             todasLasLineas.forEach(function(linea) {
                 if (linea.getBounds && linea.getBounds().contains(e.latlng)) {
@@ -400,53 +332,26 @@
         });
 
         // Agregar líneas de colores para cada cuadra
-        ferias.forEach(function(feria) {
-            feria.cuadras.forEach(function(cuadra) {
-                // En el mapa general, todas las cuadras de una feria tienen el mismo color
-                var colorDia = '#1a3a52';      // Azul oscuro para modo día
-                var colorNoche = '#4fc3f7';    // Celeste claro para modo noche
-                var color = modoNocturno ? colorNoche : colorDia;
-                
-                var polyline = L.polyline(cuadra.coordenadas, {
-                    color: color,
-                    weight: 4,
-                    opacity: 0.9
-                }).addTo(map);
-
-                polyline.nombreFeria = feria.nombre;
-                polyline.categoria = cuadra.categoria_principal;
-                polyline.colorDia = colorDia;
-                polyline.colorNoche = colorNoche;
-                todasLasLineas.push(polyline);
-
-                polyline.on('click', function() {
-                    mostrarInfoFeria(feria);
-                });
-
-                polyline.bindPopup('<b>' + feria.nombre + '</b>');
-            });
-        });
-        
-        // Ajustar el grosor de las líneas según el zoom
-        map.on('zoomend', function() {
-            var zoom = map.getZoom();
-            var weight;
+        feria.cuadras.forEach(function(cuadra) {
+            var color = categoriasColores[cuadra.categoria_principal];
             
-            if (zoom >= 16) {
-                weight = 6;
-            } else if (zoom >= 15) {
-                weight = 5;
-            } else if (zoom >= 14) {
-                weight = 4;
-            } else if (zoom >= 13) {
-                weight = 3;
-            } else {
-                weight = 2;
-            }
-            
-            todasLasLineas.forEach(function(linea) {
-                linea.setStyle({ weight: weight });
+            var polyline = L.polyline(cuadra.coordenadas, {
+                color: color,
+                weight: 6,
+                opacity: 0.9
+            }).addTo(map);
+
+            polyline.categoria = cuadra.categoria_principal;
+            todasLasLineas.push(polyline);
+
+            polyline.on('click', function() {
+                mostrarInfoCuadra(cuadra);
             });
+
+            polyline.bindPopup(
+                '<b>' + cuadra.nombre + '</b><br>' +
+                'Categoría principal: <span style="color:' + color + '"><b>' + cuadra.categoria_principal + '</b></span>'
+            );
         });
     </script>
 </body>
