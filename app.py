@@ -17,6 +17,8 @@ categorias_colores = {
 ferias = [
     {
         'nombre': 'Feria de Tristán Narvaja',
+        'barrio': 'Cordón',
+        'dia': 'Domingos',
         'lat': -34.9015,
         'lng': -56.1785,
         'cuadras': [
@@ -192,6 +194,7 @@ ferias = [
     {
         'nombre': 'Feria Vecinal Juan Paullier',
         'barrio': 'Tres Cruces',
+        'dia': 'Martes',
         'lat': -34.9015,
         'lng': -56.1680,
         'cuadras': [
@@ -257,6 +260,16 @@ def juan_paullier():
                          feria=feria_juan, 
                          categorias_colores=categorias_colores,
                          limites_feria=limites_feria)
+
+@app.route('/tres-cruces')
+def tres_cruces():
+    # Por ahora redirige al lobby, más adelante tendrá su propia página
+    return render_template('lobby.html')
+
+@app.route('/calle-salto')
+def calle_salto():
+    # Por ahora redirige al lobby, más adelante tendrá su propia página
+    return render_template('lobby.html')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
