@@ -8,28 +8,39 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='lobby.css') }}">
 </head>
 <body>
+    <header class="lobby-header">
+        <h1 class="logo">Feriando.uy</h1>
+    </header>
+    
     <div class="lobby-container">
-        <header class="lobby-header">
-            <h1 class="logo">Feriando.uy</h1>
-            <p class="subtitulo">Tu guía de ferias en Montevideo</p>
-        </header>
-        <div class="opciones-menu">
-            <a href="/mapa" class="opcion-card">
+        <!-- Segundo tercio: Botón Mapa centrado -->
+        <div class="seccion-mapa">
+            <a href="/mapa" class="opcion-mapa">
                 <div class="icono">🗺️</div>
-                <h2>Mapa</h2>
-                <p>Explora todas las ferias en el mapa interactivo</p>
+                <div class="opcion-card-content">
+                    <h2>Mapa</h2>
+                    <p>Explora todas las ferias en el mapa interactivo</p>
+                </div>
             </a>
+        </div>
+        
+        <!-- Tercer tercio: Ferias específicas desde la izquierda -->
+        <div class="seccion-ferias">
             <a href="/tristan-narvaja" class="opcion-card">
                 <div class="icono">📚</div>
-                <h2>Tristán Narvaja</h2>
-                <p class="barrio">Cordón</p>
-                <p>Guía completa de la feria más famosa</p>
+                <div class="opcion-card-content">
+                    <h2>Tristán Narvaja</h2>
+                    <p class="barrio">Cordón</p>
+                    <p>Guía completa de la feria más famosa</p>
+                </div>
             </a>
             <a href="/juan-paullier" class="opcion-card">
                 <div class="icono">🥬</div>
-                <h2>Juan Paullier</h2>
-                <p class="barrio">Tres Cruces</p>
-                <p>Feria vecinal con productos frescos</p>
+                <div class="opcion-card-content">
+                    <h2>Juan Paullier</h2>
+                    <p class="barrio">Tres Cruces</p>
+                    <p>Feria vecinal con productos frescos</p>
+                </div>
             </a>
         </div>
     </div>
