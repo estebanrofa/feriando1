@@ -194,7 +194,6 @@ ferias = [
     {
         'nombre': 'Feria Vecinal Juan Paullier',
         'barrio': 'Tres Cruces',
-        'dia': 'Martes',
         'lat': -34.9015,
         'lng': -56.1680,
         'cuadras': [

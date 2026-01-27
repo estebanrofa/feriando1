@@ -75,8 +75,9 @@ body {
     align-items: flex-start;
     justify-content: flex-start;
     padding: 20px;
-    padding-left: 10%;
+    padding-left: 5%;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 /* Botón Mapa - rectangular con sombra más fuerte */
@@ -120,7 +121,7 @@ body {
     margin: 0;
 }
 
-/* Cards de ferias con sombra más fuerte */
+/* Cards de ferias con sombra más fuerte - TODAS DEL MISMO TAMAÑO */
 .opcion-card {
     background: white;
     padding: 12px 20px;
@@ -137,8 +138,12 @@ body {
     align-items: center;
     text-align: left;
     gap: 15px;
-    min-height: 70px;
-    width: 280px;
+    min-height: 70px !important;
+    max-height: 70px !important;
+    width: 280px !important;
+    min-width: 280px !important;
+    max-width: 280px !important;
+    flex-shrink: 0;
 }
 
 .opcion-card:hover {
@@ -174,12 +179,17 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    overflow: hidden;
+    min-width: 0;
 }
 
 .opcion-card h2 {
     font-size: 1.1em;
     margin: 0;
     color: #7BB662;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .opcion-card .barrio {
@@ -189,6 +199,9 @@ body {
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .opcion-card p {
@@ -196,6 +209,9 @@ body {
     font-size: 0.8em;
     line-height: 1.3;
     margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .badge {
@@ -225,15 +241,16 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* Card próximamente - opacidad reducida */
+/* Card próximamente - misma apariencia pero sin hover */
 .opcion-card-proximo {
     opacity: 0.85;
-    cursor: default;
+    cursor: not-allowed;
 }
 
 .opcion-card-proximo:hover {
     transform: none;
     box-shadow: 0 3px 15px rgba(0,0,0,0.25);
+    border-left-color: #7BB662;
 }
 
 /* Responsive */
