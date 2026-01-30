@@ -192,8 +192,156 @@ ferias = [
         ]
     },
     {
+        'nombre': 'Feria Calle Salto',
+        'barrio': 'Cordón',
+        'dia': 'Sábados',
+        'lat': -34.909,
+        'lng': -56.182,
+        'cuadras': [
+            {
+                'nombre': 'Calle Salto - Recorrido completo',
+                'coordenadas': [
+                    [-34.91169061803468, -56.181665955354696],
+                    [-34.90716234917917, -56.18216673960329]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Frutas', 'Verduras', 'Productos frescos'],
+                    'Ropa': ['Ropa usada', 'Accesorios']
+                }
+            }
+        ]
+    },
+    {
+        'nombre': 'Feria Tres Cruces',
+        'barrio': 'La Comercial',
+        'dia': 'Sábados',
+        'lat': -34.889,
+        'lng': -56.168,
+        'cuadras': [
+            {
+                'nombre': 'Tres Cruces - Recorrido completo',
+                'coordenadas': [
+                    [-34.88986640083746, -56.16682645270599],
+                    [-34.8891860519139, -56.169361353226115]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Frutas', 'Verduras', 'Productos orgánicos'],
+                    'Ropa': ['Ropa nueva', 'Zapatos']
+                }
+            }
+        ]
+    },
+    {
+        'nombre': 'Feria Democracia',
+        'barrio': 'Villa Muñoz/Retiro',
+        'dia': 'Domingos',
+        'lat': -34.890,
+        'lng': -56.177,
+        'cuadras': [
+            {
+                'nombre': 'Democracia - Recorrido completo',
+                'coordenadas': [
+                    [-34.89068718380285, -56.17667370807447],
+                    [-34.88980637272634, -56.17679857241883]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Frutas', 'Verduras', 'Productos de granja'],
+                    'Ropa': ['Ropa usada']
+                }
+            }
+        ]
+    },
+    {
+        'nombre': 'Feria Acevedo Díaz',
+        'barrio': 'Parque Rodó',
+        'dia': 'Martes',
+        'lat': -34.906,
+        'lng': -56.166,
+        'cuadras': [
+            {
+                'nombre': 'Acevedo Díaz - Recorrido completo',
+                'coordenadas': [
+                    [-34.90685750900923, -56.166047944787074],
+                    [-34.905833784203644, -56.1661575292588]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Frutas', 'Verduras', 'Productos frescos'],
+                    'Ropa': ['Ropa', 'Accesorios']
+                }
+            }
+        ]
+    },
+    {
+        'nombre': 'Feria San Salvador',
+        'barrio': 'Parque Rodó',
+        'dia': 'Miércoles',
+        'lat': -34.911,
+        'lng': -56.170,
+        'cuadras': [
+            {
+                'nombre': 'San Salvador - Recorrido completo',
+                'coordenadas': [
+                    [-34.91090280595359, -56.170360333445714],
+                    [-34.91081042578227, -56.16868663516422]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Frutas', 'Verduras', 'Productos locales'],
+                    'Ropa': ['Ropa usada', 'Zapatos']
+                }
+            }
+        ]
+    },
+    {
+        'nombre': 'Feria Isla de Flores',
+        'barrio': 'Palermo',
+        'dia': 'Jueves',
+        'lat': -34.910,
+        'lng': -56.177,
+        'cuadras': [
+            {
+                'nombre': 'Isla de Flores - Recorrido completo',
+                'coordenadas': [
+                    [-34.91048071389207, -56.17705693125584],
+                    [-34.91043672499547, -56.17648475403061]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Frutas', 'Verduras', 'Productos frescos'],
+                    'Ropa': ['Ropa', 'Calzado']
+                }
+            }
+        ]
+    },
+    {
+        'nombre': 'Feria Martínez Trueba',
+        'barrio': 'Palermo',
+        'dia': 'Martes',
+        'lat': -34.908,
+        'lng': -56.183,
+        'cuadras': [
+            {
+                'nombre': 'Martínez Trueba - Recorrido completo',
+                'coordenadas': [
+                    [-34.90807534389788, -56.18306312419999],
+                    [-34.90724257521355, -56.18315193027305]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Frutas', 'Verduras', 'Productos de estación'],
+                    'Ropa': ['Ropa usada']
+                }
+            }
+        ]
+    },
+    {
         'nombre': 'Feria Vecinal Juan Paullier',
         'barrio': 'Tres Cruces',
+        'dia': 'Martes',
         'lat': -34.9015,
         'lng': -56.1680,
         'cuadras': [
@@ -262,13 +410,101 @@ def juan_paullier():
 
 @app.route('/tres-cruces')
 def tres_cruces():
-    # Por ahora redirige al lobby, más adelante tendrá su propia página
-    return render_template('lobby.html')
+    feria = [f for f in ferias if f['nombre'] == 'Feria Tres Cruces'][0]
+    limites_feria = [
+        [-34.89050, -56.16650],
+        [-34.89050, -56.16970],
+        [-34.88880, -56.16970],
+        [-34.88880, -56.16650]
+    ]
+    return render_template('feria_generica.html', 
+                         feria=feria, 
+                         categorias_colores=categorias_colores,
+                         limites_feria=limites_feria)
 
 @app.route('/calle-salto')
 def calle_salto():
-    # Por ahora redirige al lobby, más adelante tendrá su propia página
-    return render_template('lobby.html')
+    feria = [f for f in ferias if f['nombre'] == 'Feria Calle Salto'][0]
+    limites_feria = [
+        [-34.91200, -56.18150],
+        [-34.91200, -56.18250],
+        [-34.90700, -56.18250],
+        [-34.90700, -56.18150]
+    ]
+    return render_template('feria_generica.html', 
+                         feria=feria, 
+                         categorias_colores=categorias_colores,
+                         limites_feria=limites_feria)
+
+@app.route('/democracia')
+def democracia():
+    feria = [f for f in ferias if f['nombre'] == 'Feria Democracia'][0]
+    limites_feria = [
+        [-34.89100, -56.17650],
+        [-34.89100, -56.17700],
+        [-34.88950, -56.17700],
+        [-34.88950, -56.17650]
+    ]
+    return render_template('feria_generica.html', 
+                         feria=feria, 
+                         categorias_colores=categorias_colores,
+                         limites_feria=limites_feria)
+
+@app.route('/acevedo-diaz')
+def acevedo_diaz():
+    feria = [f for f in ferias if f['nombre'] == 'Feria Acevedo Díaz'][0]
+    limites_feria = [
+        [-34.90720, -56.16590],
+        [-34.90720, -56.16630],
+        [-34.90550, -56.16630],
+        [-34.90550, -56.16590]
+    ]
+    return render_template('feria_generica.html', 
+                         feria=feria, 
+                         categorias_colores=categorias_colores,
+                         limites_feria=limites_feria)
+
+@app.route('/san-salvador')
+def san_salvador():
+    feria = [f for f in ferias if f['nombre'] == 'Feria San Salvador'][0]
+    limites_feria = [
+        [-34.91120, -56.16850],
+        [-34.91120, -56.17050],
+        [-34.91050, -56.17050],
+        [-34.91050, -56.16850]
+    ]
+    return render_template('feria_generica.html', 
+                         feria=feria, 
+                         categorias_colores=categorias_colores,
+                         limites_feria=limites_feria)
+
+@app.route('/isla-flores')
+def isla_flores():
+    feria = [f for f in ferias if f['nombre'] == 'Feria Isla de Flores'][0]
+    limites_feria = [
+        [-34.91080, -56.17630],
+        [-34.91080, -56.17720],
+        [-34.91010, -56.17720],
+        [-34.91010, -56.17630]
+    ]
+    return render_template('feria_generica.html', 
+                         feria=feria, 
+                         categorias_colores=categorias_colores,
+                         limites_feria=limites_feria)
+
+@app.route('/martinez-trueba')
+def martinez_trueba():
+    feria = [f for f in ferias if f['nombre'] == 'Feria Martínez Trueba'][0]
+    limites_feria = [
+        [-34.90840, -56.18290],
+        [-34.90840, -56.18330],
+        [-34.90700, -56.18330],
+        [-34.90700, -56.18290]
+    ]
+    return render_template('feria_generica.html', 
+                         feria=feria, 
+                         categorias_colores=categorias_colores,
+                         limites_feria=limites_feria)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

@@ -10,16 +10,13 @@ html {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: url('lobby-fondo.jpg') center/cover no-repeat fixed;
     background-color: #7BB662;
-    height: 100%;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
 }
 
-/* Header - Solo logo sin imagen de fondo */
 .lobby-header {
     height: 40vh;
     width: 100%;
@@ -28,59 +25,192 @@ body {
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    background: url('lobby-fondo.jpg') center top/cover no-repeat;
+    background-size: 100% 100vh;
+    background-position: center top;
+    background-attachment: scroll;
 }
 
-/* Logo curveado con sombra fuerte para legibilidad */
 .logo {
-    font-size: 4em;
+    font-size: 3em;
     font-weight: bold;
-    color: white;
-    text-shadow: 5px 5px 15px rgba(0,0,0,0.8),
-                 2px 2px 5px rgba(0,0,0,0.9);
+    background: linear-gradient(45deg, 
+        #1B5E20 0%, #1B5E20 20%, 
+        #388E3C 20%, #388E3C 40%, 
+        #66BB6A 40%, #66BB6A 60%, 
+        #81C784 60%, #81C784 80%, 
+        #A5D6A7 80%, #A5D6A7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     letter-spacing: 2px;
     position: relative;
     z-index: 2;
-    transform: perspective(300px) rotateX(-10deg);
     text-align: center;
     margin: 0;
 }
 
-/* Ocultar subtítulo */
 .subtitulo {
     display: none;
 }
 
-/* Container de opciones - SIN fondo blanco */
 .lobby-container {
-    flex: 1;
+    flex: 0 0 60vh;
     width: 100%;
-    height: 60vh;
     display: flex;
     flex-direction: column;
+    padding-top: 20px;
+    background: url('lobby-fondo.jpg') center/cover no-repeat;
+    background-size: 100% 100vh;
+    background-position: center -40vh;
+    background-attachment: scroll;
 }
 
-/* Segundo tercio - Botón Mapa centrado */
-.seccion-mapa {
-    height: 50%;
+.filtros-wrapper {
+    width: 280px;
+    margin: 0 0 20px 20px;
+    position: relative;
+}
+
+.filtro-toggle {
+    background: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border: 2px solid #7BB662;
 }
 
-/* Tercer tercio - Ferias específicas */
+.filtro-toggle:hover {
+    background: #f9f9f9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.filtro-texto {
+    font-weight: bold;
+    color: #7BB662;
+    font-size: 0.95em;
+}
+
+.filtro-flecha {
+    color: #D9822B;
+    font-size: 0.9em;
+}
+
+.filtros-panel {
+    display: none;
+    background: white;
+    margin-top: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    border: 2px solid #7BB662;
+}
+
+.filtros-opciones {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.filtro-btn {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #7BB662;
+    background: white;
+    color: #7BB662;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    font-size: 0.9em;
+}
+
+.filtro-btn:hover {
+    background: #f0f0f0;
+}
+
+.filtro-btn.active {
+    background: #7BB662;
+    color: white;
+}
+
+.filtros-items {
+    margin-bottom: 15px;
+}
+
+.filtro-grupo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filtro-item {
+    padding: 8px 15px;
+    background: #f5f5f5;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: all 0.2s ease;
+    color: #4A4A48;
+    font-weight: 500;
+}
+
+.filtro-item:hover {
+    background: #F6E27F;
+    border-color: #D9822B;
+}
+
+.filtro-item.active {
+    background: #7BB662;
+    color: white;
+    border-color: #7BB662;
+}
+
+.btn-limpiar {
+    width: 100%;
+    padding: 10px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    font-size: 0.9em;
+}
+
+.btn-limpiar:hover {
+    background: #ff5252;
+    transform: translateY(-1px);
+}
+
+.seccion-mapa {
+    height: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+}
+
 .seccion-ferias {
-    height: 50%;
+    height: 45%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 20px;
-    padding-left: 5%;
-    gap: 20px;
+    padding: 10px 20px 20px 20px;
+    gap: 15px;
     flex-wrap: wrap;
+    overflow-y: auto;
 }
 
-/* Botón Mapa - rectangular con sombra más fuerte */
 .opcion-mapa {
     background: white;
     padding: 18px 30px;
@@ -121,7 +251,6 @@ body {
     margin: 0;
 }
 
-/* Cards de ferias con sombra más fuerte - TODAS DEL MISMO TAMAÑO */
 .opcion-card {
     background: white;
     padding: 12px 20px;
@@ -226,7 +355,6 @@ body {
     font-weight: bold;
 }
 
-/* Badge para ferias próximamente */
 .badge-proximo {
     position: absolute;
     top: 8px;
@@ -241,7 +369,6 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* Card próximamente - misma apariencia pero sin hover */
 .opcion-card-proximo {
     opacity: 0.85;
     cursor: not-allowed;
@@ -253,11 +380,14 @@ body {
     border-left-color: #7BB662;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
     .seccion-ferias {
         padding-left: 5%;
         flex-wrap: wrap;
+    }
+    
+    .filtros-wrapper {
+        max-width: 90%;
     }
 }
 
@@ -273,20 +403,46 @@ body {
     
     .lobby-container {
         height: 65vh;
+        padding-top: 15px;
+    }
+    
+    .filtros-wrapper {
+        max-width: 95%;
+    }
+    
+    .filtro-toggle {
+        padding: 10px 15px;
+    }
+    
+    .filtro-texto {
+        font-size: 0.85em;
+    }
+    
+    .filtros-panel {
+        padding: 12px;
+    }
+    
+    .filtro-btn {
+        padding: 8px;
+        font-size: 0.8em;
+    }
+    
+    .filtro-item {
+        padding: 6px 12px;
+        font-size: 0.8em;
     }
     
     .seccion-mapa {
-        height: 40%;
-        padding: 15px;
+        height: 30%;
+        padding: 10px 15px;
     }
     
     .seccion-ferias {
-        height: 60%;
+        height: 50%;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding: 10px 20px 20px 20px;
         gap: 12px;
     }
     
@@ -328,6 +484,16 @@ body {
         height: 30vh;
     }
     
+    .filtro-grupo {
+        gap: 6px;
+    }
+    
+    .filtro-item {
+        flex: 1 1 calc(50% - 6px);
+        min-width: calc(50% - 6px);
+        text-align: center;
+    }
+    
     .opcion-mapa {
         width: 95%;
         min-height: 70px;
@@ -338,4 +504,12 @@ body {
         width: 95%;
         gap: 12px;
     }
+}
+
+.seccion-extra {
+    width: 100%;
+    min-height: 100vh;
+    background: url('lobby-fondo-2.jpg') center top/cover no-repeat;
+    background-color: #7BB662;
+    background-attachment: scroll;
 }

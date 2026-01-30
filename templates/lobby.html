@@ -13,7 +13,6 @@
     </header>
     
     <div class="lobby-container">
-        <!-- Segundo tercio: Botón Mapa centrado -->
         <div class="seccion-mapa">
             <a href="/mapa" class="opcion-mapa">
                 <div class="icono">🗺️</div>
@@ -24,43 +23,201 @@
             </a>
         </div>
         
-        <!-- Tercer tercio: Ferias específicas desde la izquierda -->
+        <div class="filtros-wrapper">
+            <div class="filtro-toggle" onclick="toggleFiltros()">
+                <span class="filtro-texto">Filtrar</span>
+                <span class="filtro-flecha" id="filtroFlecha">▲</span>
+            </div>
+            
+            <div class="filtros-panel" id="filtrosPanel" style="display: none;">
+                <div class="filtros-opciones">
+                    <button class="filtro-btn active" id="btnDia" onclick="cambiarFiltro('dia')">Por día</button>
+                    <button class="filtro-btn" id="btnBarrio" onclick="cambiarFiltro('barrio')">Por barrio</button>
+                </div>
+                
+                <div class="filtros-items" id="grupodia">
+                    <div class="filtro-grupo">
+                        <div class="filtro-item" onclick="filtrarFerias('Lunes')">Lunes</div>
+                        <div class="filtro-item" onclick="filtrarFerias('Martes')">Martes</div>
+                        <div class="filtro-item" onclick="filtrarFerias('Miércoles')">Miércoles</div>
+                        <div class="filtro-item" onclick="filtrarFerias('Jueves')">Jueves</div>
+                        <div class="filtro-item" onclick="filtrarFerias('Viernes')">Viernes</div>
+                        <div class="filtro-item" onclick="filtrarFerias('Sábados')">Sábados</div>
+                        <div class="filtro-item" onclick="filtrarFerias('Domingos')">Domingos</div>
+                    </div>
+                </div>
+                
+                <div class="filtros-items" id="grupobarrio" style="display: none;">
+                    <div class="filtro-grupo">
+                        <div class="filtro-item" onclick="filtrarFerias('Cordón')">Cordón</div>
+                        <div class="filtro-item" onclick="filtrarFerias('Tres Cruces')">Tres Cruces</div>
+                        <div class="filtro-item" onclick="filtrarFerias('La Comercial')">La Comercial</div>
+                        <div class="filtro-item" onclick="filtrarFerias('Villa Muñoz')">Villa Muñoz</div>
+                        <div class="filtro-item" onclick="filtrarFerias('Parque Rodó')">Parque Rodó</div>
+                        <div class="filtro-item" onclick="filtrarFerias('Palermo')">Palermo</div>
+                    </div>
+                </div>
+                
+                <button class="btn-limpiar" onclick="limpiarFiltros()">🔄 Limpiar filtros</button>
+            </div>
+        </div>
+        
         <div class="seccion-ferias">
-            <a href="/tristan-narvaja" class="opcion-card">
+            <a href="/tristan-narvaja" class="opcion-card" data-dia="Domingos" data-barrio="Cordón">
                 <div class="icono">📚</div>
                 <div class="opcion-card-content">
                     <h2>Tristán Narvaja</h2>
                     <p class="barrio">Cordón • Domingos</p>
-                    <p>Guía completa de la feria más famosa</p>
+                    <p>La feria más famosa de MVD</p>
                 </div>
             </a>
-            <a href="/juan-paullier" class="opcion-card">
+            <a href="/juan-paullier" class="opcion-card" data-dia="Martes" data-barrio="Tres Cruces">
                 <div class="icono">🥬</div>
                 <div class="opcion-card-content">
                     <h2>Juan Paullier</h2>
                     <p class="barrio">Tres Cruces • Martes</p>
-                    <p>Feria vecinal con productos frescos</p>
+                    <p>Productos frescos de barrio</p>
                 </div>
             </a>
-            <a href="/tres-cruces" class="opcion-card opcion-card-proximo">
+            <a href="/tres-cruces" class="opcion-card" data-dia="Sábados" data-barrio="La Comercial">
                 <div class="icono">🛒</div>
                 <div class="opcion-card-content">
                     <h2>Tres Cruces</h2>
-                    <p class="barrio">Tres Cruces • Sábados</p>
+                    <p class="barrio">La Comercial • Sábados</p>
                     <p>Feria de barrio variada</p>
                 </div>
-                <span class="badge-proximo">Prox.</span>
             </a>
-            <a href="/calle-salto" class="opcion-card opcion-card-proximo">
+            <a href="/calle-salto" class="opcion-card" data-dia="Sábados" data-barrio="Cordón">
                 <div class="icono">🥕</div>
                 <div class="opcion-card-content">
                     <h2>Calle Salto</h2>
                     <p class="barrio">Cordón • Sábados</p>
-                    <p>Productos locales y artesanías</p>
+                    <p>Productos locales</p>
                 </div>
-                <span class="badge-proximo">Prox.</span>
+            </a>
+            <a href="/democracia" class="opcion-card" data-dia="Domingos" data-barrio="Villa Muñoz">
+                <div class="icono">🌽</div>
+                <div class="opcion-card-content">
+                    <h2>Democracia</h2>
+                    <p class="barrio">Villa Muñoz • Domingos</p>
+                    <p>Productos de granja</p>
+                </div>
+            </a>
+            <a href="/acevedo-diaz" class="opcion-card" data-dia="Martes" data-barrio="Parque Rodó">
+                <div class="icono">🥦</div>
+                <div class="opcion-card-content">
+                    <h2>Acevedo Díaz</h2>
+                    <p class="barrio">Parque Rodó • Martes</p>
+                    <p>Feria vecinal</p>
+                </div>
+            </a>
+            <a href="/san-salvador" class="opcion-card" data-dia="Miércoles" data-barrio="Parque Rodó">
+                <div class="icono">🍅</div>
+                <div class="opcion-card-content">
+                    <h2>San Salvador</h2>
+                    <p class="barrio">Parque Rodó • Miércoles</p>
+                    <p>Productos frescos</p>
+                </div>
+            </a>
+            <a href="/isla-flores" class="opcion-card" data-dia="Jueves" data-barrio="Palermo">
+                <div class="icono">🥗</div>
+                <div class="opcion-card-content">
+                    <h2>Isla de Flores</h2>
+                    <p class="barrio">Palermo • Jueves</p>
+                    <p>Feria de barrio</p>
+                </div>
+            </a>
+            <a href="/martinez-trueba" class="opcion-card" data-dia="Martes" data-barrio="Palermo">
+                <div class="icono">🍇</div>
+                <div class="opcion-card-content">
+                    <h2>Martínez Trueba</h2>
+                    <p class="barrio">Palermo • Martes</p>
+                    <p>Productos de estación</p>
+                </div>
             </a>
         </div>
     </div>
+    
+    <div class="seccion-extra">
+    </div>
+    
+    <script>
+        var filtroActivo = null;
+        var tipoFiltro = 'dia';
+        
+        function toggleFiltros() {
+            var panel = document.getElementById('filtrosPanel');
+            var flecha = document.getElementById('filtroFlecha');
+            
+            if (panel.style.display === 'none' || panel.style.display === '') {
+                panel.style.display = 'block';
+                flecha.textContent = '▼';
+            } else {
+                panel.style.display = 'none';
+                flecha.textContent = '▲';
+            }
+        }
+        
+        function cambiarFiltro(tipo) {
+            tipoFiltro = tipo;
+            
+            document.getElementById('btnDia').classList.remove('active');
+            document.getElementById('btnBarrio').classList.remove('active');
+            document.getElementById('btn' + tipo.charAt(0).toUpperCase() + tipo.slice(1)).classList.add('active');
+            
+            document.getElementById('grupodia').style.display = tipo === 'dia' ? 'block' : 'none';
+            document.getElementById('grupobarrio').style.display = tipo === 'barrio' ? 'block' : 'none';
+            
+            limpiarFiltros();
+        }
+        
+        function filtrarFerias(valor) {
+            filtroActivo = valor;
+            var cards = document.querySelectorAll('.opcion-card');
+            var atributo = 'data-' + tipoFiltro;
+            var visibles = 0;
+            
+            document.querySelectorAll('.filtro-item').forEach(function(item) {
+                if (item.textContent === valor) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+            
+            cards.forEach(function(card) {
+                if (card.getAttribute(atributo) === valor) {
+                    card.style.display = 'flex';
+                    visibles++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            toggleFiltros();
+        }
+        
+        function limpiarFiltros() {
+            filtroActivo = null;
+            var cards = document.querySelectorAll('.opcion-card');
+            
+            cards.forEach(function(card) {
+                card.style.display = 'flex';
+            });
+            
+            document.querySelectorAll('.filtro-item').forEach(function(item) {
+                item.classList.remove('active');
+            });
+        }
+        
+        document.addEventListener('click', function(event) {
+            var filtrosWrapper = document.querySelector('.filtros-wrapper');
+            var panel = document.getElementById('filtrosPanel');
+            
+            if (filtrosWrapper && !filtrosWrapper.contains(event.target) && panel.style.display === 'block') {
+                toggleFiltros();
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ feria.nombre }} - Feriando.uy</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <div class="map-container">
+                <a href="/" class="boton-volver">
+                    ← Volver al Lobby
+                </a>
+                
+                <div class="header-feria">
+                    <h1>{{ feria.nombre }}</h1>
+                    <p>{{ feria.barrio }} - {{ feria.dia }}</p>
+                </div>
+                
+                <div class="leyenda-flotante" id="leyendaBox">
+                    <div class="leyenda-header" onclick="toggleLeyenda()">
+                        <h3>Categorías</h3>
+                        <span class="flecha-toggle" id="flechaLeyenda">▲</span>
+                    </div>
+                    <div class="leyenda-contenido" id="leyendaContenido">
+                        <div class="leyenda-item-flotante categoria-filtro active" data-categoria="Todas" onclick="filtrarCategoria('Todas')">
+                            <span class="color-box-flotante" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></span>
+                            <span>Todas</span>
+                        </div>
+                        {% for categoria, color in categorias_colores.items() %}
+                        <div class="leyenda-item-flotante categoria-filtro" data-categoria="{{ categoria }}" onclick="filtrarCategoria('{{ categoria }}')">
+                            <span class="color-box-flotante" style="background-color: {{ color }};"></span>
+                            <span>{{ categoria }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="barra-info-toggle" onclick="toggleInfoPanel()" id="barraInfoToggle">
+                    <div class="flecha-barra">◀</div>
+                    <div class="texto-vertical">Información de Cuadras</div>
+                </div>
+                
+                <button class="boton-nocturno" onclick="toggleModoNocturno()" id="botonModo">
+                    🌙 Modo Nocturno
+                </button>
+                
+                <div id="map"></div>
+            </div>
+            
+            <div class="info-panel" id="infoPanel">
+                <div class="info-header">
+                    <h2>Información de Cuadras</h2>
+                </div>
+                <div class="info-contenido abierto" id="infoContenido">
+                    <div id="feria-info">
+                        <h3>{{ feria.nombre }}</h3>
+                        <p>Haz click en cualquier cuadra del mapa para ver sus productos.</p>
+                        
+                        <div class="estadisticas-feria">
+                            <div class="stat-item">
+                                <span class="stat-numero">{{ feria.cuadras|length }}</span>
+                                <span class="stat-label">Cuadras</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-numero">{{ categorias_colores|length }}</span>
+                                <span class="stat-label">Categorías</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        var map;
+        var capaDia;
+        var capaNoche;
+        var modoNocturno = false;
+        var todasLasLineas = [];
+        var categoriaActual = 'Todas';
+        var feria = {{ feria | tojson }};
+        var categoriasColores = {{ categorias_colores | tojson }};
+        var limitesFeria = {{ limites_feria | tojson }};
+        
+        function toggleModoNocturno() {
+            var boton = document.getElementById('botonModo');
+            
+            if (!modoNocturno) {
+                map.removeLayer(capaDia);
+                capaNoche.addTo(map);
+                boton.innerHTML = '☀️ Modo Día';
+                boton.classList.add('activo');
+                modoNocturno = true;
+            } else {
+                map.removeLayer(capaNoche);
+                capaDia.addTo(map);
+                boton.innerHTML = '🌙 Modo Nocturno';
+                boton.classList.remove('activo');
+                modoNocturno = false;
+            }
+        }
+        
+        function toggleLeyenda() {
+            var contenido = document.getElementById('leyendaContenido');
+            var flecha = document.getElementById('flechaLeyenda');
+            var leyendaBox = document.getElementById('leyendaBox');
+            
+            if (contenido.classList.contains('abierto')) {
+                contenido.classList.remove('abierto');
+                flecha.innerHTML = '▲';
+                leyendaBox.classList.remove('expandido');
+            } else {
+                contenido.classList.add('abierto');
+                flecha.innerHTML = '▼';
+                leyendaBox.classList.add('expandido');
+            }
+        }
+        
+        function toggleInfoPanel() {
+            var infoPanel = document.querySelector('.info-panel');
+            var mainContent = document.querySelector('.main-content');
+            var barra = document.getElementById('barraInfoToggle');
+            var flecha = barra.querySelector('.flecha-barra');
+            
+            if (infoPanel.classList.contains('visible')) {
+                infoPanel.classList.remove('visible');
+                mainContent.classList.remove('panel-visible');
+                flecha.innerHTML = '◀';
+                
+                setTimeout(function() {
+                    if (!infoPanel.classList.contains('visible')) {
+                        infoPanel.style.display = 'none';
+                    }
+                }, 500);
+            } else {
+                infoPanel.style.display = 'block';
+                mainContent.classList.add('panel-visible');
+                requestAnimationFrame(function() {
+                    infoPanel.classList.add('visible');
+                    flecha.innerHTML = '▶';
+                });
+            }
+        }
+        
+        function filtrarCategoria(categoria) {
+            categoriaActual = categoria;
+            
+            document.querySelectorAll('.categoria-filtro').forEach(function(item) {
+                if (item.dataset.categoria === categoria) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+
+            todasLasLineas.forEach(function(linea) {
+                if (categoria === 'Todas' || linea.categoria === categoria) {
+                    linea.setStyle({ opacity: 0.9 });
+                    map.addLayer(linea);
+                } else {
+                    map.removeLayer(linea);
+                }
+            });
+            
+            if (categoria !== 'Todas') {
+                mostrarInfoCategoria(categoria);
+            } else {
+                ocultarPanel();
+            }
+        }
+        
+        function mostrarInfoCategoria(categoria) {
+            var infoDiv = document.getElementById('feria-info');
+            var infoPanel = document.querySelector('.info-panel');
+            var mainContent = document.querySelector('.main-content');
+            
+            var html = '<h3>Categoría: ' + categoria + '</h3>';
+            var color = categoriasColores[categoria];
+            html += '<p style="color: ' + color + '">Filtrando por: <strong>' + categoria + '</strong></p>';
+            html += '<p>Las cuadras destacadas en el mapa pertenecen a esta categoría.</p>';
+            
+            var contador = 0;
+            feria.cuadras.forEach(function(cuadra) {
+                if (cuadra.categoria_principal === categoria) {
+                    contador++;
+                }
+            });
+            
+            html += '<div class="categoria-stats">';
+            html += '<p>📍 <strong>' + contador + '</strong> cuadra(s) encontrada(s)</p>';
+            html += '</div>';
+            
+            infoDiv.innerHTML = html;
+            
+            var barra = document.getElementById('barraInfoToggle');
+            var flecha = barra.querySelector('.flecha-barra');
+            
+            infoPanel.style.display = 'block';
+            mainContent.classList.add('panel-visible');
+            requestAnimationFrame(function() {
+                infoPanel.classList.add('visible');
+                flecha.innerHTML = '▶';
+            });
+        }
+        
+        function ocultarPanel() {
+            var infoPanel = document.querySelector('.info-panel');
+            var mainContent = document.querySelector('.main-content');
+            
+            infoPanel.classList.remove('visible');
+            mainContent.classList.remove('panel-visible');
+            
+            setTimeout(function() {
+                if (!infoPanel.classList.contains('visible')) {
+                    infoPanel.style.display = 'none';
+                }
+            }, 500);
+        }
+        
+        function mostrarInfoCuadra(cuadra) {
+            var infoDiv = document.getElementById('feria-info');
+            var infoPanel = document.querySelector('.info-panel');
+            var mainContent = document.querySelector('.main-content');
+            var color = categoriasColores[cuadra.categoria_principal];
+            
+            var html = '<h3>' + feria.nombre + '</h3>';
+            html += '<h4 style="color:' + color + '">📍 ' + cuadra.nombre + '</h4>';
+            html += '<p class="categoria-principal">Categoría principal: <strong style="color:' + color + '">' + cuadra.categoria_principal + '</strong></p>';
+            
+            html += '<div class="productos-section">';
+            html += '<h5>📦 Productos disponibles:</h5>';
+            for (var categoria in cuadra.productos) {
+                var colorCategoria = categoriasColores[categoria];
+                html += '<div class="categoria-section">';
+                html += '<h5 style="color:' + colorCategoria + '">' + categoria + '</h5>';
+                html += '<ul>';
+                cuadra.productos[categoria].forEach(function(producto) {
+                    html += '<li>' + producto + '</li>';
+                });
+                html += '</ul>';
+                html += '</div>';
+            }
+            html += '</div>';
+            
+            infoDiv.innerHTML = html;
+            
+            var barra = document.getElementById('barraInfoToggle');
+            var flecha = barra.querySelector('.flecha-barra');
+            
+            infoPanel.style.display = 'block';
+            mainContent.classList.add('panel-visible');
+            requestAnimationFrame(function() {
+                infoPanel.classList.add('visible');
+                flecha.innerHTML = '▶';
+            });
+        }
+        
+        var polygon = L.polygon(limitesFeria);
+        var bounds = polygon.getBounds();
+
+        map = L.map('map', {
+            center: bounds.getCenter(),
+            zoom: 16.2,
+            minZoom: 16.2,
+            maxZoom: 18,
+            zoomControl: true,
+            scrollWheelZoom: true,
+            doubleClickZoom: true,
+            touchZoom: true,
+            dragging: true
+        });
+
+        capaDia = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap contributors, © CARTO',
+            subdomains: 'abcd',
+            maxZoom: 18
+        });
+        
+        capaNoche = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap contributors, © CARTO',
+            subdomains: 'abcd',
+            maxZoom: 18
+        });
+        
+        capaDia.addTo(map);
+        
+        setTimeout(function() {
+            map.invalidateSize();
+        }, 100);
+
+        map.on('click', function(e) {
+            var clickEnLinea = false;
+            todasLasLineas.forEach(function(linea) {
+                if (linea.getBounds && linea.getBounds().contains(e.latlng)) {
+                    clickEnLinea = true;
+                }
+            });
+            
+            if (!clickEnLinea) {
+                ocultarPanel();
+            }
+        });
+
+        feria.cuadras.forEach(function(cuadra) {
+            var color = categoriasColores[cuadra.categoria_principal];
+            
+            var polyline = L.polyline(cuadra.coordenadas, {
+                color: color,
+                weight: 6,
+                opacity: 0.9
+            }).addTo(map);
+
+            polyline.categoria = cuadra.categoria_principal;
+            todasLasLineas.push(polyline);
+
+            polyline.on('click', function() {
+                mostrarInfoCuadra(cuadra);
+            });
+
+            polyline.bindPopup(
+                '<b>' + cuadra.nombre + '</b><br>' +
+                'Categoría principal: <span style="color:' + color + '"><b>' + cuadra.categoria_principal + '</b></span>'
+            );
+        });
+    </script>
+</body>
+</html>
