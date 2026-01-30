@@ -62,83 +62,103 @@
             </div>
         </div>
         
-        <div class="seccion-ferias">
-            <a href="/tristan-narvaja" class="opcion-card" data-dia="Domingos" data-barrio="Cordón">
-                <div class="icono">📚</div>
-                <div class="opcion-card-content">
-                    <h2>Tristán Narvaja</h2>
-                    <p class="barrio">Cordón • Domingos</p>
-                    <p>La feria más famosa de MVD</p>
-                </div>
-            </a>
-            <a href="/juan-paullier" class="opcion-card" data-dia="Martes" data-barrio="Tres Cruces">
-                <div class="icono">🥬</div>
-                <div class="opcion-card-content">
-                    <h2>Juan Paullier</h2>
-                    <p class="barrio">Tres Cruces • Martes</p>
-                    <p>Productos frescos de barrio</p>
-                </div>
-            </a>
-            <a href="/tres-cruces" class="opcion-card" data-dia="Sábados" data-barrio="La Comercial">
-                <div class="icono">🛒</div>
-                <div class="opcion-card-content">
-                    <h2>Tres Cruces</h2>
-                    <p class="barrio">La Comercial • Sábados</p>
-                    <p>Feria de barrio variada</p>
-                </div>
-            </a>
-            <a href="/calle-salto" class="opcion-card" data-dia="Sábados" data-barrio="Cordón">
-                <div class="icono">🥕</div>
-                <div class="opcion-card-content">
-                    <h2>Calle Salto</h2>
-                    <p class="barrio">Cordón • Sábados</p>
-                    <p>Productos locales</p>
-                </div>
-            </a>
-            <a href="/democracia" class="opcion-card" data-dia="Domingos" data-barrio="Villa Muñoz">
-                <div class="icono">🌽</div>
-                <div class="opcion-card-content">
-                    <h2>Democracia</h2>
-                    <p class="barrio">Villa Muñoz • Domingos</p>
-                    <p>Productos de granja</p>
-                </div>
-            </a>
-            <a href="/acevedo-diaz" class="opcion-card" data-dia="Martes" data-barrio="Parque Rodó">
-                <div class="icono">🥦</div>
-                <div class="opcion-card-content">
-                    <h2>Acevedo Díaz</h2>
-                    <p class="barrio">Parque Rodó • Martes</p>
-                    <p>Feria vecinal</p>
-                </div>
-            </a>
-            <a href="/san-salvador" class="opcion-card" data-dia="Miércoles" data-barrio="Parque Rodó">
-                <div class="icono">🍅</div>
-                <div class="opcion-card-content">
-                    <h2>San Salvador</h2>
-                    <p class="barrio">Parque Rodó • Miércoles</p>
-                    <p>Productos frescos</p>
-                </div>
-            </a>
-            <a href="/isla-flores" class="opcion-card" data-dia="Jueves" data-barrio="Palermo">
-                <div class="icono">🥗</div>
-                <div class="opcion-card-content">
-                    <h2>Isla de Flores</h2>
-                    <p class="barrio">Palermo • Jueves</p>
-                    <p>Feria de barrio</p>
-                </div>
-            </a>
-            <a href="/martinez-trueba" class="opcion-card" data-dia="Martes" data-barrio="Palermo">
-                <div class="icono">🍇</div>
-                <div class="opcion-card-content">
-                    <h2>Martínez Trueba</h2>
-                    <p class="barrio">Palermo • Martes</p>
-                    <p>Productos de estación</p>
-                </div>
-            </a>
+        <div class="seccion-ferias-wrapper">
+            <button class="scroll-btn scroll-btn-left" id="scrollLeft">◀</button>
+            <button class="scroll-btn scroll-btn-right" id="scrollRight">▶</button>
+            
+            <div class="seccion-ferias" id="seccionFerias">
+                <a href="/tristan-narvaja" class="opcion-card" data-dia="Domingos" data-barrio="Cordón">
+                    <div class="icono">📚</div>
+                    <div class="opcion-card-content">
+                        <h2>Tristán Narvaja</h2>
+                        <p class="barrio">Cordón • Domingos</p>
+                        <p>La feria más famosa de MVD</p>
+                    </div>
+                </a>
+                <a href="/juan-paullier" class="opcion-card" data-dia="Martes" data-barrio="Tres Cruces">
+                    <div class="icono">🥬</div>
+                    <div class="opcion-card-content">
+                        <h2>Juan Paullier</h2>
+                        <p class="barrio">Tres Cruces • Martes</p>
+                        <p>Productos frescos de barrio</p>
+                    </div>
+                </a>
+                <a href="/tres-cruces" class="opcion-card" data-dia="Sábados" data-barrio="La Comercial">
+                    <div class="icono">🛒</div>
+                    <div class="opcion-card-content">
+                        <h2>Tres Cruces</h2>
+                        <p class="barrio">La Comercial • Sábados</p>
+                        <p>Feria de barrio variada</p>
+                    </div>
+                </a>
+                <a href="/calle-salto" class="opcion-card" data-dia="Sábados" data-barrio="Cordón">
+                    <div class="icono">🥕</div>
+                    <div class="opcion-card-content">
+                        <h2>Calle Salto</h2>
+                        <p class="barrio">Cordón • Sábados</p>
+                        <p>Productos locales</p>
+                    </div>
+                </a>
+                <a href="/democracia" class="opcion-card" data-dia="Domingos" data-barrio="Villa Muñoz">
+                    <div class="icono">🌽</div>
+                    <div class="opcion-card-content">
+                        <h2>Democracia</h2>
+                        <p class="barrio">Villa Muñoz • Domingos</p>
+                        <p>Productos de granja</p>
+                    </div>
+                </a>
+                <a href="/acevedo-diaz" class="opcion-card" data-dia="Martes" data-barrio="Parque Rodó">
+                    <div class="icono">🥦</div>
+                    <div class="opcion-card-content">
+                        <h2>Acevedo Díaz</h2>
+                        <p class="barrio">Parque Rodó • Martes</p>
+                        <p>Feria vecinal</p>
+                    </div>
+                </a>
+                <a href="/san-salvador" class="opcion-card" data-dia="Miércoles" data-barrio="Parque Rodó">
+                    <div class="icono">🍅</div>
+                    <div class="opcion-card-content">
+                        <h2>San Salvador</h2>
+                        <p class="barrio">Parque Rodó • Miércoles</p>
+                        <p>Productos frescos</p>
+                    </div>
+                </a>
+                <a href="/isla-flores" class="opcion-card" data-dia="Jueves" data-barrio="Palermo">
+                    <div class="icono">🥗</div>
+                    <div class="opcion-card-content">
+                        <h2>Isla de Flores</h2>
+                        <p class="barrio">Palermo • Jueves</p>
+                        <p>Feria de barrio</p>
+                    </div>
+                </a>
+                <a href="/martinez-trueba" class="opcion-card" data-dia="Martes" data-barrio="Palermo">
+                    <div class="icono">🍇</div>
+                    <div class="opcion-card-content">
+                        <h2>Martínez Trueba</h2>
+                        <p class="barrio">Palermo • Martes</p>
+                        <p>Productos de estación</p>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
     
     <div class="seccion-extra">
+        <h2 class="porque-titulo">¿Por que <span class="texto-verde">Feriando</span>?</h2>
+        
+        <div class="porque-feriando">
+            <div class="porque-contenido">
+                <div class="porque-columna">
+                    <h3>Para quienes caminan la feria</h3>
+                    <p>Porque la feria no se recorre al azar: se vive. Feriando te ayuda a encontrar lo que buscás, descubrir lo que no sabías que querías y caminar cada cuadra con más sentido y menos vueltas.</p>
+                </div>
+                
+                <div class="porque-columna">
+                    <h3>Para quienes la hacen posible</h3>
+                    <p>Porque cada puesto tiene una historia. Feriando te pone en el mapa para que más personas lleguen a vos, valoren tu rubro y mantengan viva la feria de siempre.</p>
+                </div>
+            </div>
+        </div>
     </div>
     
     <script>
@@ -195,6 +215,8 @@
             });
             
             toggleFiltros();
+            
+            setTimeout(updateScrollButtons, 100);
         }
         
         function limpiarFiltros() {
@@ -208,6 +230,8 @@
             document.querySelectorAll('.filtro-item').forEach(function(item) {
                 item.classList.remove('active');
             });
+            
+            setTimeout(updateScrollButtons, 100);
         }
         
         document.addEventListener('click', function(event) {
@@ -218,6 +242,53 @@
                 toggleFiltros();
             }
         });
+    </script>
+    
+    <script>
+        var seccionFerias = document.getElementById('seccionFerias');
+        var scrollLeft = document.getElementById('scrollLeft');
+        var scrollRight = document.getElementById('scrollRight');
+
+        function updateScrollButtons() {
+            if (!seccionFerias) return;
+            
+            var maxScroll = seccionFerias.scrollWidth - seccionFerias.clientWidth;
+            
+            if (seccionFerias.scrollLeft > 10) {
+                scrollLeft.classList.add('visible');
+            } else {
+                scrollLeft.classList.remove('visible');
+            }
+            
+            if (seccionFerias.scrollLeft < maxScroll - 10) {
+                scrollRight.classList.add('visible');
+            } else {
+                scrollRight.classList.remove('visible');
+            }
+        }
+
+        if (scrollLeft && scrollRight && seccionFerias) {
+            scrollLeft.addEventListener('click', function() {
+                seccionFerias.scrollBy({
+                    left: -600,
+                    behavior: 'smooth'
+                });
+            });
+
+            scrollRight.addEventListener('click', function() {
+                seccionFerias.scrollBy({
+                    left: 600,
+                    behavior: 'smooth'
+                });
+            });
+
+            seccionFerias.addEventListener('scroll', updateScrollButtons);
+            
+            window.addEventListener('load', updateScrollButtons);
+            window.addEventListener('resize', updateScrollButtons);
+            
+            setTimeout(updateScrollButtons, 500);
+        }
     </script>
 </body>
 </html>
