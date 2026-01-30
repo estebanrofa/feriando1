@@ -520,21 +520,26 @@ body {
 
 @media (max-width: 768px) {
     .lobby-header {
-        height: 35vh;
-        padding-top: 6vh;
+        height: 30vh;
+        padding-top: 8vh;
+        background-size: cover;
+        background-position: center top;
     }
     
     .logo {
-        font-size: 2.8em;
+        font-size: 2.5em;
     }
     
     .lobby-container {
-        height: 65vh;
+        flex: 0 0 70vh;
         padding-top: 15px;
+        background-position: center -30vh;
     }
     
     .filtros-wrapper {
         max-width: 95%;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .filtro-toggle {
@@ -564,13 +569,25 @@ body {
         padding: 10px 15px;
     }
     
+    .seccion-ferias-wrapper {
+        padding: 10px 0;
+    }
+    
     .seccion-ferias {
-        height: 50%;
+        height: auto;
+        min-height: 200px;
         flex-direction: column;
+        flex-wrap: nowrap;
         align-items: center;
         justify-content: flex-start;
         padding: 10px 20px 20px 20px;
         gap: 12px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    
+    .scroll-btn {
+        display: none;
     }
     
     .opcion-mapa {
@@ -590,7 +607,7 @@ body {
     .opcion-card {
         width: 90%;
         max-width: 350px;
-        min-height: 65px;
+        height: 70px;
     }
     
     .icono {
@@ -601,6 +618,16 @@ body {
         font-size: 1em;
     }
     
+    .porque-feriando {
+        padding: 40px 20px;
+    }
+    
+    .porque-titulo {
+        font-size: 2.2em;
+        padding-top: 40px;
+        margin-bottom: 30px;
+    }
+    
     .porque-contenido {
         flex-direction: column;
         gap: 40px;
@@ -609,15 +636,24 @@ body {
     .porque-columna {
         max-width: 100%;
     }
+    
+    .porque-columna h3 {
+        font-size: 1.3em;
+    }
+    
+    .porque-columna p {
+        font-size: 1em;
+    }
 }
 
 @media (max-width: 480px) {
-    .logo {
-        font-size: 2em;
+    .lobby-header {
+        height: 25vh;
+        padding-top: 6vh;
     }
     
-    .lobby-header {
-        height: 30vh;
+    .logo {
+        font-size: 2em;
     }
     
     .filtro-grupo {
@@ -642,7 +678,7 @@ body {
     }
     
     .porque-titulo {
-        font-size: 2em;
+        font-size: 1.8em;
     }
     
     .porque-columna h3 {
@@ -650,6 +686,6 @@ body {
     }
     
     .porque-columna p {
-        font-size: 1em;
+        font-size: 0.95em;
     }
 }
