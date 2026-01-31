@@ -2,18 +2,16 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# Configuración de categorías y colores
 categorias_colores = {
-    'Libros': '#CC0000',        # rojo oscuro
-    'Ropa': '#6B00CC',          # violeta oscuro
-    'Antigüedades': '#CCAA00',  # amarillo oscuro/dorado
-    'Ferreteria': '#8B5A00',    # cobre oscuro
-    'Herreria': '#4D4D4D',      # gris oscuro
-    'Camaras': '#000000',       # negro
-    'Comida': '#CC7700'         # naranja oscuro
+    'Libros': '#CC0000',
+    'Ropa': '#6B00CC',
+    'Antigüedades': '#CCAA00',
+    'Ferreteria': '#8B5A00',
+    'Herreria': '#4D4D4D',
+    'Camaras': '#000000',
+    'Comida': '#CC7700'
 }
 
-# Datos de las ferias con coordenadas exactas
 ferias = [
     {
         'nombre': 'Feria de Tristán Narvaja',
@@ -360,6 +358,90 @@ ferias = [
                 }
             }
         ]
+    },
+    {
+        'nombre': 'Feria Julio Herrera y Obes',
+        'barrio': 'Centro',
+        'dia': 'Viernes',
+        'lat': -34.9104,
+        'lng': -56.1943,
+        'cuadras': [
+            {
+                'nombre': 'Julio Herrera y Obes - Recorrido completo',
+                'coordenadas': [
+                    [-34.91078908381817, -56.19426766065802],
+                    [-34.909952910158744, -56.19433021672227]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Frutas', 'Verduras', 'Productos frescos'],
+                    'Ropa': ['Ropa usada', 'Accesorios']
+                }
+            }
+        ]
+    },
+    {
+        'nombre': 'Feria Acevedo Díaz (Sábados)',
+        'barrio': 'Cordón',
+        'dia': 'Sábados',
+        'lat': -34.8995,
+        'lng': -56.1668,
+        'cuadras': [
+            {
+                'nombre': 'Acevedo Díaz - Recorrido completo',
+                'coordenadas': [
+                    [-34.89995795847101, -56.16678730930974],
+                    [-34.8991050295766, -56.16687705192749]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Frutas', 'Verduras', 'Productos frescos'],
+                    'Ropa': ['Ropa', 'Calzado']
+                }
+            }
+        ]
+    },
+    {
+        'nombre': 'Feria Guaná',
+        'barrio': 'Cordón',
+        'dia': 'Viernes',
+        'lat': -34.9053,
+        'lng': -56.1728,
+        'cuadras': [
+            {
+                'nombre': 'Guaná - Recorrido completo',
+                'coordenadas': [
+                    [-34.90527733926171, -56.172280018620846],
+                    [-34.90533002215996, -56.17335319922175]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Frutas', 'Verduras', 'Productos locales'],
+                    'Ropa': ['Ropa usada']
+                }
+            }
+        ]
+    },
+    {
+        'nombre': 'Feria Gaboto (Viernes)',
+        'barrio': 'Cordón',
+        'dia': 'Viernes',
+        'lat': -34.9052,
+        'lng': -56.1773,
+        'cuadras': [
+            {
+                'nombre': 'Gaboto - Recorrido completo',
+                'coordenadas': [
+                    [-34.90475811179553, -56.17744792377785],
+                    [-34.905612996184374, -56.17720060797018]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Frutas', 'Verduras', 'Productos frescos'],
+                    'Ferreteria': ['Herramientas básicas']
+                }
+            }
+        ]
     }
 ]
 
@@ -373,10 +455,7 @@ def mapa():
 
 @app.route('/tristan-narvaja')
 def tristan_narvaja():
-    # Filtrar solo la feria de Tristán Narvaja
     feria_tristan = [feria for feria in ferias if feria['nombre'] == 'Feria de Tristán Narvaja'][0]
-    
-    # Límites del área de la feria (polígono delimitador)
     limites_feria = [
         [-34.90539596455646, -56.18953227996827],
         [-34.90346022842819, -56.168932914733894],
@@ -384,7 +463,6 @@ def tristan_narvaja():
         [-34.89367526399983, -56.19000434875489],
         [-34.90520239299701, -56.1895376443863]
     ]
-    
     return render_template('tristan_narvaja.html', 
                          feria=feria_tristan, 
                          categorias_colores=categorias_colores,
@@ -392,17 +470,13 @@ def tristan_narvaja():
 
 @app.route('/juan-paullier')
 def juan_paullier():
-    # Filtrar solo la feria de Juan Paullier
     feria_juan = [feria for feria in ferias if feria['nombre'] == 'Feria Vecinal Juan Paullier'][0]
-    
-    # Límites del área de la feria
     limites_feria = [
         [-34.90250, -56.16750],
         [-34.90250, -56.16850],
         [-34.90000, -56.16850],
         [-34.90000, -56.16750]
     ]
-    
     return render_template('juan_paullier.html', 
                          feria=feria_juan, 
                          categorias_colores=categorias_colores,
@@ -500,6 +574,62 @@ def martinez_trueba():
         [-34.90840, -56.18330],
         [-34.90700, -56.18330],
         [-34.90700, -56.18290]
+    ]
+    return render_template('feria_generica.html', 
+                         feria=feria, 
+                         categorias_colores=categorias_colores,
+                         limites_feria=limites_feria)
+
+@app.route('/julio-herrera')
+def julio_herrera():
+    feria = [f for f in ferias if f['nombre'] == 'Feria Julio Herrera y Obes'][0]
+    limites_feria = [
+        [-34.91100, -56.19400],
+        [-34.91100, -56.19460],
+        [-34.90970, -56.19460],
+        [-34.90970, -56.19400]
+    ]
+    return render_template('feria_generica.html', 
+                         feria=feria, 
+                         categorias_colores=categorias_colores,
+                         limites_feria=limites_feria)
+
+@app.route('/acevedo-diaz-sabados')
+def acevedo_diaz_sabados():
+    feria = [f for f in ferias if f['nombre'] == 'Feria Acevedo Díaz (Sábados)'][0]
+    limites_feria = [
+        [-34.90020, -56.16650],
+        [-34.90020, -56.16710],
+        [-34.89890, -56.16710],
+        [-34.89890, -56.16650]
+    ]
+    return render_template('feria_generica.html', 
+                         feria=feria, 
+                         categorias_colores=categorias_colores,
+                         limites_feria=limites_feria)
+
+@app.route('/guana')
+def guana():
+    feria = [f for f in ferias if f['nombre'] == 'Feria Guaná'][0]
+    limites_feria = [
+        [-34.90560, -56.17200],
+        [-34.90560, -56.17360],
+        [-34.90500, -56.17360],
+        [-34.90500, -56.17200]
+    ]
+    return render_template('feria_generica.html', 
+                         feria=feria, 
+                         categorias_colores=categorias_colores,
+                         limites_feria=limites_feria)
+
+@app.route('/gaboto-viernes')
+def gaboto_viernes():
+    feria = [f for f in ferias if f['nombre'] == 'Feria Gaboto (Viernes)'][0]
+    limites_feria = [
+        [-34.90580, -56.17700],
+        [-34.90580, -56.17770],
+        [-34.90450, -56.17770],
+        [-34.90450, -56.17700]
     ]
     return render_template('feria_generica.html', 
                          feria=feria, 
