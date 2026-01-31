@@ -222,6 +222,43 @@ body {
     padding: 10px 20px;
 }
 
+.scroll-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px 0;
+    color: #7BB662;
+    font-size: 1.25em;
+}
+
+.scroll-hint-arrow {
+    font-weight: bold;
+    animation: bounce-horizontal 1.5s ease-in-out infinite;
+}
+
+.scroll-hint-arrow:first-child {
+    animation-name: bounce-left;
+}
+
+.scroll-hint-arrow:last-child {
+    animation-name: bounce-right;
+}
+
+.scroll-hint-text {
+    font-weight: 500;
+}
+
+@keyframes bounce-left {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(-5px); }
+}
+
+@keyframes bounce-right {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
 .seccion-ferias-wrapper {
     position: relative;
     width: 100%;
@@ -505,14 +542,14 @@ body {
 }
 
 .porque-columna h3 {
-    color: #66BB6A;
+    color: #2E7D32;
     font-size: 1.5em;
     margin-bottom: 20px;
     font-weight: bold;
 }
 
 .porque-columna p {
-    color: #66BB6A;
+    color: #000000;
     font-size: 1.1em;
     line-height: 1.8;
 }
@@ -606,6 +643,10 @@ body {
     }
     
     .scroll-btn {
+        display: none;
+    }
+
+    .scroll-hint {
         display: none;
     }
     
@@ -761,14 +802,14 @@ body {
 }
 
 .como-card h3 {
-    color: #D4A373;
+    color: #8B5A2B;
     font-size: 1.3em;
     margin-bottom: 15px;
     font-weight: bold;
 }
 
 .como-card p {
-    color: #5D4E37;
+    color: #000000;
     font-size: 1em;
     line-height: 1.6;
 }
