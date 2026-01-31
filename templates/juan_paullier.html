@@ -286,30 +286,55 @@
         // Calcular el centro y bounds de la feria
         var polygon = L.polygon(limitesFeria);
         var bounds = polygon.getBounds();
+        var zoomInicial = 16.2;
+
+        // Expandir los límites un poco para dar margen al mover
+        var maxBounds = bounds.pad(0.5);
 
         // Inicializar el mapa con zoom controlado (mismo que Tristán Narvaja)
         map = L.map('map', {
             center: bounds.getCenter(),
-            zoom: 16.2,
-            minZoom: 16.2,
+            zoom: zoomInicial,
+            minZoom: zoomInicial,
             maxZoom: 18,
             zoomControl: true,
             scrollWheelZoom: true,
             doubleClickZoom: true,
             touchZoom: true,
-            dragging: true
+            dragging: false,
+            maxBounds: maxBounds,
+            maxBoundsViscosity: 1.0
+        });
+
+        // Habilitar/deshabilitar dragging según el nivel de zoom
+        map.on('zoomend', function() {
+            if (map.getZoom() > zoomInicial) {
+                map.dragging.enable();
+            } else {
+                map.dragging.disable();
+                // Volver al centro cuando está en zoom inicial
+                map.setView(bounds.getCenter(), zoomInicial);
+            }
         });
 
         capaDia = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '© OpenStreetMap contributors, © CARTO',
             subdomains: 'abcd',
-            maxZoom: 18
+            maxZoom: 18,
+            updateWhenIdle: false,
+            updateWhenZooming: false,
+            keepBuffer: 6,
+            crossOrigin: 'anonymous'
         });
-        
+
         capaNoche = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
             attribution: '© OpenStreetMap contributors, © CARTO',
             subdomains: 'abcd',
-            maxZoom: 18
+            maxZoom: 18,
+            updateWhenIdle: false,
+            updateWhenZooming: false,
+            keepBuffer: 6,
+            crossOrigin: 'anonymous'
         });
         
         capaDia.addTo(map);

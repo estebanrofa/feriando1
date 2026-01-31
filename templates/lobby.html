@@ -9,6 +9,10 @@
 </head>
 <body>
     <header class="lobby-header">
+        <div class="auth-links">
+            <a href="/login" class="auth-link">Iniciar sesión</a>
+            <a href="/registro" class="auth-link">Crear cuenta</a>
+        </div>
         <h1 class="logo">Feriando.uy</h1>
     </header>
     
@@ -193,7 +197,37 @@
             </div>
         </div>
     </div>
-    
+
+    <div class="seccion-nueva">
+        <h2 class="como-titulo">¿Cómo <span class="texto-oscuro">funciona</span>?</h2>
+
+        <div class="como-funciona">
+            <div class="como-card">
+                <h3>Explorá la Feria</h3>
+                <p>Entrás, conocés todas las ferias de Montevideo, y elegís la que más se ajuste a tus gustos y tiempos.</p>
+            </div>
+
+            <div class="como-card">
+                <h3>Encontrá lo que buscás (y lo que no)</h3>
+                <p>Elegí la feria, recorré el mapa y descubrí nuevas experiencias sin perderte nada.</p>
+            </div>
+
+            <div class="como-card">
+                <h3>Conectá con quienes venden</h3>
+                <p>Los feriantes muestran su rubro y su lugar. Vos llegás directo, ellos reciben a quien realmente busca lo que ofrecen.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="seccion-bordo">
+        <h2 class="equipo-titulo">Conocé a nuestro <span class="texto-rojo">equipo</span></h2>
+        <div class="fundador-card">
+            <img src="{{ url_for('static', filename='fundador.png') }}" alt="Fundador" class="fundador-img">
+            <p class="fundador-nombre">Esteban Rodrigues</p>
+            <p class="fundador-cargo">Fundador</p>
+        </div>
+    </div>
+
     <script>
         var filtroActivo = null;
         var tipoFiltro = 'dia';
