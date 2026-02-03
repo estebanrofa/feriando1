@@ -48,7 +48,16 @@
                 <button class="boton-nocturno" onclick="toggleModoNocturno()" id="botonModo">
                     🌙 Modo Nocturno
                 </button>
-                
+
+                <div class="botones-info-ferias">
+                    <button class="boton-info-feria" onclick="mostrarMensajeNoDisponible('ofertas')" id="botonOfertas">
+                        🏷️ Ofertas
+                    </button>
+                    <button class="boton-info-feria" onclick="mostrarMensajeNoDisponible('recomendaciones')" id="botonRecomendaciones">
+                        ⭐ Recomendaciones
+                    </button>
+                </div>
+
                 <div id="map"></div>
             </div>
             
@@ -378,6 +387,18 @@
                 'Categoría principal: <span style="color:' + color + '"><b>' + cuadra.categoria_principal + '</b></span>'
             );
         });
+
+        // Función para mostrar mensaje de no disponible
+        function mostrarMensajeNoDisponible(tipo) {
+            var mensaje = tipo === 'ofertas'
+                ? 'No hay ofertas disponibles en esta feria por el momento.'
+                : 'No hay recomendaciones disponibles en esta feria por el momento.';
+
+            var popup = L.popup()
+                .setLatLng(bounds.getCenter())
+                .setContent('<div style="text-align: center; padding: 10px;"><b>' + (tipo === 'ofertas' ? '🏷️' : '⭐') + ' ' + mensaje + '</b></div>')
+                .openOn(map);
+        }
     </script>
 </body>
 </html>

@@ -178,6 +178,141 @@ body {
     background: #34495e;
 }
 
+/* Botones de información de ferias (Ofertas y Recomendaciones) */
+.botones-info-ferias {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    z-index: 1001;
+}
+
+.boton-info-feria {
+    background: white;
+    color: #4A4A48;
+    border: 2px solid #7BB662;
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    font-size: 0.85em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.boton-info-feria:hover {
+    background: #7BB662;
+    color: white;
+    transform: scale(1.05);
+}
+
+.boton-info-feria.activo {
+    background: #D9822B;
+    color: white;
+    border-color: #D9822B;
+}
+
+.boton-info-feria.activo:hover {
+    background: #c67520;
+}
+
+/* Marcadores de información en el mapa */
+.marcador-info-feria {
+    background: transparent;
+    border: none;
+}
+
+.marcador-contenido {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    white-space: nowrap;
+}
+
+.marcador-icono {
+    font-size: 1em;
+}
+
+.marcador-numero {
+    font-size: 1.1em;
+}
+
+.marcador-texto {
+    font-size: 0.9em;
+}
+
+/* Marcadores de cartel con emoji */
+.marcador-cartel-emoji {
+    background: transparent;
+    border: none;
+}
+
+.cartel-emoji {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.cartel-emoji.izq {
+    flex-direction: row;
+}
+
+.cartel-emoji.der {
+    flex-direction: row-reverse;
+}
+
+.cartel-contenido {
+    background: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #7BB662;
+}
+
+.cartel-emoji.oferta .cartel-contenido {
+    border-color: #e74c3c;
+    width: auto;
+    height: auto;
+    border-radius: 25px;
+    padding: 8px 12px;
+    gap: 5px;
+}
+
+.texto-oferta {
+    font-size: 0.5em;
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.cartel-flecha {
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.cartel-flecha.flecha-derecha {
+    border-width: 6px 0 6px 8px;
+    border-color: transparent transparent transparent white;
+    filter: drop-shadow(1px 0 1px rgba(0,0,0,0.15));
+}
+
+.cartel-flecha.flecha-izquierda {
+    border-width: 6px 8px 6px 0;
+    border-color: transparent white transparent transparent;
+    filter: drop-shadow(-1px 0 1px rgba(0,0,0,0.15));
+}
+
 /* Barra lateral de información */
 .barra-info-toggle {
     position: fixed;
@@ -532,6 +667,18 @@ body {
     }
     
     .header-feria p {
+        font-size: 0.8em;
+    }
+
+    .botones-info-ferias {
+        bottom: 10px;
+        right: 10px;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .boton-info-feria {
+        padding: 6px 10px;
         font-size: 0.8em;
     }
 }

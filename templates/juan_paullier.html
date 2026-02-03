@@ -48,7 +48,16 @@
                 <button class="boton-nocturno" onclick="toggleModoNocturno()" id="botonModo">
                     🌙 Modo Nocturno
                 </button>
-                
+
+                <div class="botones-info-ferias">
+                    <button class="boton-info-feria" onclick="toggleOfertas()" id="botonOfertas">
+                        🏷️ Ofertas
+                    </button>
+                    <button class="boton-info-feria" onclick="toggleRecomendaciones()" id="botonRecomendaciones">
+                        ⭐ Recomendaciones
+                    </button>
+                </div>
+
                 <div id="map"></div>
             </div>
             
@@ -89,6 +98,10 @@
         var feria = {{ feria | tojson }};
         var categoriasColores = {{ categorias_colores | tojson }};
         var limitesFeria = {{ limites_feria | tojson }};
+        var marcadoresRecomendaciones = [];
+        var marcadoresOfertas = [];
+        var recomendacionesActivo = false;
+        var ofertasActivo = false;
         
         // Función para cambiar entre modo día y noche
         function toggleModoNocturno() {
@@ -378,6 +391,121 @@
                 'Categoría principal: <span style="color:' + color + '"><b>' + cuadra.categoria_principal + '</b></span>'
             );
         });
+
+        // Función para crear icono de emoji con cartel (lado: 'izq' o 'der')
+        function crearIconoEmoji(emoji, lado) {
+            var flechaClass = lado === 'izq' ? 'flecha-derecha' : 'flecha-izquierda';
+            // iconAnchor en la punta de la flecha para que apenas toque la feria
+            return L.divIcon({
+                className: 'marcador-cartel-emoji',
+                html: '<div class="cartel-emoji ' + lado + '">' +
+                      '<div class="cartel-contenido">' + emoji + '</div>' +
+                      '<div class="cartel-flecha ' + flechaClass + '"></div>' +
+                      '</div>',
+                iconSize: [60, 45],
+                iconAnchor: lado === 'izq' ? [60, 22] : [0, 22]
+            });
+        }
+
+        // Función para crear icono de oferta con cartel
+        function crearIconoOferta(emoji, lado) {
+            var flechaClass = lado === 'izq' ? 'flecha-derecha' : 'flecha-izquierda';
+            return L.divIcon({
+                className: 'marcador-cartel-emoji',
+                html: '<div class="cartel-emoji oferta ' + lado + '">' +
+                      '<div class="cartel-contenido">' + emoji + '<span class="texto-oferta">Oferta!</span></div>' +
+                      '<div class="cartel-flecha ' + flechaClass + '"></div>' +
+                      '</div>',
+                iconSize: [110, 45],
+                iconAnchor: lado === 'izq' ? [110, 22] : [0, 22]
+            });
+        }
+
+        // Coordenadas del tramo de mercado (primer tramo)
+        var coordsMercado = feria.cuadras[0].coordenadas;
+        var puntoInicio = coordsMercado[0];
+        var puntoFin = coordsMercado[1];
+
+        // Calcular puntos para los emojis (en la línea de la feria)
+        var puntoFrutas = [
+            puntoInicio[0] + (puntoFin[0] - puntoInicio[0]) * 0.3,
+            puntoInicio[1] + (puntoFin[1] - puntoInicio[1]) * 0.3
+        ];
+        var puntoPescado = [
+            puntoInicio[0] + (puntoFin[0] - puntoInicio[0]) * 0.7,
+            puntoInicio[1] + (puntoFin[1] - puntoInicio[1]) * 0.7
+        ];
+        // Punto para la oferta (centro del tramo)
+        var puntoOferta = [
+            puntoInicio[0] + (puntoFin[0] - puntoInicio[0]) * 0.5,
+            puntoInicio[1] + (puntoFin[1] - puntoInicio[1]) * 0.5
+        ];
+
+        // Función para mostrar/ocultar recomendaciones
+        function toggleRecomendaciones() {
+            var boton = document.getElementById('botonRecomendaciones');
+
+            if (recomendacionesActivo) {
+                // Ocultar recomendaciones
+                marcadoresRecomendaciones.forEach(function(marcador) {
+                    map.removeLayer(marcador);
+                });
+                marcadoresRecomendaciones = [];
+                boton.classList.remove('activo');
+                recomendacionesActivo = false;
+            } else {
+                // Si ofertas está activo, desactivarlo
+                if (ofertasActivo) {
+                    toggleOfertas();
+                }
+
+                // Mostrar recomendaciones (frutas sale a la izquierda, pescado a la derecha)
+                var marcadorFrutas = L.marker(puntoFrutas, {
+                    icon: crearIconoEmoji('🍎', 'izq')
+                }).addTo(map);
+                marcadorFrutas.bindPopup('<b>Recomendación</b><br>Frutas frescas de estación');
+                marcadoresRecomendaciones.push(marcadorFrutas);
+
+                var marcadorPescado = L.marker(puntoPescado, {
+                    icon: crearIconoEmoji('🐟', 'der')
+                }).addTo(map);
+                marcadorPescado.bindPopup('<b>Recomendación</b><br>Pescado fresco del día');
+                marcadoresRecomendaciones.push(marcadorPescado);
+
+                boton.classList.add('activo');
+                recomendacionesActivo = true;
+            }
+        }
+
+        // Función para mostrar/ocultar ofertas
+        function toggleOfertas() {
+            var boton = document.getElementById('botonOfertas');
+
+            if (ofertasActivo) {
+                // Ocultar ofertas
+                marcadoresOfertas.forEach(function(marcador) {
+                    map.removeLayer(marcador);
+                });
+                marcadoresOfertas = [];
+                boton.classList.remove('activo');
+                ofertasActivo = false;
+            } else {
+                // Si recomendaciones está activo, desactivarlo
+                if (recomendacionesActivo) {
+                    toggleRecomendaciones();
+                }
+
+                // Mostrar oferta (huevo) - sale a la izquierda
+                var marcadorHuevo = L.marker(puntoOferta, {
+                    icon: crearIconoOferta('🥚', 'izq')
+                }).addTo(map);
+                marcadorHuevo.bindPopup('<b>🥚 Oferta del día!</b><br>Huevos de campo a precio especial');
+                marcadoresOfertas.push(marcadorHuevo);
+
+                boton.classList.add('activo');
+                ofertasActivo = true;
+            }
+        }
     </script>
 </body>
 </html>

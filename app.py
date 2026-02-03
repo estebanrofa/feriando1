@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -344,17 +344,37 @@ ferias = [
         'lng': -56.1680,
         'cuadras': [
             {
-                'nombre': 'Juan Paullier - Tramo completo',
+                'nombre': 'Juan Paullier - Mercado y Alimentos',
                 'coordenadas': [
-                    [-34.90207878883594, -56.16795659065247],
-                    [-34.9011724814482, -56.16802096366883],
-                    [-34.90049494414942, -56.16809606552125],
-                    [-34.900219968001814, -56.168133616447456]
+                    [-34.90209198741333, -56.1679619550705],
+                    [-34.90116368229832, -56.16805851459504]
                 ],
                 'categoria_principal': 'Comida',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Productos orgánicos'],
-                    'Ropa': ['Ropa usada', 'Accesorios']
+                    'Comida': ['Frutas', 'Verduras', 'Pescados', 'Quesos', 'Productos de mercado']
+                }
+            },
+            {
+                'nombre': 'Juan Paullier - Ropa y Antigüedades',
+                'coordenadas': [
+                    [-34.90116368229832, -56.16805851459504],
+                    [-34.9001297756249, -56.16814702749253]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa'],
+                    'Antigüedades': ['Antigüedades']
+                }
+            },
+            {
+                'nombre': 'Juan Paullier - Antigüedades',
+                'coordenadas': [
+                    [-34.9001297756249, -56.16814702749253],
+                    [-34.90017157210456, -56.16823822259904]
+                ],
+                'categoria_principal': 'Antigüedades',
+                'productos': {
+                    'Antigüedades': ['Antigüedades']
                 }
             }
         ]
@@ -631,10 +651,20 @@ def gaboto_viernes():
         [-34.90450, -56.17770],
         [-34.90450, -56.17700]
     ]
-    return render_template('feria_generica.html', 
-                         feria=feria, 
+    return render_template('feria_generica.html',
+                         feria=feria,
                          categorias_colores=categorias_colores,
                          limites_feria=limites_feria)
+
+@app.route('/registro')
+def registro():
+    tipo = request.args.get('tipo', 'visitante')
+    dgi = request.args.get('dgi', '')
+    return render_template('registro.html', tipo=tipo, dgi=dgi)
+
+@app.route('/login')
+def login():
+    return render_template('registro.html', tipo='login', dgi='')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

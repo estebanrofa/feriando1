@@ -43,7 +43,16 @@
                 <button class="boton-nocturno" onclick="toggleModoNocturno()" id="botonModo">
                     🌙 Modo Nocturno
                 </button>
-                
+
+                <div class="botones-info-ferias">
+                    <button class="boton-info-feria" onclick="toggleOfertas()" id="botonOfertas">
+                        🏷️ Ofertas
+                    </button>
+                    <button class="boton-info-feria" onclick="toggleRecomendaciones()" id="botonRecomendaciones">
+                        ⭐ Recomendaciones
+                    </button>
+                </div>
+
                 <div id="map"></div>
             </div>
             
@@ -72,6 +81,10 @@
         var categoriaActual = 'Todas';
         var ferias = {{ ferias | tojson }};
         var categoriasColores = {{ categorias_colores | tojson }};
+        var marcadoresOfertas = [];
+        var marcadoresRecomendaciones = [];
+        var ofertasActivo = false;
+        var recomendacionesActivo = false;
         
         // Función para cambiar entre modo día y noche
         function toggleModoNocturno() {
@@ -433,7 +446,7 @@
         map.on('zoomend', function() {
             var zoom = map.getZoom();
             var weight;
-            
+
             if (zoom >= 16) {
                 weight = 6;
             } else if (zoom >= 15) {
@@ -445,11 +458,99 @@
             } else {
                 weight = 2;
             }
-            
+
             todasLasLineas.forEach(function(linea) {
                 linea.setStyle({ weight: weight });
             });
         });
+
+        // Función para generar número aleatorio entre 3 y 11
+        function numeroAleatorio() {
+            return Math.floor(Math.random() * 9) + 3;
+        }
+
+        // Función para crear icono personalizado
+        function crearIcono(numero, tipo) {
+            var color = tipo === 'ofertas' ? '#e74c3c' : '#f39c12';
+            var icono = tipo === 'ofertas' ? '🏷️' : '⭐';
+            return L.divIcon({
+                className: 'marcador-info-feria',
+                html: '<div class="marcador-contenido" style="background-color: ' + color + ';">' +
+                      '<span class="marcador-icono">' + icono + '</span>' +
+                      '<span class="marcador-numero">' + numero + '</span>' +
+                      '</div>',
+                iconSize: [60, 30],
+                iconAnchor: [30, 30]
+            });
+        }
+
+        // Función para mostrar/ocultar ofertas
+        function toggleOfertas() {
+            var boton = document.getElementById('botonOfertas');
+
+            if (ofertasActivo) {
+                // Ocultar ofertas
+                marcadoresOfertas.forEach(function(marcador) {
+                    map.removeLayer(marcador);
+                });
+                marcadoresOfertas = [];
+                boton.classList.remove('activo');
+                ofertasActivo = false;
+            } else {
+                // Si recomendaciones está activo, desactivarlo
+                if (recomendacionesActivo) {
+                    toggleRecomendaciones();
+                }
+
+                // Mostrar ofertas
+                ferias.forEach(function(feria) {
+                    var numero = numeroAleatorio();
+                    var marcador = L.marker([feria.lat, feria.lng], {
+                        icon: crearIcono(numero, 'ofertas')
+                    }).addTo(map);
+
+                    marcador.bindPopup('<b>' + feria.nombre + '</b><br>🏷️ ' + numero + ' ofertas disponibles');
+                    marcadoresOfertas.push(marcador);
+                });
+
+                boton.classList.add('activo');
+                ofertasActivo = true;
+            }
+        }
+
+        // Función para mostrar/ocultar recomendaciones
+        function toggleRecomendaciones() {
+            var boton = document.getElementById('botonRecomendaciones');
+
+            if (recomendacionesActivo) {
+                // Ocultar recomendaciones
+                marcadoresRecomendaciones.forEach(function(marcador) {
+                    map.removeLayer(marcador);
+                });
+                marcadoresRecomendaciones = [];
+                boton.classList.remove('activo');
+                recomendacionesActivo = false;
+            } else {
+                // Si ofertas está activo, desactivarlo
+                if (ofertasActivo) {
+                    toggleOfertas();
+                }
+
+                // Mostrar recomendaciones
+                ferias.forEach(function(feria) {
+                    var numero = numeroAleatorio();
+                    var marcador = L.marker([feria.lat, feria.lng], {
+                        icon: crearIcono(numero, 'recomendaciones')
+                    }).addTo(map);
+
+                    marcador.bindPopup('<b>' + feria.nombre + '</b><br>⭐ ' + numero + ' recomendaciones');
+                    marcadoresRecomendaciones.push(marcador);
+                });
+
+                boton.classList.add('activo');
+                recomendacionesActivo = true;
+            }
+        }
     </script>
 </body>
 </html>
