@@ -11,7 +11,7 @@
     <header class="lobby-header">
         <div class="auth-links">
             <a href="/login" class="auth-link">Iniciar sesión</a>
-            <a href="/registro" class="auth-link">Crear cuenta</a>
+            <a href="#" class="auth-link" onclick="abrirModalTipoUsuario(event)">Crear cuenta</a>
         </div>
         <h1 class="logo">Feriando.uy</h1>
     </header>
@@ -190,7 +190,7 @@
             <div class="porque-contenido">
                 <div class="porque-columna">
                     <h3>Para quienes caminan la feria</h3>
-                    <p>Porque la feria no se recorre al azar: se vive. Feriando te ayuda a encontrar lo que buscás, descubrir lo que no sabías que querías y caminar Tristán Narvaja con más sentido y menos vueltas.</p>
+                    <p>Porque la feria no se recorre al azar: se vive. Feriando te ayuda a encontrar lo que buscás, descubrir lo que no sabías que querías y caminar cada cuadra con más sentido y menos vueltas.</p>
                 </div>
                 
                 <div class="porque-columna">
@@ -230,6 +230,79 @@
             <p class="fundador-cargo">Fundador</p>
         </div>
     </div>
+
+    <!-- Modal Tipo de Usuario -->
+    <div class="modal-overlay" id="modalTipoUsuario" onclick="cerrarModalTipoUsuario(event)">
+        <div class="modal-contenido" onclick="event.stopPropagation()">
+            <button class="modal-cerrar" onclick="cerrarModalTipoUsuario(event)">&times;</button>
+
+            <!-- Paso 1: Tipo de usuario -->
+            <div id="modalPaso1">
+                <h2 class="modal-titulo">¿Cómo vas a usar Feriando?</h2>
+                <div class="modal-opciones">
+                    <a href="/registro?tipo=visitante" class="modal-opcion">
+                        <div class="modal-opcion-icono">🛒</div>
+                        <h3>Recorro la feria</h3>
+                        <p>Busco productos, exploro puestos y descubro nuevas ferias</p>
+                    </a>
+                    <div class="modal-opcion" onclick="mostrarPasoDGI()">
+                        <div class="modal-opcion-icono">🏪</div>
+                        <h3>Soy vendedor</h3>
+                        <p>Tengo un puesto y quiero que más gente me encuentre</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paso 2: Registro DGI -->
+            <div id="modalPaso2" style="display: none;">
+                <button class="modal-volver" onclick="volverPaso1()">← Volver</button>
+                <h2 class="modal-titulo">¿Estás registrado ante la DGI?</h2>
+                <div class="modal-opciones">
+                    <a href="/registro?tipo=vendedor&dgi=si" class="modal-opcion">
+                        <div class="modal-opcion-icono">✅</div>
+                        <h3>Sí</h3>
+                        <p>Ya tengo mi registro en la DGI</p>
+                    </a>
+                    <a href="/registro?tipo=vendedor&dgi=no" class="modal-opcion">
+                        <div class="modal-opcion-icono">📝</div>
+                        <h3>Quiero registrarme</h3>
+                        <p>Necesito ayuda para dar de alta mi actividad</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function abrirModalTipoUsuario(event) {
+            event.preventDefault();
+            document.getElementById('modalPaso1').style.display = 'block';
+            document.getElementById('modalPaso2').style.display = 'none';
+            document.getElementById('modalTipoUsuario').classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarModalTipoUsuario(event) {
+            document.getElementById('modalTipoUsuario').classList.remove('visible');
+            document.body.style.overflow = '';
+        }
+
+        function mostrarPasoDGI() {
+            document.getElementById('modalPaso1').style.display = 'none';
+            document.getElementById('modalPaso2').style.display = 'block';
+        }
+
+        function volverPaso1() {
+            document.getElementById('modalPaso1').style.display = 'block';
+            document.getElementById('modalPaso2').style.display = 'none';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                cerrarModalTipoUsuario();
+            }
+        });
+    </script>
 
     <script>
         var filtroActivo = null;

@@ -1,0 +1,256 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #7BB662 0%, #5a9a47 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.registro-container {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-link {
+    text-decoration: none;
+}
+
+.logo {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.registro-card {
+    background: white;
+    border-radius: 16px;
+    padding: 35px 30px;
+    width: 100%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.registro-titulo {
+    font-size: 1.8em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.registro-subtitulo {
+    color: #666;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 0.95em;
+}
+
+.opciones-auth {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    font-size: 1em;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-social:hover {
+    background: #f8f8f8;
+    border-color: #ccc;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-google:hover {
+    border-color: #4285F4;
+}
+
+.btn-facebook:hover {
+    border-color: #1877F2;
+}
+
+.icon-social {
+    width: 22px;
+    height: 22px;
+}
+
+.separador {
+    display: flex;
+    align-items: center;
+    margin: 25px 0;
+}
+
+.separador::before,
+.separador::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+}
+
+.separador span {
+    padding: 0 15px;
+    color: #999;
+    font-size: 0.9em;
+}
+
+.form-registro {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo-grupo label {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: #444;
+}
+
+.campo-grupo input {
+    padding: 14px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.2s ease;
+}
+
+.campo-grupo input:focus {
+    outline: none;
+    border-color: #7BB662;
+    box-shadow: 0 0 0 3px rgba(123, 182, 98, 0.2);
+}
+
+.campo-grupo input::placeholder {
+    color: #aaa;
+}
+
+.btn-crear-cuenta {
+    padding: 16px;
+    background: #7BB662;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 5px;
+}
+
+.btn-crear-cuenta:hover {
+    background: #6aa352;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(123, 182, 98, 0.4);
+}
+
+.mensaje-dgi {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    border: 2px solid #7BB662;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.mensaje-dgi-icono {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.mensaje-dgi p {
+    color: #2e7d32;
+    font-size: 0.95em;
+    line-height: 1.5;
+    font-weight: 500;
+    margin: 0;
+}
+
+.texto-login {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    font-size: 0.95em;
+}
+
+.link-login {
+    color: #7BB662;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link-login:hover {
+    text-decoration: underline;
+}
+
+.volver-inicio {
+    margin-top: 25px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.95em;
+    transition: opacity 0.2s ease;
+}
+
+.volver-inicio:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .registro-card {
+        padding: 25px 20px;
+    }
+
+    .logo {
+        font-size: 1.8em;
+    }
+
+    .registro-titulo {
+        font-size: 1.5em;
+    }
+
+    .btn-social {
+        padding: 12px 16px;
+        font-size: 0.95em;
+    }
+
+    .campo-grupo input {
+        padding: 12px 14px;
+    }
+
+    .btn-crear-cuenta {
+        padding: 14px;
+        font-size: 1em;
+    }
+}
