@@ -170,7 +170,7 @@ body.loaded .footer-bar {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    background: url('lobby-fondo.jpg') center top no-repeat;
+    background: url('lobby-header2.png') center top no-repeat;
     background-size: 100% auto;
     background-position: center -10vh;
     background-attachment: scroll;
@@ -182,21 +182,25 @@ body.loaded .footer-bar {
     top: 15px;
     right: 20px;
     display: flex;
-    gap: 20px;
+    gap: 10px;
     z-index: 10;
 }
 
 .auth-link {
-    color: white;
+    background: white;
+    color: #7BB662;
     text-decoration: none;
     font-size: 0.95em;
-    font-weight: 500;
-    transition: opacity 0.3s ease;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .auth-link:hover {
-    opacity: 0.8;
-    text-decoration: underline;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
@@ -364,6 +368,17 @@ body.loaded .footer-bar {
     align-items: center;
     justify-content: center;
     padding: 10px 20px;
+    padding-top: 80px;
+    position: relative;
+}
+
+.fondo-mapa {
+    position: absolute;
+    max-width: 650px;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+    margin-left: 55px;
 }
 
 .scroll-hint {
@@ -476,7 +491,7 @@ body.loaded .footer-bar {
 
 .opcion-mapa {
     background: white;
-    padding: 18px 30px;
+    padding: 14px 24px;
     border-radius: 10px;
     text-decoration: none;
     color: #4A4A48;
@@ -486,9 +501,12 @@ body.loaded .footer-bar {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 20px;
-    min-height: 90px;
-    width: 450px;
+    justify-content: center;
+    gap: 15px;
+    min-height: 75px;
+    width: 380px;
+    position: relative;
+    z-index: 2;
 }
 
 .opcion-mapa:hover {
@@ -713,11 +731,12 @@ body.loaded .footer-bar {
     .auth-links {
         top: 10px;
         right: 15px;
-        gap: 15px;
+        gap: 8px;
     }
 
     .auth-link {
         font-size: 0.85em;
+        padding: 8px 16px;
     }
 
     .lobby-header {
@@ -854,11 +873,12 @@ body.loaded .footer-bar {
     .auth-links {
         top: 8px;
         right: 10px;
-        gap: 12px;
+        gap: 6px;
     }
 
     .auth-link {
-        font-size: 0.8em;
+        font-size: 0.75em;
+        padding: 6px 12px;
     }
 
     .lobby-header {
@@ -923,7 +943,7 @@ body.loaded .footer-bar {
 }
 
 .texto-oscuro {
-    color: #8B4513;
+    color: #1B5E20;
 }
 
 .como-funciona {
@@ -946,7 +966,7 @@ body.loaded .footer-bar {
 }
 
 .como-card h3 {
-    color: #8B5A2B;
+    color: #2E7D32;
     font-size: 1.3em;
     margin-bottom: 15px;
     font-weight: bold;
@@ -1018,7 +1038,7 @@ body.loaded .footer-bar {
 }
 
 .texto-rojo {
-    color: #c44536;
+    color: #1B5E20;
 }
 
 .fundador-card {
@@ -1041,7 +1061,7 @@ body.loaded .footer-bar {
     margin-top: 20px;
     font-size: 1.3em;
     font-weight: bold;
-    color: #69140e;
+    color: #1B5E20;
 }
 
 .fundador-cargo {
