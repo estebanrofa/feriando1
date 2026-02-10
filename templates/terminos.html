@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminos y Condiciones - Feriando.uy</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #1B5E20;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5em;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+
+        .contenido {
+            flex: 1;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contenido h2 {
+            color: #1B5E20;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .contenido h3 {
+            color: #2E7D32;
+            font-size: 1.2em;
+            margin: 25px 0 10px 0;
+        }
+
+        .contenido p {
+            color: #333;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .contenido ul {
+            margin: 10px 0 20px 25px;
+            color: #333;
+        }
+
+        .contenido li {
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        .fecha {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-bar {
+            background-color: #1B5E20;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 0.9em;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .contenido {
+                margin: 20px;
+                padding: 25px;
+            }
+
+            .contenido h2 {
+                font-size: 1.5em;
+            }
+
+            .header h1 {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="/">&#8592;</a>
+        <h1>Feriando.uy</h1>
+    </header>
+
+    <div class="contenido">
+        <h2>Terminos y Condiciones</h2>
+
+        <p>Bienvenido a Feriando.uy. Al acceder y utilizar este sitio web, aceptas los siguientes terminos y condiciones de uso. Te recomendamos leerlos detenidamente.</p>
+
+        <h3>1. Aceptacion de los Terminos</h3>
+        <p>Al utilizar Feriando.uy, declaras que has leido, entendido y aceptado estos terminos y condiciones en su totalidad. Si no estas de acuerdo con alguno de estos terminos, te pedimos que no utilices el sitio.</p>
+
+        <h3>2. Descripcion del Servicio</h3>
+        <p>Feriando.uy es una plataforma informativa que proporciona:</p>
+        <ul>
+            <li>Informacion sobre ferias vecinales de Montevideo</li>
+            <li>Mapas y ubicaciones de las ferias</li>
+            <li>Informacion sobre dias y horarios de funcionamiento</li>
+            <li>Directorio de puestos y vendedores registrados</li>
+        </ul>
+
+        <h3>3. Uso del Sitio</h3>
+        <p>El usuario se compromete a utilizar el sitio de manera responsable y conforme a la ley. Queda prohibido:</p>
+        <ul>
+            <li>Usar el sitio para fines ilegales o no autorizados</li>
+            <li>Intentar acceder a areas restringidas del sistema</li>
+            <li>Publicar informacion falsa o enganosa</li>
+            <li>Realizar actividades que perjudiquen el funcionamiento del sitio</li>
+        </ul>
+
+        <h3>4. Registro de Usuarios</h3>
+        <p>Para acceder a ciertas funcionalidades, es necesario crear una cuenta. El usuario es responsable de:</p>
+        <ul>
+            <li>Proporcionar informacion veraz y actualizada</li>
+            <li>Mantener la confidencialidad de sus credenciales de acceso</li>
+            <li>Notificar cualquier uso no autorizado de su cuenta</li>
+        </ul>
+
+        <h3>5. Informacion de Ferias y Vendedores</h3>
+        <p>La informacion sobre ferias, horarios y productos es proporcionada con fines informativos. Feriando.uy no garantiza la exactitud de los horarios o la disponibilidad de productos especificos. Los usuarios deben verificar la informacion directamente con los vendedores.</p>
+
+        <h3>6. Propiedad Intelectual</h3>
+        <p>Todo el contenido del sitio, incluyendo pero no limitado a textos, graficos, logos, iconos y software, es propiedad de Feriando.uy o de sus licenciantes y esta protegido por las leyes de propiedad intelectual.</p>
+
+        <h3>7. Privacidad y Datos Personales</h3>
+        <p>Feriando.uy se compromete a proteger la privacidad de los usuarios. Los datos personales recopilados seran utilizados unicamente para:</p>
+        <ul>
+            <li>Proporcionar y mejorar nuestros servicios</li>
+            <li>Comunicarnos con los usuarios registrados</li>
+            <li>Cumplir con obligaciones legales</li>
+        </ul>
+
+        <h3>8. Limitacion de Responsabilidad</h3>
+        <p>Feriando.uy no sera responsable por:</p>
+        <ul>
+            <li>Danos derivados del uso o imposibilidad de uso del sitio</li>
+            <li>Perdidas economicas relacionadas con transacciones entre usuarios y vendedores</li>
+            <li>Inexactitudes en la informacion proporcionada por terceros</li>
+            <li>Interrupciones del servicio por causas tecnicas o de fuerza mayor</li>
+        </ul>
+
+        <h3>9. Modificaciones</h3>
+        <p>Feriando.uy se reserva el derecho de modificar estos terminos en cualquier momento. Los cambios entraran en vigor desde su publicacion en el sitio. El uso continuado del sitio implica la aceptacion de los terminos modificados.</p>
+
+        <h3>10. Ley Aplicable</h3>
+        <p>Estos terminos se rigen por las leyes de la Republica Oriental del Uruguay. Cualquier disputa sera sometida a la jurisdiccion de los tribunales competentes de Montevideo.</p>
+
+        <h3>11. Contacto</h3>
+        <p>Para consultas sobre estos terminos y condiciones, puedes contactarnos a traves del sitio web.</p>
+
+        <p class="fecha">Ultima actualizacion: Febrero 2026</p>
+    </div>
+
+    <footer class="footer-bar">
+        <span>2026 (c) Feriando.uy</span>
+        <span>Terminos y condiciones</span>
+    </footer>
+</body>
+</html>

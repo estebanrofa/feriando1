@@ -666,5 +666,9 @@ def registro():
 def login():
     return render_template('registro.html', tipo='login', dgi='')
 
+@app.route('/terminos')
+def terminos():
+    return render_template('terminos.html')
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
