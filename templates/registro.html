@@ -61,17 +61,17 @@
                     <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres" required minlength="8">
                 </div>
 
-                {% if tipo == 'vendedor' and dgi == 'si' %}
+                {% if tipo == 'vendedor' and declarado == 'si' %}
                 <div class="campo-grupo">
-                    <label for="numero_socio">Tu número de socio</label>
-                    <input type="text" id="numero_socio" name="numero_socio" placeholder="Ej: 123456" required>
+                    <label for="numero_puesto">Tu número de puesto</label>
+                    <input type="text" id="numero_puesto" name="numero_puesto" placeholder="Ej: 123456" required>
                 </div>
                 {% endif %}
 
-                {% if tipo == 'vendedor' and dgi == 'no' %}
+                {% if tipo == 'vendedor' and declarado == 'no' %}
                 <div class="mensaje-dgi">
                     <div class="mensaje-dgi-icono">📋</div>
-                    <p>¡A la brevedad te estaremos contactando para ayudarte a registrarte en la DGI y que puedas vender sin complicaciones!</p>
+                    <p>¡A la brevedad te estaremos contactando para ayudarte a declarar tu puesto ante la Intendencia de Montevideo!</p>
                 </div>
                 {% endif %}
 
@@ -99,8 +99,8 @@
 
         document.getElementById('formRegistro').addEventListener('submit', function(e) {
             e.preventDefault();
-            {% if tipo == 'vendedor' and dgi == 'no' %}
-            alert('¡Gracias por registrarte! Te contactaremos pronto para ayudarte con tu registro en la DGI.');
+            {% if tipo == 'vendedor' and declarado == 'no' %}
+            alert('¡Gracias por registrarte! Te contactaremos pronto para ayudarte a declarar tu puesto ante la Intendencia.');
             {% else %}
             alert('Próximamente: Registro con correo electrónico');
             {% endif %}

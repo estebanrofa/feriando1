@@ -659,8 +659,8 @@ def gaboto_viernes():
 @app.route('/registro')
 def registro():
     tipo = request.args.get('tipo', 'visitante')
-    dgi = request.args.get('dgi', '')
-    return render_template('registro.html', tipo=tipo, dgi=dgi)
+    declarado = request.args.get('declarado', '')
+    return render_template('registro.html', tipo=tipo, declarado=declarado)
 
 @app.route('/login')
 def login():
