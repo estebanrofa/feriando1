@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='lobby.css') }}">
 </head>
 <body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-logo" id="splashLogo">
+            <span class="splash-feriando">Feriando</span><span class="splash-uy">.uy</span>
+        </div>
+        <div class="splash-underline" id="splashUnderline"></div>
+    </div>
+
     <header class="lobby-header">
         <div class="auth-links">
             <a href="/login" class="auth-link">Iniciar sesión</a>
@@ -438,6 +446,50 @@
             
             setTimeout(updateScrollButtons, 500);
         }
+    </script>
+
+    <script>
+        // Splash Screen Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            var splash = document.getElementById('splashScreen');
+            var splashLogo = document.getElementById('splashLogo');
+            var splashUnderline = document.getElementById('splashUnderline');
+            var headerLogo = document.querySelector('.logo');
+
+            // Ocultar contenido inicial
+            document.body.classList.add('loading');
+
+            // Esperar a que cargue todo
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    // Obtener posición del logo en el header
+                    var headerRect = headerLogo.getBoundingClientRect();
+                    var splashRect = splashLogo.getBoundingClientRect();
+
+                    // Calcular diferencia de posición
+                    var deltaX = headerRect.left + headerRect.width/2 - (splashRect.left + splashRect.width/2);
+                    var deltaY = headerRect.top + headerRect.height/2 - (splashRect.top + splashRect.height/2);
+                    var scale = headerRect.width / splashRect.width;
+
+                    // Ocultar línea
+                    splashUnderline.style.opacity = '0';
+
+                    // Mover logo a posición del header
+                    splashLogo.style.transform = 'translate(' + deltaX + 'px, ' + deltaY + 'px) scale(' + scale + ')';
+
+                    // Desvanecer splash y mostrar contenido
+                    setTimeout(function() {
+                        splash.classList.add('fade-out');
+                        document.body.classList.remove('loading');
+                        document.body.classList.add('loaded');
+
+                        setTimeout(function() {
+                            splash.style.display = 'none';
+                        }, 500);
+                    }, 600);
+                }, 1500);
+            });
+        });
     </script>
 </body>
 </html>
