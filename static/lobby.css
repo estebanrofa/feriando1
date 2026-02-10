@@ -1063,10 +1063,22 @@ body {
     background-color: #1B5E20;
     padding: 15px 30px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    gap: 20px;
     color: white;
     font-size: 0.9em;
+}
+
+.footer-bar .copyright {
+    font-size: 0.75em;
+    vertical-align: middle;
+}
+
+.footer-divider {
+    width: 1px;
+    height: 16px;
+    background-color: white;
 }
 
 .footer-link {
@@ -1084,5 +1096,6 @@ body {
     .footer-bar {
         padding: 12px 20px;
         font-size: 0.8em;
+        gap: 15px;
     }
 }

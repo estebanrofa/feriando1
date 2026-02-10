@@ -93,15 +93,22 @@
             background-color: #1B5E20;
             padding: 15px 30px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            gap: 20px;
             color: white;
             font-size: 0.9em;
         }
 
-        .footer-link {
-            color: white;
-            text-decoration: none;
+        .footer-bar .copyright {
+            font-size: 0.75em;
+            vertical-align: middle;
+        }
+
+        .footer-divider {
+            width: 1px;
+            height: 16px;
+            background-color: white;
         }
 
         @media (max-width: 768px) {
@@ -196,7 +203,8 @@
     </div>
 
     <footer class="footer-bar">
-        <span>2026 (c) Feriando.uy</span>
+        <span>2026 <span class="copyright">©</span> Feriando.uy</span>
+        <div class="footer-divider"></div>
         <span>Terminos y condiciones</span>
     </footer>
 </body>
