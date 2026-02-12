@@ -1,4 +1,40 @@
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Entorno
 .env
+.env.local
+.env.*.local
 venv/
+.venv/
+env/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+logs/
+
+# Temp
+tmp/
+temp/

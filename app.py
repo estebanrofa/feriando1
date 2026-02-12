@@ -1,6 +1,41 @@
-from flask import Flask, render_template, request
+import os
+from flask import Flask, render_template, request, send_from_directory
+
+# Cargar variables de entorno (opcional)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+# Sentry para error tracking (opcional)
+try:
+    import sentry_sdk
+    from sentry_sdk.integrations.flask import FlaskIntegration
+
+    sentry_dsn = os.environ.get('SENTRY_DSN')
+    if sentry_dsn:
+        sentry_sdk.init(
+            dsn=sentry_dsn,
+            integrations=[FlaskIntegration()],
+            traces_sample_rate=0.1,  # 10% de requests para performance
+            profiles_sample_rate=0.1,
+        )
+except ImportError:
+    pass
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-change-in-production')
+
+# Compresion gzip (opcional)
+try:
+    from flask_compress import Compress
+    Compress(app)
+except ImportError:
+    pass
+
+# Configuracion para produccion
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 31536000  # Cache 1 año para assets
 
 categorias_colores = {
     'Libros': '#CC0000',
@@ -467,7 +502,8 @@ ferias = [
 
 @app.route('/')
 def index():
-    return render_template('lobby.html')
+    ga_id = os.environ.get('GA_MEASUREMENT_ID', '')
+    return render_template('lobby.html', ga_id=ga_id)
 
 @app.route('/mapa')
 def mapa():
@@ -669,6 +705,29 @@ def login():
 @app.route('/terminos')
 def terminos():
     return render_template('terminos.html')
+
+# SEO: Servir robots.txt y sitemap.xml desde la raiz
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory(app.static_folder, 'robots.txt')
+
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory(app.static_folder, 'sitemap.xml')
+
+# PWA: Servir manifest.json desde la raiz (opcional, algunos navegadores lo buscan ahi)
+@app.route('/manifest.json')
+def manifest():
+    return send_from_directory(app.static_folder, 'manifest.json')
+
+# Security headers middleware
+@app.after_request
+def add_security_headers(response):
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['X-XSS-Protection'] = '1; mode=block'
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

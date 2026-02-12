@@ -1,0 +1,95 @@
+{
+    "name": "Feriando.uy - Ferias de Montevideo",
+    "short_name": "Feriando",
+    "description": "Descubri todas las ferias de Montevideo. Encontra productos frescos, antiguedades, ropa y conecta con los feriantes.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#7BB662",
+    "theme_color": "#7BB662",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "es",
+    "categories": ["lifestyle", "shopping", "navigation"],
+    "icons": [
+        {
+            "src": "/static/icon-72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/icon-128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/icon-144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/icon-152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/icon-384.png",
+            "sizes": "384x384",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/static/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/static/screenshot-wide.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide"
+        },
+        {
+            "src": "/static/screenshot-mobile.png",
+            "sizes": "390x844",
+            "type": "image/png",
+            "form_factor": "narrow"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Ver Mapa",
+            "short_name": "Mapa",
+            "description": "Abrir el mapa de ferias",
+            "url": "/mapa",
+            "icons": [{ "src": "/static/icon-96.png", "sizes": "96x96" }]
+        },
+        {
+            "name": "Tristan Narvaja",
+            "short_name": "Tristan",
+            "description": "Ver feria Tristan Narvaja",
+            "url": "/tristan-narvaja",
+            "icons": [{ "src": "/static/icon-96.png", "sizes": "96x96" }]
+        }
+    ],
+    "related_applications": [],
+    "prefer_related_applications": false
+}

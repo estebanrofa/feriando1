@@ -4,8 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feriando.uy - Ferias de Montevideo</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Descubrí todas las ferias de Montevideo. Encontrá productos frescos, antigüedades, ropa y más. Conectá con los feriantes de tu barrio.">
+    <meta name="keywords" content="ferias, montevideo, uruguay, tristán narvaja, feria, mercado, productos frescos, antigüedades, feriantes">
+    <meta name="author" content="Feriando.uy">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://feriando.uy/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://feriando.uy/">
+    <meta property="og:title" content="Feriando.uy - Descubrí las ferias de Montevideo">
+    <meta property="og:description" content="Explorá las ferias de Montevideo. Encontrá productos frescos, antigüedades, ropa y conectá con los feriantes de tu barrio.">
+    <meta property="og:image" content="{{ url_for('static', filename='og-image.png', _external=True) }}">
+    <meta property="og:locale" content="es_UY">
+    <meta property="og:site_name" content="Feriando.uy">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://feriando.uy/">
+    <meta name="twitter:title" content="Feriando.uy - Descubrí las ferias de Montevideo">
+    <meta name="twitter:description" content="Explorá las ferias de Montevideo. Encontrá productos frescos, antigüedades, ropa y conectá con los feriantes.">
+    <meta name="twitter:image" content="{{ url_for('static', filename='og-image.png', _external=True) }}">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#7BB662">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Feriando">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icon-192.png') }}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon.png') }}">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='lobby.css') }}">
+
+    <!-- Google Analytics -->
+    {% if ga_id %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_id }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ ga_id }}');
+    </script>
+    {% endif %}
+
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Feriando.uy",
+        "description": "Plataforma para descubrir ferias de Montevideo",
+        "url": "https://feriando.uy",
+        "applicationCategory": "LifestyleApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Feriando.uy",
+            "founder": {
+                "@type": "Person",
+                "name": "Esteban Rodrigues"
+            }
+        },
+        "areaServed": {
+            "@type": "City",
+            "name": "Montevideo",
+            "containedInPlace": {
+                "@type": "Country",
+                "name": "Uruguay"
+            }
+        }
+    }
+    </script>
 </head>
 <body>
     <!-- Splash Screen -->
@@ -472,6 +559,19 @@
                 }, 1500);
             });
         });
+
+        // Service Worker Registration (PWA)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/static/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registrado:', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log('SW error:', error);
+                    });
+            });
+        }
     </script>
 </body>
 </html>

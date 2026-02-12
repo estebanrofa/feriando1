@@ -1,0 +1,12 @@
+# Robots.txt para Feriando.uy
+# https://feriando.uy
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://feriando.uy/sitemap.xml
+
+# Bloquear rutas de desarrollo/admin (agregar si es necesario)
+# Disallow: /admin/
+# Disallow: /api/internal/

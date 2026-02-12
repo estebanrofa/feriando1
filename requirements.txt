@@ -1,2 +1,8 @@
 Flask==3.0.0
 gunicorn==21.2.0
+
+# Produccion
+python-dotenv==1.0.0        # Variables de entorno (.env)
+sentry-sdk[flask]==1.39.1   # Error tracking y performance
+Flask-Compress==1.14        # Compresion gzip automatica
+Flask-Talisman==1.1.0       # Security headers adicionales
