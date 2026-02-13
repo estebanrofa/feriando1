@@ -991,6 +991,29 @@ a.logo {
         font-size: 1em;
     }
 
+    .equipo-grid {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0 20px;
+        gap: 20px;
+    }
+
+    .equipo-card {
+        width: 150px;
+        min-width: 150px;
+        flex-shrink: 0;
+    }
+
+    .equipo-img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .equipo-img-placeholder {
+        width: 80px;
+        height: 80px;
+    }
 }
 
 @media (max-width: 480px) {
