@@ -104,12 +104,35 @@
     </div>
 
     <header class="lobby-header">
+        <a href="/" class="logo">Feriando.uy</a>
+        <nav class="header-nav">
+            <a href="#" class="nav-btn" onclick="scrollToTop(event)">Inicio</a>
+            <a href="#" class="nav-btn" onclick="scrollToSection(event, 'porque-feriando')">¿Por qué Feriando?</a>
+            <a href="#" class="nav-btn" onclick="scrollToSection(event, 'como-funciona')">¿Cómo funciona?</a>
+            <a href="#" class="nav-btn" onclick="scrollToSection(event, 'nosotros')">Nosotros</a>
+            <a href="#" class="nav-btn" onclick="scrollToSection(event, 'contacto')">Contacto</a>
+        </nav>
         <div class="auth-links">
             <a href="/login" class="auth-link">Iniciar sesión</a>
             <a href="#" class="auth-link" onclick="abrirModalTipoUsuario(event)">Crear cuenta</a>
         </div>
-        <h1 class="logo">Feriando.uy</h1>
+        <button class="menu-hamburguesa" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </header>
+
+    <div class="menu-mobile" id="menuMobile">
+        <a href="#" class="menu-mobile-btn" onclick="scrollToTop(event); cerrarMenu()">Inicio</a>
+        <a href="#" class="menu-mobile-btn" onclick="scrollToSection(event, 'porque-feriando'); cerrarMenu()">¿Por qué Feriando?</a>
+        <a href="#" class="menu-mobile-btn" onclick="scrollToSection(event, 'como-funciona'); cerrarMenu()">¿Cómo funciona?</a>
+        <a href="#" class="menu-mobile-btn" onclick="scrollToSection(event, 'nosotros'); cerrarMenu()">Nosotros</a>
+        <a href="#" class="menu-mobile-btn" onclick="scrollToSection(event, 'contacto'); cerrarMenu()">Contacto</a>
+        <div class="menu-mobile-divider"></div>
+        <a href="/login" class="menu-mobile-btn">Iniciar sesión</a>
+        <a href="#" class="menu-mobile-btn" onclick="abrirModalTipoUsuario(event); cerrarMenu()">Crear cuenta</a>
+    </div>
     
     <div class="lobby-container">
         <div class="seccion-mapa">
@@ -119,18 +142,20 @@
             </a>
         </div>
         
+        <h2 class="ferias-titulo">Explorá las <span class="texto-verde">ferias</span></h2>
+
         <div class="filtros-wrapper">
             <div class="filtro-toggle" onclick="toggleFiltros()">
                 <span class="filtro-texto">Filtrar</span>
                 <span class="filtro-flecha" id="filtroFlecha">▲</span>
             </div>
-            
+
             <div class="filtros-panel" id="filtrosPanel" style="display: none;">
                 <div class="filtros-opciones">
                     <button class="filtro-btn active" id="btnDia" onclick="cambiarFiltro('dia')">Por día</button>
                     <button class="filtro-btn" id="btnBarrio" onclick="cambiarFiltro('barrio')">Por barrio</button>
                 </div>
-                
+
                 <div class="filtros-items" id="grupodia">
                     <div class="filtro-grupo">
                         <div class="filtro-item" onclick="filtrarFerias('Lunes')">Lunes</div>
@@ -142,7 +167,7 @@
                         <div class="filtro-item" onclick="filtrarFerias('Domingos')">Domingos</div>
                     </div>
                 </div>
-                
+
                 <div class="filtros-items" id="grupobarrio" style="display: none;">
                     <div class="filtro-grupo">
                         <div class="filtro-item" onclick="filtrarFerias('Cordón')">Cordón</div>
@@ -154,7 +179,7 @@
                         <div class="filtro-item" onclick="filtrarFerias('Centro')">Centro</div>
                     </div>
                 </div>
-                
+
                 <button class="btn-limpiar" onclick="limpiarFiltros()">🔄 Limpiar filtros</button>
             </div>
         </div>
@@ -278,7 +303,7 @@
         </div>
     </div>
     
-    <div class="seccion-extra">
+    <div class="seccion-extra" id="porque-feriando">
         <h2 class="porque-titulo">¿Por que <span class="texto-verde">Feriando</span>?</h2>
         
         <div class="porque-feriando">
@@ -296,7 +321,7 @@
         </div>
     </div>
 
-    <div class="seccion-nueva">
+    <div class="seccion-nueva" id="como-funciona">
         <h2 class="como-titulo">¿Cómo <span class="texto-oscuro">funciona</span>?</h2>
 
         <div class="como-funciona">
@@ -317,13 +342,32 @@
         </div>
     </div>
 
-    <div class="seccion-bordo">
+    <div class="seccion-bordo" id="nosotros">
         <h2 class="equipo-titulo">Conocé a nuestro <span class="texto-rojo">equipo</span></h2>
         <div class="fundador-card">
             <img src="{{ url_for('static', filename='fundador.png') }}" alt="Fundador" class="fundador-img">
             <p class="fundador-nombre">Esteban Rodrigues</p>
             <p class="fundador-cargo">Fundador</p>
         </div>
+    </div>
+
+    <div class="seccion-contacto" id="contacto">
+        <h2 class="contacto-titulo">Contactanos</h2>
+        <form class="contacto-form">
+            <div class="form-grupo">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-grupo">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-grupo">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn-enviar">Enviar</button>
+        </form>
     </div>
 
     <footer class="footer-bar">
@@ -375,6 +419,16 @@
     </div>
 
     <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menuMobile');
+            menu.classList.toggle('visible');
+        }
+
+        function cerrarMenu() {
+            var menu = document.getElementById('menuMobile');
+            menu.classList.remove('visible');
+        }
+
         function abrirModalTipoUsuario(event) {
             event.preventDefault();
             document.getElementById('modalPaso1').style.display = 'block';
@@ -403,6 +457,24 @@
                 cerrarModalTipoUsuario();
             }
         });
+
+        function scrollToTop(event) {
+            event.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollToSection(event, sectionId) {
+            event.preventDefault();
+            var section = document.getElementById(sectionId);
+            var headerHeight = document.querySelector('.lobby-header').offsetHeight;
+            window.scrollTo({
+                top: section.offsetTop - headerHeight,
+                behavior: 'smooth'
+            });
+        }
     </script>
 
     <script>
