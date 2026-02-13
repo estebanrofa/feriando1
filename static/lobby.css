@@ -1543,6 +1543,13 @@ a.logo {
     color: #333333;
 }
 
+.equipo-estudio {
+    margin-top: 5px;
+    font-size: 0.85em;
+    color: #666;
+    font-style: italic;
+}
+
 /* Modal Tipo de Usuario */
 .modal-overlay {
     position: fixed;
