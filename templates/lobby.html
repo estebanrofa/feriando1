@@ -123,6 +123,7 @@
         </button>
     </header>
 
+    <div class="menu-overlay" id="menuOverlay" onclick="cerrarMenu()"></div>
     <div class="menu-mobile" id="menuMobile">
         <a href="#" class="menu-mobile-btn" onclick="scrollToTop(event); cerrarMenu()">Inicio</a>
         <a href="#" class="menu-mobile-btn" onclick="scrollToSection(event, 'porque-feriando'); cerrarMenu()">¿Por qué Feriando?</a>
@@ -421,12 +422,16 @@
     <script>
         function toggleMenu() {
             var menu = document.getElementById('menuMobile');
+            var overlay = document.getElementById('menuOverlay');
             menu.classList.toggle('visible');
+            overlay.classList.toggle('visible');
         }
 
         function cerrarMenu() {
             var menu = document.getElementById('menuMobile');
+            var overlay = document.getElementById('menuOverlay');
             menu.classList.remove('visible');
+            overlay.classList.remove('visible');
         }
 
         function abrirModalTipoUsuario(event) {
