@@ -602,6 +602,58 @@ body {
     color: #4A4A48;
 }
 
+/* Botón ir a feria */
+.boton-ir-feria {
+    display: block;
+    background: linear-gradient(135deg, #7BB662, #5a9a47);
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1em;
+    margin-top: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(123, 182, 98, 0.3);
+}
+
+.boton-ir-feria:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(123, 182, 98, 0.4);
+}
+
+.feria-dia {
+    color: #7BB662;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.estadisticas-feria {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 15px 25px;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+.stat-numero {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    color: #7BB662;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #666;
+}
+
 .productos-section h5 {
     color: #7BB662;
     margin-top: 15px;
@@ -680,5 +732,207 @@ body {
     .boton-info-feria {
         padding: 6px 10px;
         font-size: 0.8em;
+    }
+}
+
+/* Modal Login Requerido en Mapa */
+.modal-overlay-mapa {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay-mapa.visible {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-contenido-mapa {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-overlay-mapa.visible .modal-contenido-mapa {
+    transform: scale(1);
+}
+
+.modal-cerrar-mapa {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2em;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.modal-cerrar-mapa:hover {
+    color: #333;
+}
+
+.modal-login-icono {
+    font-size: 4em;
+    margin-bottom: 15px;
+}
+
+.modal-contenido-mapa h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.modal-contenido-mapa p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.modal-login-botones {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-modal-login {
+    background: linear-gradient(135deg, #7BB662, #5a9a47);
+    color: white;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1em;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-modal-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(123, 182, 98, 0.4);
+}
+
+.btn-modal-registro {
+    background: white;
+    color: #7BB662;
+    text-decoration: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1em;
+    border: 2px solid #7BB662;
+    transition: background 0.2s;
+}
+
+.btn-modal-registro:hover {
+    background: #f0f9ed;
+}
+
+/* Filtro por días */
+.filtro-dias-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1001;
+}
+
+.boton-filtro-dias {
+    background: white;
+    color: #4A4A48;
+    border: 2px solid #7BB662;
+    padding: 12px 18px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+    font-size: 0.95em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.boton-filtro-dias:hover {
+    background: #7BB662;
+    color: white;
+}
+
+.boton-filtro-dias.activo {
+    background: #7BB662;
+    color: white;
+}
+
+.filtro-dias-panel {
+    position: absolute;
+    bottom: 55px;
+    left: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    padding: 8px 0;
+    min-width: 150px;
+    display: none;
+    transform: translateY(10px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.filtro-dias-panel.visible {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.filtro-dia-item {
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    font-size: 0.9em;
+}
+
+.filtro-dia-item:hover {
+    background: #f5f5f5;
+}
+
+.filtro-dia-item.active {
+    background: #7BB662;
+    color: white;
+    font-weight: bold;
+}
+
+/* Responsive filtro días */
+@media (max-width: 768px) {
+    .filtro-dias-container {
+        bottom: 15px;
+        left: 15px;
+    }
+
+    .boton-filtro-dias {
+        padding: 10px 14px;
+        font-size: 0.85em;
+    }
+
+    .filtro-dias-panel {
+        min-width: 130px;
+    }
+
+    .filtro-dia-item {
+        padding: 8px 14px;
+        font-size: 0.85em;
     }
 }

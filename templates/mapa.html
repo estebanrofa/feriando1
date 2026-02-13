@@ -12,7 +12,7 @@
     <div class="container">
         <div class="main-content">
             <div class="map-container">
-                <a href="/" class="boton-volver">
+                <a href="/" class="boton-volver" onclick="sessionStorage.setItem('navegacionInterna', 'true')">
                     ← Volver
                 </a>
                 
@@ -46,14 +46,45 @@
 
                 <div class="botones-info-ferias">
                     <button class="boton-info-feria" onclick="toggleOfertas()" id="botonOfertas">
-                        🏷️ Ofertas
+                        🏷️ Ofertas hoy
                     </button>
                     <button class="boton-info-feria" onclick="toggleRecomendaciones()" id="botonRecomendaciones">
-                        ⭐ Recomendaciones
+                        ⭐ Recomendaciones hoy
                     </button>
                 </div>
 
+                <!-- Filtro por días -->
+                <div class="filtro-dias-container" id="filtroDiasContainer">
+                    <button class="boton-filtro-dias" onclick="toggleFiltroDias()" id="botonFiltroDias">
+                        📅 Filtrar
+                    </button>
+                    <div class="filtro-dias-panel" id="filtroDiasPanel">
+                        <div class="filtro-dia-item active" data-dia="Todos" onclick="filtrarPorDia('Todos')">Todos</div>
+                        <div class="filtro-dia-item" data-dia="Lunes" onclick="filtrarPorDia('Lunes')">Lunes</div>
+                        <div class="filtro-dia-item" data-dia="Martes" onclick="filtrarPorDia('Martes')">Martes</div>
+                        <div class="filtro-dia-item" data-dia="Miércoles" onclick="filtrarPorDia('Miércoles')">Miércoles</div>
+                        <div class="filtro-dia-item" data-dia="Jueves" onclick="filtrarPorDia('Jueves')">Jueves</div>
+                        <div class="filtro-dia-item" data-dia="Viernes" onclick="filtrarPorDia('Viernes')">Viernes</div>
+                        <div class="filtro-dia-item" data-dia="Sábados" onclick="filtrarPorDia('Sábados')">Sábados</div>
+                        <div class="filtro-dia-item" data-dia="Domingos" onclick="filtrarPorDia('Domingos')">Domingos</div>
+                    </div>
+                </div>
+
                 <div id="map"></div>
+
+                <!-- Modal Login Requerido -->
+                <div class="modal-overlay-mapa" id="modalLoginRequerido" onclick="cerrarModalLogin(event)">
+                    <div class="modal-contenido-mapa" onclick="event.stopPropagation()">
+                        <button class="modal-cerrar-mapa" onclick="cerrarModalLogin(event)">&times;</button>
+                        <div class="modal-login-icono">🔒</div>
+                        <h2>Debés iniciar sesión</h2>
+                        <p>Para ver el detalle de las ferias necesitás tener una cuenta</p>
+                        <div class="modal-login-botones">
+                            <a href="/login" class="btn-modal-login">Iniciar sesión</a>
+                            <a href="/registro" class="btn-modal-registro">Crear cuenta</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <div class="info-panel" id="infoPanel">
@@ -85,6 +116,38 @@
         var marcadoresRecomendaciones = [];
         var ofertasActivo = false;
         var recomendacionesActivo = false;
+        var usuarioLogueado = false;
+        var urlFeriaActual = '/';
+
+        // Verificar sesión de usuario
+        async function verificarSesion() {
+            try {
+                const response = await fetch('/api/sesion');
+                const data = await response.json();
+                usuarioLogueado = data.logged_in;
+            } catch (error) {
+                console.log('Error verificando sesión:', error);
+            }
+        }
+
+        // Mostrar modal de login requerido
+        function mostrarModalLoginRequerido(event, url) {
+            event.preventDefault();
+            if (!usuarioLogueado) {
+                urlFeriaActual = url;
+                document.getElementById('modalLoginRequerido').classList.add('visible');
+            } else {
+                window.location.href = url;
+            }
+        }
+
+        function cerrarModalLogin(event) {
+            event.preventDefault();
+            document.getElementById('modalLoginRequerido').classList.remove('visible');
+        }
+
+        // Verificar sesión al cargar
+        verificarSesion();
         
         // Función para cambiar entre modo día y noche
         function toggleModoNocturno() {
@@ -180,9 +243,17 @@
             todasLasLineas.forEach(function(linea) {
                 if (categoria === 'Todas' || linea.categoria === categoria) {
                     linea.setStyle({ opacity: 0.9 });
-                    map.addLayer(linea);
+                    if (!map.hasLayer(linea)) {
+                        map.addLayer(linea);
+                    }
+                    if (linea.hitArea && !map.hasLayer(linea.hitArea)) {
+                        map.addLayer(linea.hitArea);
+                    }
                 } else {
                     map.removeLayer(linea);
+                    if (linea.hitArea) {
+                        map.removeLayer(linea.hitArea);
+                    }
                 }
             });
             
@@ -266,24 +337,44 @@
             }, 500);
         }
         
+        // Mapeo de nombres de ferias a URLs
+        var feriasUrls = {
+            'Feria de Tristán Narvaja': '/tristan-narvaja',
+            'Feria Vecinal Juan Paullier': '/juan-paullier',
+            'Feria Tres Cruces': '/tres-cruces',
+            'Feria Calle Salto': '/calle-salto',
+            'Feria Democracia': '/democracia',
+            'Feria Acevedo Díaz': '/acevedo-diaz',
+            'Feria San Salvador': '/san-salvador',
+            'Feria Isla de Flores': '/isla-flores',
+            'Feria Martínez Trueba': '/martinez-trueba',
+            'Feria Julio Herrera y Obes': '/julio-herrera',
+            'Feria Acevedo Díaz (Sábados)': '/acevedo-diaz-sabados',
+            'Feria Guaná': '/guana',
+            'Feria Gaboto (Viernes)': '/gaboto-viernes'
+        };
+
         // Función para mostrar información de la feria
         function mostrarInfoFeria(feria) {
             var infoDiv = document.getElementById('feria-info');
             var infoPanel = document.querySelector('.info-panel');
             var mainContent = document.querySelector('.main-content');
-            
+
             var html = '<h3>' + feria.nombre + '</h3>';
+            html += '<p class="feria-dia">📅 ' + feria.dia + '</p>';
             html += '<p>Esta es una de las ferias tradicionales de Montevideo.</p>';
-            
+
             html += '<div class="estadisticas-feria">';
             html += '<div class="stat-item">';
             html += '<span class="stat-numero">' + feria.cuadras.length + '</span>';
             html += '<span class="stat-label">Cuadras</span>';
             html += '</div>';
             html += '</div>';
-            
-            html += '<p style="margin-top: 20px;">Para ver más detalles de esta feria, visita su página dedicada desde el lobby.</p>';
-            
+
+            // Botón ir a feria
+            var urlFeria = feriasUrls[feria.nombre] || '/';
+            html += '<a href="#" class="boton-ir-feria" onclick="mostrarModalLoginRequerido(event, \'' + urlFeria + '\')">Ir a feria →</a>';
+
             infoDiv.innerHTML = html;
             
             var barra = document.getElementById('barraInfoToggle');
@@ -421,7 +512,15 @@
                 var colorDia = '#1a3a52';      // Azul oscuro para modo día
                 var colorNoche = '#4fc3f7';    // Celeste claro para modo noche
                 var color = modoNocturno ? colorNoche : colorDia;
-                
+
+                // Línea invisible más gruesa para área clickeable
+                var hitArea = L.polyline(cuadra.coordenadas, {
+                    color: 'transparent',
+                    weight: 30,
+                    opacity: 0
+                }).addTo(map);
+
+                // Línea visible
                 var polyline = L.polyline(cuadra.coordenadas, {
                     color: color,
                     weight: 4,
@@ -432,13 +531,19 @@
                 polyline.categoria = cuadra.categoria_principal;
                 polyline.colorDia = colorDia;
                 polyline.colorNoche = colorNoche;
+                polyline.hitArea = hitArea;
                 todasLasLineas.push(polyline);
 
-                polyline.on('click', function() {
+                // Ambas líneas abren la info
+                function abrirInfo() {
                     mostrarInfoFeria(feria);
-                });
+                }
+
+                polyline.on('click', abrirInfo);
+                hitArea.on('click', abrirInfo);
 
                 polyline.bindPopup('<b>' + feria.nombre + '</b>');
+                hitArea.bindPopup('<b>' + feria.nombre + '</b>');
             });
         });
         
@@ -464,6 +569,13 @@
             });
         });
 
+        // Función para obtener el día actual en formato de las ferias
+        function obtenerDiaHoy() {
+            var dias = ['Domingos', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábados'];
+            var hoy = new Date().getDay();
+            return dias[hoy];
+        }
+
         // Función para generar número aleatorio entre 3 y 11
         function numeroAleatorio() {
             return Math.floor(Math.random() * 9) + 3;
@@ -487,6 +599,7 @@
         // Función para mostrar/ocultar ofertas
         function toggleOfertas() {
             var boton = document.getElementById('botonOfertas');
+            var diaHoy = obtenerDiaHoy();
 
             if (ofertasActivo) {
                 // Ocultar ofertas
@@ -502,15 +615,17 @@
                     toggleRecomendaciones();
                 }
 
-                // Mostrar ofertas
+                // Mostrar ofertas solo de ferias de hoy
                 ferias.forEach(function(feria) {
-                    var numero = numeroAleatorio();
-                    var marcador = L.marker([feria.lat, feria.lng], {
-                        icon: crearIcono(numero, 'ofertas')
-                    }).addTo(map);
+                    if (feria.dia === diaHoy) {
+                        var numero = numeroAleatorio();
+                        var marcador = L.marker([feria.lat, feria.lng], {
+                            icon: crearIcono(numero, 'ofertas')
+                        }).addTo(map);
 
-                    marcador.bindPopup('<b>' + feria.nombre + '</b><br>🏷️ ' + numero + ' ofertas disponibles');
-                    marcadoresOfertas.push(marcador);
+                        marcador.bindPopup('<b>' + feria.nombre + '</b><br>🏷️ ' + numero + ' ofertas disponibles hoy');
+                        marcadoresOfertas.push(marcador);
+                    }
                 });
 
                 boton.classList.add('activo');
@@ -521,6 +636,7 @@
         // Función para mostrar/ocultar recomendaciones
         function toggleRecomendaciones() {
             var boton = document.getElementById('botonRecomendaciones');
+            var diaHoy = obtenerDiaHoy();
 
             if (recomendacionesActivo) {
                 // Ocultar recomendaciones
@@ -536,21 +652,100 @@
                     toggleOfertas();
                 }
 
-                // Mostrar recomendaciones
+                // Mostrar recomendaciones solo de ferias de hoy
                 ferias.forEach(function(feria) {
-                    var numero = numeroAleatorio();
-                    var marcador = L.marker([feria.lat, feria.lng], {
-                        icon: crearIcono(numero, 'recomendaciones')
-                    }).addTo(map);
+                    if (feria.dia === diaHoy) {
+                        var numero = numeroAleatorio();
+                        var marcador = L.marker([feria.lat, feria.lng], {
+                            icon: crearIcono(numero, 'recomendaciones')
+                        }).addTo(map);
 
-                    marcador.bindPopup('<b>' + feria.nombre + '</b><br>⭐ ' + numero + ' recomendaciones');
-                    marcadoresRecomendaciones.push(marcador);
+                        marcador.bindPopup('<b>' + feria.nombre + '</b><br>⭐ ' + numero + ' recomendaciones hoy');
+                        marcadoresRecomendaciones.push(marcador);
+                    }
                 });
 
                 boton.classList.add('activo');
                 recomendacionesActivo = true;
             }
         }
+
+        // Variables para filtro por días
+        var diaActual = 'Todos';
+        var filtroDiasAbierto = false;
+
+        // Función para mostrar/ocultar panel de filtro por días
+        function toggleFiltroDias() {
+            var panel = document.getElementById('filtroDiasPanel');
+            var boton = document.getElementById('botonFiltroDias');
+
+            if (filtroDiasAbierto) {
+                panel.classList.remove('visible');
+                boton.classList.remove('activo');
+                filtroDiasAbierto = false;
+            } else {
+                panel.classList.add('visible');
+                boton.classList.add('activo');
+                filtroDiasAbierto = true;
+            }
+        }
+
+        // Función para filtrar ferias por día
+        function filtrarPorDia(dia) {
+            diaActual = dia;
+
+            // Actualizar estilos de los items
+            document.querySelectorAll('.filtro-dia-item').forEach(function(item) {
+                if (item.dataset.dia === dia) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Actualizar texto del botón
+            var boton = document.getElementById('botonFiltroDias');
+            if (dia === 'Todos') {
+                boton.innerHTML = '📅 Filtrar';
+            } else {
+                boton.innerHTML = '📅 ' + dia;
+            }
+
+            // Filtrar líneas del mapa
+            todasLasLineas.forEach(function(linea) {
+                var feriaLinea = ferias.find(function(f) {
+                    return f.nombre === linea.nombreFeria;
+                });
+
+                if (feriaLinea) {
+                    if (dia === 'Todos' || feriaLinea.dia === dia) {
+                        linea.setStyle({ opacity: 0.9 });
+                        if (!map.hasLayer(linea)) {
+                            map.addLayer(linea);
+                        }
+                        if (linea.hitArea && !map.hasLayer(linea.hitArea)) {
+                            map.addLayer(linea.hitArea);
+                        }
+                    } else {
+                        map.removeLayer(linea);
+                        if (linea.hitArea) {
+                            map.removeLayer(linea.hitArea);
+                        }
+                    }
+                }
+            });
+
+            // Cerrar panel después de seleccionar
+            toggleFiltroDias();
+        }
+
+        // Cerrar filtro al hacer click fuera
+        document.addEventListener('click', function(event) {
+            var container = document.getElementById('filtroDiasContainer');
+            if (container && !container.contains(event.target) && filtroDiasAbierto) {
+                toggleFiltroDias();
+            }
+        });
     </script>
 </body>
 </html>

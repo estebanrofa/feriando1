@@ -104,7 +104,7 @@
     </div>
 
     <header class="lobby-header">
-        <a href="/" class="logo">Feriando.uy</a>
+        <a href="/" class="logo"><img src="{{ url_for('static', filename='favicon.png') }}" alt="" class="logo-icon">Feriando.uy</a>
         <nav class="header-nav">
             <a href="#" class="nav-btn" onclick="scrollToTop(event)">Inicio</a>
             <a href="#" class="nav-btn" onclick="scrollToSection(event, 'porque-feriando')">¿Por qué Feriando?</a>
@@ -112,9 +112,20 @@
             <a href="#" class="nav-btn" onclick="scrollToSection(event, 'nosotros')">Nosotros</a>
             <a href="#" class="nav-btn" onclick="scrollToSection(event, 'contacto')">Contacto</a>
         </nav>
-        <div class="auth-links">
+        <div class="auth-links" id="authLinks">
             <a href="/login" class="auth-link">Iniciar sesión</a>
             <a href="#" class="auth-link" onclick="abrirModalTipoUsuario(event)">Crear cuenta</a>
+        </div>
+        <div class="user-menu" id="userMenu" style="display: none;">
+            <div class="user-avatar" onclick="toggleUserDropdown()">
+                <span id="userInitial">U</span>
+            </div>
+            <div class="user-dropdown" id="userDropdown">
+                <a href="#" class="dropdown-item">Configuración</a>
+                <a href="#" class="dropdown-item">Mis ferias</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item dropdown-logout" onclick="cerrarSesion(event)">Cerrar sesión</a>
+            </div>
         </div>
         <button class="menu-hamburguesa" onclick="toggleMenu()">
             <span></span>
@@ -131,8 +142,15 @@
         <a href="#" class="menu-mobile-btn" onclick="scrollToSection(event, 'nosotros'); cerrarMenu()">Nosotros</a>
         <a href="#" class="menu-mobile-btn" onclick="scrollToSection(event, 'contacto'); cerrarMenu()">Contacto</a>
         <div class="menu-mobile-divider"></div>
-        <a href="/login" class="menu-mobile-btn">Iniciar sesión</a>
-        <a href="#" class="menu-mobile-btn" onclick="abrirModalTipoUsuario(event); cerrarMenu()">Crear cuenta</a>
+        <div id="menuMobileAuth">
+            <a href="/login" class="menu-mobile-btn">Iniciar sesión</a>
+            <a href="#" class="menu-mobile-btn" onclick="abrirModalTipoUsuario(event); cerrarMenu()">Crear cuenta</a>
+        </div>
+        <div id="menuMobileUser" style="display: none;">
+            <a href="#" class="menu-mobile-btn">Configuración</a>
+            <a href="#" class="menu-mobile-btn">Mis ferias</a>
+            <a href="#" class="menu-mobile-btn menu-mobile-logout" onclick="cerrarSesion(event); cerrarMenu()">Cerrar sesión</a>
+        </div>
     </div>
     
     <div class="lobby-container">
@@ -196,7 +214,7 @@
             <button class="scroll-btn scroll-btn-right" id="scrollRight">▶</button>
             
             <div class="seccion-ferias" id="seccionFerias">
-                <a href="/tristan-narvaja" class="opcion-card" data-dia="Domingos" data-barrio="Cordón">
+                <a href="/tristan-narvaja" class="opcion-card" data-dia="Domingos" data-barrio="Cordón" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">📚</div>
                     <div class="opcion-card-content">
                         <h2>Tristán Narvaja</h2>
@@ -204,7 +222,7 @@
                         <p>La feria más famosa de MVD</p>
                     </div>
                 </a>
-                <a href="/juan-paullier" class="opcion-card" data-dia="Martes" data-barrio="Tres Cruces">
+                <a href="/juan-paullier" class="opcion-card" data-dia="Martes" data-barrio="Tres Cruces" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🥬</div>
                     <div class="opcion-card-content">
                         <h2>Juan Paullier</h2>
@@ -212,7 +230,7 @@
                         <p>Productos frescos de barrio</p>
                     </div>
                 </a>
-                <a href="/tres-cruces" class="opcion-card" data-dia="Sábados" data-barrio="La Comercial">
+                <a href="/tres-cruces" class="opcion-card" data-dia="Sábados" data-barrio="La Comercial" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🛒</div>
                     <div class="opcion-card-content">
                         <h2>Tres Cruces</h2>
@@ -220,7 +238,7 @@
                         <p>Feria de barrio variada</p>
                     </div>
                 </a>
-                <a href="/calle-salto" class="opcion-card" data-dia="Sábados" data-barrio="Cordón">
+                <a href="/calle-salto" class="opcion-card" data-dia="Sábados" data-barrio="Cordón" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🥕</div>
                     <div class="opcion-card-content">
                         <h2>Calle Salto</h2>
@@ -228,7 +246,7 @@
                         <p>Productos locales</p>
                     </div>
                 </a>
-                <a href="/democracia" class="opcion-card" data-dia="Domingos" data-barrio="Villa Muñoz">
+                <a href="/democracia" class="opcion-card" data-dia="Domingos" data-barrio="Villa Muñoz" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🌽</div>
                     <div class="opcion-card-content">
                         <h2>Democracia</h2>
@@ -236,7 +254,7 @@
                         <p>Productos de granja</p>
                     </div>
                 </a>
-                <a href="/acevedo-diaz" class="opcion-card" data-dia="Martes" data-barrio="Parque Rodó">
+                <a href="/acevedo-diaz" class="opcion-card" data-dia="Martes" data-barrio="Parque Rodó" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🥦</div>
                     <div class="opcion-card-content">
                         <h2>Acevedo Díaz</h2>
@@ -244,7 +262,7 @@
                         <p>Feria vecinal</p>
                     </div>
                 </a>
-                <a href="/san-salvador" class="opcion-card" data-dia="Miércoles" data-barrio="Parque Rodó">
+                <a href="/san-salvador" class="opcion-card" data-dia="Miércoles" data-barrio="Parque Rodó" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🍅</div>
                     <div class="opcion-card-content">
                         <h2>San Salvador</h2>
@@ -252,7 +270,7 @@
                         <p>Productos frescos</p>
                     </div>
                 </a>
-                <a href="/isla-flores" class="opcion-card" data-dia="Jueves" data-barrio="Palermo">
+                <a href="/isla-flores" class="opcion-card" data-dia="Jueves" data-barrio="Palermo" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🥗</div>
                     <div class="opcion-card-content">
                         <h2>Isla de Flores</h2>
@@ -260,7 +278,7 @@
                         <p>Feria de barrio</p>
                     </div>
                 </a>
-                <a href="/martinez-trueba" class="opcion-card" data-dia="Martes" data-barrio="Palermo">
+                <a href="/martinez-trueba" class="opcion-card" data-dia="Martes" data-barrio="Palermo" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🍇</div>
                     <div class="opcion-card-content">
                         <h2>Martínez Trueba</h2>
@@ -268,7 +286,7 @@
                         <p>Productos de estación</p>
                     </div>
                 </a>
-                <a href="/julio-herrera" class="opcion-card" data-dia="Viernes" data-barrio="Centro">
+                <a href="/julio-herrera" class="opcion-card" data-dia="Viernes" data-barrio="Centro" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🍊</div>
                     <div class="opcion-card-content">
                         <h2>Julio Herrera y Obes</h2>
@@ -276,7 +294,7 @@
                         <p>Feria vecinal</p>
                     </div>
                 </a>
-                <a href="/acevedo-diaz-sabados" class="opcion-card" data-dia="Sábados" data-barrio="Cordón">
+                <a href="/acevedo-diaz-sabados" class="opcion-card" data-dia="Sábados" data-barrio="Cordón" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🥬</div>
                     <div class="opcion-card-content">
                         <h2>Acevedo Díaz</h2>
@@ -284,7 +302,7 @@
                         <p>Productos frescos</p>
                     </div>
                 </a>
-                <a href="/guana" class="opcion-card" data-dia="Viernes" data-barrio="Cordón">
+                <a href="/guana" class="opcion-card" data-dia="Viernes" data-barrio="Cordón" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🌶️</div>
                     <div class="opcion-card-content">
                         <h2>Guaná</h2>
@@ -292,7 +310,7 @@
                         <p>Productos locales</p>
                     </div>
                 </a>
-                <a href="/gaboto-viernes" class="opcion-card" data-dia="Viernes" data-barrio="Cordón">
+                <a href="/gaboto-viernes" class="opcion-card" data-dia="Viernes" data-barrio="Cordón" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🛠️</div>
                     <div class="opcion-card-content">
                         <h2>Gaboto</h2>
@@ -398,6 +416,20 @@
         <div class="footer-divider"></div>
         <a href="/terminos" class="footer-link">Terminos y condiciones</a>
     </footer>
+
+    <!-- Modal Login Requerido -->
+    <div class="modal-overlay" id="modalLoginRequerido" onclick="cerrarModalLogin(event)">
+        <div class="modal-contenido modal-login-requerido" onclick="event.stopPropagation()">
+            <button class="modal-cerrar" onclick="cerrarModalLogin(event)">&times;</button>
+            <div class="modal-login-icono">🔒</div>
+            <h2 class="modal-titulo">Debés iniciar sesión</h2>
+            <p class="modal-subtitulo">Para ver el detalle de las ferias necesitás tener una cuenta</p>
+            <div class="modal-login-botones">
+                <a href="/login" class="btn-modal-login">Iniciar sesión</a>
+                <a href="#" class="btn-modal-registro" onclick="cerrarModalLogin(event); abrirModalTipoUsuario(event);">Crear cuenta</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal Tipo de Usuario -->
     <div class="modal-overlay" id="modalTipoUsuario" onclick="cerrarModalTipoUsuario(event)">
@@ -534,12 +566,16 @@
             limpiarFiltros();
         }
         
-        function filtrarFerias(valor) {
+        function filtrarFerias(valor, noToggle) {
             filtroActivo = valor;
             var cards = document.querySelectorAll('.opcion-card');
             var atributo = 'data-' + tipoFiltro;
             var visibles = 0;
-            
+
+            // Guardar filtro en sessionStorage
+            sessionStorage.setItem('filtroActivo', valor);
+            sessionStorage.setItem('tipoFiltro', tipoFiltro);
+
             document.querySelectorAll('.filtro-item').forEach(function(item) {
                 if (item.textContent === valor) {
                     item.classList.add('active');
@@ -547,7 +583,7 @@
                     item.classList.remove('active');
                 }
             });
-            
+
             cards.forEach(function(card) {
                 if (card.getAttribute(atributo) === valor) {
                     card.style.display = 'flex';
@@ -556,31 +592,62 @@
                     card.style.display = 'none';
                 }
             });
-            
-            toggleFiltros();
-            
+
+            if (!noToggle) {
+                toggleFiltros();
+            }
+
             setTimeout(updateScrollButtons, 100);
         }
         
         function limpiarFiltros() {
             filtroActivo = null;
             var cards = document.querySelectorAll('.opcion-card');
-            
+
+            // Limpiar filtro del sessionStorage
+            sessionStorage.removeItem('filtroActivo');
+            sessionStorage.removeItem('tipoFiltro');
+
             cards.forEach(function(card) {
                 card.style.display = 'flex';
             });
-            
+
             document.querySelectorAll('.filtro-item').forEach(function(item) {
                 item.classList.remove('active');
             });
-            
+
             setTimeout(updateScrollButtons, 100);
         }
-        
+
+        // Restaurar filtro guardado al cargar la página
+        function restaurarFiltro() {
+            var filtroGuardado = sessionStorage.getItem('filtroActivo');
+            var tipoGuardado = sessionStorage.getItem('tipoFiltro');
+
+            if (filtroGuardado && tipoGuardado) {
+                tipoFiltro = tipoGuardado;
+
+                // Actualizar botones de tipo de filtro
+                document.getElementById('btnDia').classList.remove('active');
+                document.getElementById('btnBarrio').classList.remove('active');
+                document.getElementById('btn' + tipoGuardado.charAt(0).toUpperCase() + tipoGuardado.slice(1)).classList.add('active');
+
+                // Mostrar el grupo correcto
+                document.getElementById('grupodia').style.display = tipoGuardado === 'dia' ? 'block' : 'none';
+                document.getElementById('grupobarrio').style.display = tipoGuardado === 'barrio' ? 'block' : 'none';
+
+                // Aplicar el filtro sin toggle
+                filtrarFerias(filtroGuardado, true);
+            }
+        }
+
+        // Ejecutar al cargar
+        document.addEventListener('DOMContentLoaded', restaurarFiltro);
+
         document.addEventListener('click', function(event) {
             var filtrosWrapper = document.querySelector('.filtros-wrapper');
             var panel = document.getElementById('filtrosPanel');
-            
+
             if (filtrosWrapper && !filtrosWrapper.contains(event.target) && panel.style.display === 'block') {
                 toggleFiltros();
             }
@@ -641,22 +708,31 @@
             var splashLogo = document.getElementById('splashLogo');
             var splashUnderline = document.getElementById('splashUnderline');
 
-            // Ocultar contenido inicial
-            document.body.classList.add('loading');
+            // Verificar si viene de navegación interna (botón volver)
+            var esNavegacionInterna = sessionStorage.getItem('navegacionInterna');
 
-            // Esperar a que cargue todo
-            window.addEventListener('load', function() {
-                setTimeout(function() {
-                    // Desvanecer splash y mostrar contenido
-                    splash.classList.add('fade-out');
-                    document.body.classList.remove('loading');
-                    document.body.classList.add('loaded');
+            if (esNavegacionInterna) {
+                // No mostrar splash, viene de navegación interna
+                sessionStorage.removeItem('navegacionInterna');
+                splash.style.display = 'none';
+                document.body.classList.remove('loading');
+                document.body.classList.add('loaded');
+            } else {
+                // Mostrar splash normalmente
+                document.body.classList.add('loading');
 
+                window.addEventListener('load', function() {
                     setTimeout(function() {
-                        splash.style.display = 'none';
-                    }, 500);
-                }, 1500);
-            });
+                        splash.classList.add('fade-out');
+                        document.body.classList.remove('loading');
+                        document.body.classList.add('loaded');
+
+                        setTimeout(function() {
+                            splash.style.display = 'none';
+                        }, 500);
+                    }, 1500);
+                });
+            }
         });
 
         // Service Worker Registration (PWA)
@@ -671,6 +747,76 @@
                     });
             });
         }
+
+        // Estado de sesión global
+        var usuarioLogueado = false;
+
+        // Verificar sesión de usuario
+        async function verificarSesion() {
+            try {
+                const response = await fetch('/api/sesion');
+                const data = await response.json();
+
+                if (data.logged_in) {
+                    usuarioLogueado = true;
+                    // Mostrar menú de usuario
+                    document.getElementById('authLinks').style.display = 'none';
+                    document.getElementById('userMenu').style.display = 'block';
+                    document.getElementById('menuMobileAuth').style.display = 'none';
+                    document.getElementById('menuMobileUser').style.display = 'block';
+
+                    // Poner inicial del nombre
+                    const inicial = data.nombre ? data.nombre.charAt(0).toUpperCase() : 'U';
+                    document.getElementById('userInitial').textContent = inicial;
+                }
+            } catch (error) {
+                console.log('Error verificando sesión:', error);
+            }
+        }
+
+        // Mostrar modal de login requerido
+        function mostrarModalLoginRequerido(event) {
+            event.preventDefault();
+            if (!usuarioLogueado) {
+                document.getElementById('modalLoginRequerido').classList.add('visible');
+                document.body.style.overflow = 'hidden';
+            } else {
+                window.location.href = event.currentTarget.getAttribute('href');
+            }
+        }
+
+        function cerrarModalLogin(event) {
+            document.getElementById('modalLoginRequerido').classList.remove('visible');
+            document.body.style.overflow = '';
+        }
+
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('visible');
+        }
+
+        // Cerrar dropdown al hacer clic fuera
+        document.addEventListener('click', function(event) {
+            const userMenu = document.getElementById('userMenu');
+            const dropdown = document.getElementById('userDropdown');
+
+            if (userMenu && !userMenu.contains(event.target)) {
+                dropdown.classList.remove('visible');
+            }
+        });
+
+        async function cerrarSesion(event) {
+            event.preventDefault();
+            try {
+                await fetch('/api/logout', { method: 'POST' });
+                window.location.reload();
+            } catch (error) {
+                console.log('Error cerrando sesión:', error);
+            }
+        }
+
+        // Verificar sesión al cargar
+        verificarSesion();
     </script>
 </body>
 </html>

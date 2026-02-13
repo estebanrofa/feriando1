@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, session, redirect, url_for, jsonify
 
 # Cargar variables de entorno (opcional)
 try:
@@ -26,6 +26,15 @@ except ImportError:
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-change-in-production')
+
+# ============================================
+# USUARIO DE PRUEBA (SOLO PARA DESARROLLO LOCAL)
+# ============================================
+USUARIO_PRUEBA = {
+    'username': 'usuario1234',
+    'password': 'HA436276',
+    'nombre': 'Usuario de Prueba'
+}
 
 # Compresion gzip (opcional)
 try:
@@ -701,6 +710,34 @@ def registro():
 @app.route('/login')
 def login():
     return render_template('registro.html', tipo='login', dgi='')
+
+# ============================================
+# RUTAS DE AUTENTICACIÓN (PRUEBAS LOCALES)
+# ============================================
+@app.route('/api/login', methods=['POST'])
+def api_login():
+    data = request.get_json()
+    username = data.get('username', '')
+    password = data.get('password', '')
+
+    if username == USUARIO_PRUEBA['username'] and password == USUARIO_PRUEBA['password']:
+        session['logged_in'] = True
+        session['username'] = username
+        session['nombre'] = USUARIO_PRUEBA['nombre']
+        return jsonify({'success': True, 'mensaje': 'Login exitoso', 'nombre': USUARIO_PRUEBA['nombre']})
+    else:
+        return jsonify({'success': False, 'mensaje': 'Usuario o contraseña incorrectos'}), 401
+
+@app.route('/api/logout', methods=['POST'])
+def api_logout():
+    session.clear()
+    return jsonify({'success': True, 'mensaje': 'Sesión cerrada'})
+
+@app.route('/api/sesion')
+def api_sesion():
+    if session.get('logged_in'):
+        return jsonify({'logged_in': True, 'username': session.get('username'), 'nombre': session.get('nombre')})
+    return jsonify({'logged_in': False})
 
 @app.route('/terminos')
 def terminos():
