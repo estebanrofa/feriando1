@@ -991,45 +991,6 @@ a.logo {
         font-size: 1em;
     }
 
-    .equipo-grid {
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        gap: 15px;
-        padding: 0 15px;
-        overflow-x: auto;
-        scroll-behavior: smooth;
-    }
-
-    .equipo-grid::-webkit-scrollbar {
-        display: none;
-    }
-
-    .equipo-card {
-        width: 110px;
-        min-width: 110px;
-        padding: 12px 8px;
-        flex-shrink: 0;
-    }
-
-    .equipo-img {
-        width: 60px !important;
-        height: 60px !important;
-        max-width: 60px !important;
-        max-height: 60px !important;
-    }
-
-    .equipo-img-placeholder {
-        width: 15px;
-        height: 15px;
-    }
-
-    .equipo-nombre {
-        font-size: 0.9em;
-    }
-
-    .equipo-cargo {
-        font-size: 0.8em;
-    }
 }
 
 @media (max-width: 480px) {
