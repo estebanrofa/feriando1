@@ -1005,20 +1005,20 @@ a.logo {
     }
 
     .equipo-card {
-        width: 130px;
-        min-width: 130px;
-        padding: 15px 10px;
+        width: 110px;
+        min-width: 110px;
+        padding: 12px 8px;
         flex-shrink: 0;
     }
 
     .equipo-img {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
     }
 
     .equipo-img-placeholder {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
     }
 
     .equipo-nombre {
