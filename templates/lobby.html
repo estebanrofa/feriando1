@@ -164,9 +164,14 @@
         <h2 class="ferias-titulo">Explorá las <span class="texto-verde">ferias</span></h2>
 
         <div class="filtros-wrapper">
-            <div class="filtro-toggle" onclick="toggleFiltros()">
-                <span class="filtro-texto">Filtrar</span>
-                <span class="filtro-flecha" id="filtroFlecha">▲</span>
+            <div class="filtros-botones">
+                <div class="filtro-toggle" onclick="toggleFiltros()">
+                    <span class="filtro-texto">Filtrar</span>
+                    <span class="filtro-flecha" id="filtroFlecha">▲</span>
+                </div>
+                <div class="filtro-favoritos" id="filtroFavoritos" onclick="filtrarPorFavoritos()">
+                    <span class="filtro-favoritos-estrella">★</span>
+                </div>
             </div>
 
             <div class="filtros-panel" id="filtrosPanel" style="display: none;">
@@ -212,7 +217,13 @@
         <div class="seccion-ferias-wrapper">
             <button class="scroll-btn scroll-btn-left" id="scrollLeft">◀</button>
             <button class="scroll-btn scroll-btn-right" id="scrollRight">▶</button>
-            
+
+            <div class="mensaje-sin-favoritos" id="mensajeSinFavoritos" style="display: none;">
+                <span class="mensaje-icono">★</span>
+                <p>Aún no seleccionaste tus ferias favoritas</p>
+                <button class="btn-ver-todas" onclick="limpiarFiltroFavoritos()">Ver todas las ferias</button>
+            </div>
+
             <div class="seccion-ferias" id="seccionFerias">
                 <a href="/tristan-narvaja" class="opcion-card" data-dia="Domingos" data-barrio="Cordón" data-feria="tristan-narvaja" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">📚</div>
@@ -882,6 +893,74 @@
 
         // Cargar favoritos al iniciar
         document.addEventListener('DOMContentLoaded', cargarFavoritos);
+
+        var filtroFavoritosActivo = false;
+
+        function filtrarPorFavoritos() {
+            var favoritos = getFavoritos();
+            var cards = document.querySelectorAll('.opcion-card');
+            var botonFavoritos = document.getElementById('filtroFavoritos');
+            var mensajeSinFavoritos = document.getElementById('mensajeSinFavoritos');
+            var seccionFerias = document.getElementById('seccionFerias');
+
+            if (filtroFavoritosActivo) {
+                // Desactivar filtro de favoritos
+                limpiarFiltroFavoritos();
+                return;
+            }
+
+            // Activar filtro de favoritos
+            filtroFavoritosActivo = true;
+            botonFavoritos.classList.add('activo');
+
+            // Limpiar otros filtros
+            sessionStorage.removeItem('filtroActivo');
+            sessionStorage.removeItem('tipoFiltro');
+            document.querySelectorAll('.filtro-item').forEach(function(item) {
+                item.classList.remove('active');
+            });
+
+            if (favoritos.length === 0) {
+                // No hay favoritos
+                cards.forEach(function(card) {
+                    card.style.display = 'none';
+                });
+                mensajeSinFavoritos.style.display = 'flex';
+                seccionFerias.style.display = 'none';
+            } else {
+                // Mostrar solo favoritos
+                mensajeSinFavoritos.style.display = 'none';
+                seccionFerias.style.display = 'flex';
+                cards.forEach(function(card) {
+                    var feriaId = card.getAttribute('data-feria');
+                    if (favoritos.includes(feriaId)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            setTimeout(updateScrollButtons, 100);
+        }
+
+        function limpiarFiltroFavoritos() {
+            filtroFavoritosActivo = false;
+            var botonFavoritos = document.getElementById('filtroFavoritos');
+            var mensajeSinFavoritos = document.getElementById('mensajeSinFavoritos');
+            var seccionFerias = document.getElementById('seccionFerias');
+            var cards = document.querySelectorAll('.opcion-card');
+
+            botonFavoritos.classList.remove('activo');
+            mensajeSinFavoritos.style.display = 'none';
+            seccionFerias.style.display = 'flex';
+
+            cards.forEach(function(card) {
+                card.style.display = 'flex';
+            });
+
+            setTimeout(updateScrollButtons, 100);
+        }
     </script>
 </body>
 </html>

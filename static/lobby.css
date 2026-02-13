@@ -379,9 +379,89 @@ a.logo {
 }
 
 .filtros-wrapper {
-    width: 280px;
+    width: 350px;
     margin: 25px 0 -22px 20px;
     position: relative;
+}
+
+.filtros-botones {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filtro-favoritos {
+    background: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: 2px solid #FFD700;
+}
+
+.filtro-favoritos:hover {
+    background: #FFFACD;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.filtro-favoritos.activo {
+    background: #FFD700;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+}
+
+.filtro-favoritos-estrella {
+    font-size: 1.4em;
+    color: #FFD700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+.filtro-favoritos.activo .filtro-favoritos-estrella {
+    color: #333;
+    text-shadow: none;
+}
+
+/* Mensaje sin favoritos */
+.mensaje-sin-favoritos {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    gap: 15px;
+}
+
+.mensaje-sin-favoritos .mensaje-icono {
+    font-size: 3em;
+    color: #ccc;
+}
+
+.mensaje-sin-favoritos p {
+    color: #666;
+    font-size: 1.1em;
+    margin: 0;
+}
+
+.btn-ver-todas {
+    background: #67723a;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-ver-todas:hover {
+    background: #4a5229;
+    transform: translateY(-2px);
 }
 
 .filtro-toggle {
@@ -805,28 +885,43 @@ a.logo {
 /* Estrella de favoritos */
 .estrella-favorito {
     position: absolute;
-    bottom: 6px;
-    right: 8px;
-    font-size: 1.3em;
-    color: #ccc;
+    bottom: 8px;
+    right: 10px;
+    font-size: 1.6em;
+    color: #ddd;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
     z-index: 10;
     line-height: 1;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .estrella-favorito:hover {
-    transform: scale(1.2);
+    transform: scale(1.3);
     color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
 }
 
 .estrella-favorito.activa {
     color: #FFD700;
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.4);
+    animation: pulseEstrella 2s ease-in-out infinite;
 }
 
 .estrella-favorito.activa:hover {
-    transform: scale(1.2);
+    transform: scale(1.3);
+    animation: none;
+}
+
+@keyframes pulseEstrella {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 12px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.4);
+    }
+    50% {
+        transform: scale(1.1);
+        text-shadow: 0 0 15px rgba(255, 215, 0, 0.9), 0 0 25px rgba(255, 215, 0, 0.6);
+    }
 }
 
 .opcion-card-proximo {
@@ -1025,15 +1120,45 @@ a.logo {
     .menu-mobile {
         top: 10vh;
     }
-    
+
     .lobby-container {
         flex: 0 0 70vh;
         padding-top: 12vh;
     }
-    
+
     .filtros-wrapper {
-        width: 150px;
+        width: auto;
         margin: 15px auto 10px auto;
+    }
+
+    .filtros-botones {
+        justify-content: center;
+    }
+
+    .filtro-favoritos {
+        padding: 8px 12px;
+    }
+
+    .filtro-favoritos-estrella {
+        font-size: 1.2em;
+    }
+
+    .mensaje-sin-favoritos {
+        padding: 30px 15px;
+    }
+
+    .mensaje-sin-favoritos .mensaje-icono {
+        font-size: 2.5em;
+    }
+
+    .mensaje-sin-favoritos p {
+        font-size: 1em;
+    }
+
+    .estrella-favorito {
+        font-size: 1.4em;
+        bottom: 6px;
+        right: 8px;
     }
 
     .filtro-toggle {
