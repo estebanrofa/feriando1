@@ -990,6 +990,35 @@ a.logo {
     .porque-columna p {
         font-size: 1em;
     }
+
+    .equipo-grid {
+        gap: 15px;
+        padding: 0 15px;
+    }
+
+    .equipo-card {
+        width: 130px;
+        min-width: 130px;
+        padding: 15px 10px;
+    }
+
+    .equipo-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .equipo-img-placeholder {
+        width: 70px;
+        height: 70px;
+    }
+
+    .equipo-nombre {
+        font-size: 0.9em;
+    }
+
+    .equipo-cargo {
+        font-size: 0.8em;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1170,25 +1199,31 @@ a.logo {
 
 .equipo-grid {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    max-width: 1200px;
+    gap: 25px;
     padding: 0 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    max-width: 100%;
+}
+
+.equipo-grid::-webkit-scrollbar {
+    display: none;
 }
 
 .equipo-card {
     background-color: white;
     border-radius: 15px;
-    padding: 25px 20px;
+    padding: 20px 15px;
     text-align: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    width: 200px;
+    width: 160px;
+    min-width: 160px;
+    flex-shrink: 0;
 }
 
 .equipo-img {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
     display: block;
@@ -1196,8 +1231,8 @@ a.logo {
 }
 
 .equipo-img-placeholder {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
     margin: 0 auto;
