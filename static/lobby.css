@@ -1012,8 +1012,10 @@ a.logo {
     }
 
     .equipo-img {
-        width: 15px;
-        height: 15px;
+        width: 60px !important;
+        height: 60px !important;
+        max-width: 60px !important;
+        max-height: 60px !important;
     }
 
     .equipo-img-placeholder {
