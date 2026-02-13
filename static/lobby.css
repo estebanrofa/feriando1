@@ -992,14 +992,23 @@ a.logo {
     }
 
     .equipo-grid {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
         gap: 15px;
         padding: 0 15px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+    }
+
+    .equipo-grid::-webkit-scrollbar {
+        display: none;
     }
 
     .equipo-card {
         width: 130px;
         min-width: 130px;
         padding: 15px 10px;
+        flex-shrink: 0;
     }
 
     .equipo-img {
@@ -1199,31 +1208,25 @@ a.logo {
 
 .equipo-grid {
     display: flex;
-    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
     padding: 0 20px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    max-width: 100%;
-}
-
-.equipo-grid::-webkit-scrollbar {
-    display: none;
 }
 
 .equipo-card {
     background-color: white;
     border-radius: 15px;
-    padding: 20px 15px;
+    padding: 25px 20px;
     text-align: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    width: 160px;
-    min-width: 160px;
-    flex-shrink: 0;
+    width: 200px;
 }
 
 .equipo-img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
     display: block;
@@ -1231,8 +1234,8 @@ a.logo {
 }
 
 .equipo-img-placeholder {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
     margin: 0 auto;
