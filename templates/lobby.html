@@ -214,109 +214,122 @@
             <button class="scroll-btn scroll-btn-right" id="scrollRight">▶</button>
             
             <div class="seccion-ferias" id="seccionFerias">
-                <a href="/tristan-narvaja" class="opcion-card" data-dia="Domingos" data-barrio="Cordón" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/tristan-narvaja" class="opcion-card" data-dia="Domingos" data-barrio="Cordón" data-feria="tristan-narvaja" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">📚</div>
                     <div class="opcion-card-content">
                         <h2>Tristán Narvaja</h2>
                         <p class="barrio">Cordón • Domingos</p>
                         <p>La feria más famosa de MVD</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'tristan-narvaja')">☆</span>
                 </a>
-                <a href="/juan-paullier" class="opcion-card" data-dia="Martes" data-barrio="Tres Cruces" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/juan-paullier" class="opcion-card" data-dia="Martes" data-barrio="Tres Cruces" data-feria="juan-paullier" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🥬</div>
                     <div class="opcion-card-content">
                         <h2>Juan Paullier</h2>
                         <p class="barrio">Tres Cruces • Martes</p>
                         <p>Productos frescos de barrio</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'juan-paullier')">☆</span>
                 </a>
-                <a href="/tres-cruces" class="opcion-card" data-dia="Sábados" data-barrio="La Comercial" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/tres-cruces" class="opcion-card" data-dia="Sábados" data-barrio="La Comercial" data-feria="tres-cruces" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🛒</div>
                     <div class="opcion-card-content">
                         <h2>Tres Cruces</h2>
                         <p class="barrio">La Comercial • Sábados</p>
                         <p>Feria de barrio variada</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'tres-cruces')">☆</span>
                 </a>
-                <a href="/calle-salto" class="opcion-card" data-dia="Sábados" data-barrio="Cordón" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/calle-salto" class="opcion-card" data-dia="Sábados" data-barrio="Cordón" data-feria="calle-salto" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🥕</div>
                     <div class="opcion-card-content">
                         <h2>Calle Salto</h2>
                         <p class="barrio">Cordón • Sábados</p>
                         <p>Productos locales</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'calle-salto')">☆</span>
                 </a>
-                <a href="/democracia" class="opcion-card" data-dia="Domingos" data-barrio="Villa Muñoz" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/democracia" class="opcion-card" data-dia="Domingos" data-barrio="Villa Muñoz" data-feria="democracia" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🌽</div>
                     <div class="opcion-card-content">
                         <h2>Democracia</h2>
                         <p class="barrio">Villa Muñoz • Domingos</p>
                         <p>Productos de granja</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'democracia')">☆</span>
                 </a>
-                <a href="/acevedo-diaz" class="opcion-card" data-dia="Martes" data-barrio="Parque Rodó" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/acevedo-diaz" class="opcion-card" data-dia="Martes" data-barrio="Parque Rodó" data-feria="acevedo-diaz" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🥦</div>
                     <div class="opcion-card-content">
                         <h2>Acevedo Díaz</h2>
                         <p class="barrio">Parque Rodó • Martes</p>
                         <p>Feria vecinal</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'acevedo-diaz')">☆</span>
                 </a>
-                <a href="/san-salvador" class="opcion-card" data-dia="Miércoles" data-barrio="Parque Rodó" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/san-salvador" class="opcion-card" data-dia="Miércoles" data-barrio="Parque Rodó" data-feria="san-salvador" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🍅</div>
                     <div class="opcion-card-content">
                         <h2>San Salvador</h2>
                         <p class="barrio">Parque Rodó • Miércoles</p>
                         <p>Productos frescos</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'san-salvador')">☆</span>
                 </a>
-                <a href="/isla-flores" class="opcion-card" data-dia="Jueves" data-barrio="Palermo" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/isla-flores" class="opcion-card" data-dia="Jueves" data-barrio="Palermo" data-feria="isla-flores" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🥗</div>
                     <div class="opcion-card-content">
                         <h2>Isla de Flores</h2>
                         <p class="barrio">Palermo • Jueves</p>
                         <p>Feria de barrio</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'isla-flores')">☆</span>
                 </a>
-                <a href="/martinez-trueba" class="opcion-card" data-dia="Martes" data-barrio="Palermo" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/martinez-trueba" class="opcion-card" data-dia="Martes" data-barrio="Palermo" data-feria="martinez-trueba" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🍇</div>
                     <div class="opcion-card-content">
                         <h2>Martínez Trueba</h2>
                         <p class="barrio">Palermo • Martes</p>
                         <p>Productos de estación</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'martinez-trueba')">☆</span>
                 </a>
-                <a href="/julio-herrera" class="opcion-card" data-dia="Viernes" data-barrio="Centro" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/julio-herrera" class="opcion-card" data-dia="Viernes" data-barrio="Centro" data-feria="julio-herrera" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🍊</div>
                     <div class="opcion-card-content">
                         <h2>Julio Herrera y Obes</h2>
                         <p class="barrio">Centro • Viernes</p>
                         <p>Feria vecinal</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'julio-herrera')">☆</span>
                 </a>
-                <a href="/acevedo-diaz-sabados" class="opcion-card" data-dia="Sábados" data-barrio="Cordón" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/acevedo-diaz-sabados" class="opcion-card" data-dia="Sábados" data-barrio="Cordón" data-feria="acevedo-diaz-sabados" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🥬</div>
                     <div class="opcion-card-content">
                         <h2>Acevedo Díaz</h2>
                         <p class="barrio">Cordón • Sábados</p>
                         <p>Productos frescos</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'acevedo-diaz-sabados')">☆</span>
                 </a>
-                <a href="/guana" class="opcion-card" data-dia="Viernes" data-barrio="Cordón" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/guana" class="opcion-card" data-dia="Viernes" data-barrio="Cordón" data-feria="guana" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🌶️</div>
                     <div class="opcion-card-content">
                         <h2>Guaná</h2>
                         <p class="barrio">Cordón • Viernes</p>
                         <p>Productos locales</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'guana')">☆</span>
                 </a>
-                <a href="/gaboto-viernes" class="opcion-card" data-dia="Viernes" data-barrio="Cordón" onclick="mostrarModalLoginRequerido(event)">
+                <a href="/gaboto-viernes" class="opcion-card" data-dia="Viernes" data-barrio="Cordón" data-feria="gaboto-viernes" onclick="mostrarModalLoginRequerido(event)">
                     <div class="icono">🛠️</div>
                     <div class="opcion-card-content">
                         <h2>Gaboto</h2>
                         <p class="barrio">Cordón • Viernes</p>
                         <p>Feria variada</p>
                     </div>
+                    <span class="estrella-favorito" onclick="toggleFavorito(event, 'gaboto-viernes')">☆</span>
                 </a>
             </div>
         </div>
@@ -817,6 +830,58 @@
 
         // Verificar sesión al cargar
         verificarSesion();
+
+        // ============================================
+        // SISTEMA DE FAVORITOS
+        // ============================================
+        function getFavoritos() {
+            var favoritos = localStorage.getItem('feriasFavoritas');
+            return favoritos ? JSON.parse(favoritos) : [];
+        }
+
+        function saveFavoritos(favoritos) {
+            localStorage.setItem('feriasFavoritas', JSON.stringify(favoritos));
+        }
+
+        function toggleFavorito(event, feriaId) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            var favoritos = getFavoritos();
+            var estrella = event.target;
+            var index = favoritos.indexOf(feriaId);
+
+            if (index === -1) {
+                // Agregar a favoritos
+                favoritos.push(feriaId);
+                estrella.textContent = '★';
+                estrella.classList.add('activa');
+            } else {
+                // Quitar de favoritos
+                favoritos.splice(index, 1);
+                estrella.textContent = '☆';
+                estrella.classList.remove('activa');
+            }
+
+            saveFavoritos(favoritos);
+        }
+
+        function cargarFavoritos() {
+            var favoritos = getFavoritos();
+            favoritos.forEach(function(feriaId) {
+                var card = document.querySelector('[data-feria="' + feriaId + '"]');
+                if (card) {
+                    var estrella = card.querySelector('.estrella-favorito');
+                    if (estrella) {
+                        estrella.textContent = '★';
+                        estrella.classList.add('activa');
+                    }
+                }
+            });
+        }
+
+        // Cargar favoritos al iniciar
+        document.addEventListener('DOMContentLoaded', cargarFavoritos);
     </script>
 </body>
 </html>

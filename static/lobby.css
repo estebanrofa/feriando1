@@ -802,6 +802,33 @@ a.logo {
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+/* Estrella de favoritos */
+.estrella-favorito {
+    position: absolute;
+    bottom: 6px;
+    right: 8px;
+    font-size: 1.3em;
+    color: #ccc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+    line-height: 1;
+}
+
+.estrella-favorito:hover {
+    transform: scale(1.2);
+    color: #FFD700;
+}
+
+.estrella-favorito.activa {
+    color: #FFD700;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.estrella-favorito.activa:hover {
+    transform: scale(1.2);
+}
+
 .opcion-card-proximo {
     opacity: 0.85;
     cursor: not-allowed;
