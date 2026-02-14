@@ -218,10 +218,13 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    background: white;
+    color: #4A4A48;
+    border: 2px solid #7BB662;
 }
 
 .boton-como-ir:hover {
-    background: #4285f4;
+    background: #7BB662;
     color: white;
 }
 
