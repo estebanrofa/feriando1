@@ -49,9 +49,9 @@
                     🌙 Modo Nocturno
                 </button>
 
-                <button class="boton-ubicacion" onclick="toggleUbicacion()" id="botonUbicacion">
-                    📍 Mi Ubicación
-                </button>
+                <a href="/mapa?feria=Feria de Tristán Narvaja" class="boton-ubicacion boton-como-ir">
+                    🧭 Cómo ir
+                </a>
 
                 <div class="botones-info-ferias">
                     <button class="boton-info-feria" onclick="mostrarMensajeNoDisponible('ofertas')" id="botonOfertas">
@@ -404,120 +404,6 @@
                 .openOn(map);
         }
 
-        // Geolocalización
-        var marcadorUsuario = null;
-        var circuloPrecision = null;
-        var ubicacionActiva = false;
-        var watchId = null;
-
-        function toggleUbicacion() {
-            var boton = document.getElementById('botonUbicacion');
-
-            if (ubicacionActiva) {
-                desactivarUbicacion();
-                boton.innerHTML = '📍 Mi Ubicación';
-                boton.classList.remove('activo');
-            } else {
-                activarUbicacion();
-            }
-        }
-
-        function activarUbicacion() {
-            var boton = document.getElementById('botonUbicacion');
-
-            if (!navigator.geolocation) {
-                mostrarPopupUbicacion('Tu navegador no soporta geolocalización');
-                return;
-            }
-
-            boton.innerHTML = '📍 Buscando...';
-
-            navigator.geolocation.getCurrentPosition(
-                function(position) {
-                    ubicacionActiva = true;
-                    boton.innerHTML = '📍 Ubicación ON';
-                    boton.classList.add('activo');
-                    mostrarUbicacion(position);
-
-                    watchId = navigator.geolocation.watchPosition(
-                        mostrarUbicacion,
-                        function(error) {
-                            console.log('Error en seguimiento:', error.message);
-                        },
-                        { enableHighAccuracy: true, maximumAge: 5000 }
-                    );
-                },
-                function(error) {
-                    boton.innerHTML = '📍 Mi Ubicación';
-                    var mensaje = 'No se pudo obtener tu ubicación';
-                    if (error.code === 1) {
-                        mensaje = 'Permiso de ubicación denegado';
-                    } else if (error.code === 2) {
-                        mensaje = 'Ubicación no disponible';
-                    } else if (error.code === 3) {
-                        mensaje = 'Tiempo de espera agotado';
-                    }
-                    mostrarPopupUbicacion(mensaje);
-                },
-                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
-            );
-        }
-
-        function mostrarUbicacion(position) {
-            var lat = position.coords.latitude;
-            var lng = position.coords.longitude;
-            var precision = position.coords.accuracy;
-
-            var iconoUsuario = L.divIcon({
-                className: 'marcador-usuario',
-                html: '<div class="pulso"></div><div class="punto-usuario"></div>',
-                iconSize: [20, 20],
-                iconAnchor: [10, 10]
-            });
-
-            if (marcadorUsuario) {
-                marcadorUsuario.setLatLng([lat, lng]);
-                circuloPrecision.setLatLng([lat, lng]);
-                circuloPrecision.setRadius(precision);
-            } else {
-                marcadorUsuario = L.marker([lat, lng], { icon: iconoUsuario }).addTo(map);
-                marcadorUsuario.bindPopup('📍 Estás aquí');
-
-                circuloPrecision = L.circle([lat, lng], {
-                    radius: precision,
-                    color: '#4285f4',
-                    fillColor: '#4285f4',
-                    fillOpacity: 0.15,
-                    weight: 1
-                }).addTo(map);
-            }
-        }
-
-        function desactivarUbicacion() {
-            ubicacionActiva = false;
-
-            if (watchId !== null) {
-                navigator.geolocation.clearWatch(watchId);
-                watchId = null;
-            }
-
-            if (marcadorUsuario) {
-                map.removeLayer(marcadorUsuario);
-                marcadorUsuario = null;
-            }
-
-            if (circuloPrecision) {
-                map.removeLayer(circuloPrecision);
-                circuloPrecision = null;
-            }
-        }
-
-        function mostrarPopupUbicacion(mensaje) {
-            L.popup()
-                .setLatLng(bounds.getCenter())
-                .setContent('<div style="text-align: center; padding: 10px;"><b>📍 ' + mensaje + '</b></div>')
-                .openOn(map);
-        }
     </script>
 </body>
 </html>

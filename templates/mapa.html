@@ -76,6 +76,15 @@
 
                 <div id="map"></div>
 
+                <!-- Cartel Activa tu ubicación -->
+                <div class="cartel-ubicacion" id="cartelUbicacion" style="display: none;">
+                    <div class="cartel-ubicacion-contenido">
+                        <span class="cartel-ubicacion-icono">📍</span>
+                        <span class="cartel-ubicacion-texto">Activa tu ubicación para ver cómo llegar</span>
+                        <button class="cartel-ubicacion-cerrar" onclick="cerrarCartelUbicacion()">&times;</button>
+                    </div>
+                </div>
+
                 <!-- Modal Login Requerido -->
                 <div class="modal-overlay-mapa" id="modalLoginRequerido" onclick="cerrarModalLogin(event)">
                     <div class="modal-contenido-mapa" onclick="event.stopPropagation()">
@@ -122,6 +131,18 @@
         var recomendacionesActivo = false;
         var usuarioLogueado = false;
         var urlFeriaActual = '/';
+        var feriaSeleccionada = null;
+
+        // Detectar feria desde URL
+        (function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            feriaSeleccionada = urlParams.get('feria');
+        })();
+
+        // Función para cerrar el cartel de ubicación
+        function cerrarCartelUbicacion() {
+            document.getElementById('cartelUbicacion').style.display = 'none';
+        }
 
         // Verificar sesión de usuario
         async function verificarSesion() {
@@ -550,7 +571,39 @@
                 hitArea.bindPopup('<b>' + feria.nombre + '</b>');
             });
         });
-        
+
+        // Si viene de una feria específica, filtrar y mostrar cartel
+        if (feriaSeleccionada) {
+            // Mostrar solo la feria seleccionada
+            todasLasLineas.forEach(function(linea) {
+                if (linea.nombreFeria === feriaSeleccionada) {
+                    linea.setStyle({ opacity: 0.9 });
+                    if (!map.hasLayer(linea)) {
+                        map.addLayer(linea);
+                    }
+                    if (linea.hitArea && !map.hasLayer(linea.hitArea)) {
+                        map.addLayer(linea.hitArea);
+                    }
+                } else {
+                    map.removeLayer(linea);
+                    if (linea.hitArea) {
+                        map.removeLayer(linea.hitArea);
+                    }
+                }
+            });
+
+            // Centrar el mapa en la feria seleccionada
+            var feriaData = ferias.find(function(f) {
+                return f.nombre === feriaSeleccionada;
+            });
+            if (feriaData) {
+                map.setView([feriaData.lat, feriaData.lng], 16);
+            }
+
+            // Mostrar el cartel de ubicación
+            document.getElementById('cartelUbicacion').style.display = 'block';
+        }
+
         // Ajustar el grosor de las líneas según el zoom
         map.on('zoomend', function() {
             var zoom = map.getZoom();
