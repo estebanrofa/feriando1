@@ -44,7 +44,7 @@
                     🌙 Modo Nocturno
                 </button>
 
-                <button class="boton-ubicacion" onclick="toggleUbicacion()" id="botonUbicacion">
+                <button class="boton-ubicacion" id="botonUbicacion">
                     📍 Mi Ubicación
                 </button>
 
@@ -756,14 +756,67 @@
         var circuloPrecision = null;
         var ubicacionActiva = false;
         var watchId = null;
+        var longPressTimer = null;
+        var isLongPress = false;
+
+        // Configurar eventos del botón de ubicación
+        (function() {
+            var boton = document.getElementById('botonUbicacion');
+
+            boton.addEventListener('mousedown', function() {
+                isLongPress = false;
+                longPressTimer = setTimeout(function() {
+                    isLongPress = true;
+                    if (ubicacionActiva) {
+                        desactivarUbicacion();
+                        boton.innerHTML = '📍 Mi Ubicación';
+                        boton.classList.remove('activo');
+                    }
+                }, 600);
+            });
+
+            boton.addEventListener('mouseup', function() {
+                clearTimeout(longPressTimer);
+                if (!isLongPress) {
+                    toggleUbicacion();
+                }
+            });
+
+            boton.addEventListener('mouseleave', function() {
+                clearTimeout(longPressTimer);
+            });
+
+            // Soporte táctil
+            boton.addEventListener('touchstart', function(e) {
+                isLongPress = false;
+                longPressTimer = setTimeout(function() {
+                    isLongPress = true;
+                    if (ubicacionActiva) {
+                        desactivarUbicacion();
+                        boton.innerHTML = '📍 Mi Ubicación';
+                        boton.classList.remove('activo');
+                    }
+                }, 600);
+            });
+
+            boton.addEventListener('touchend', function(e) {
+                clearTimeout(longPressTimer);
+                if (!isLongPress) {
+                    e.preventDefault();
+                    toggleUbicacion();
+                }
+            });
+        })();
 
         function toggleUbicacion() {
             var boton = document.getElementById('botonUbicacion');
 
             if (ubicacionActiva) {
-                desactivarUbicacion();
-                boton.innerHTML = '📍 Mi Ubicación';
-                boton.classList.remove('activo');
+                // Si ya está activa, recentrar el mapa en la ubicación actual
+                if (marcadorUsuario) {
+                    var latlng = marcadorUsuario.getLatLng();
+                    map.setView([latlng.lat, latlng.lng], 16);
+                }
             } else {
                 activarUbicacion();
             }
