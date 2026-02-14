@@ -178,6 +178,81 @@ body {
     background: #34495e;
 }
 
+/* Botón de ubicación */
+.boton-ubicacion {
+    position: absolute;
+    top: 10px;
+    right: 170px;
+    background: white;
+    color: #4A4A48;
+    border: 2px solid #4285f4;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: bold;
+    z-index: 1001;
+    transition: all 0.3s ease;
+}
+
+.boton-ubicacion:hover {
+    background: #4285f4;
+    color: white;
+    transform: scale(1.05);
+}
+
+.boton-ubicacion.activo {
+    background: #4285f4;
+    color: white;
+    border-color: #1a73e8;
+}
+
+.boton-ubicacion.activo:hover {
+    background: #1a73e8;
+}
+
+/* Marcador de usuario en el mapa */
+.marcador-usuario {
+    position: relative;
+}
+
+.punto-usuario {
+    width: 14px;
+    height: 14px;
+    background: #4285f4;
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.pulso {
+    width: 30px;
+    height: 30px;
+    background: rgba(66, 133, 244, 0.3);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulsar 2s ease-out infinite;
+}
+
+@keyframes pulsar {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+}
+
 /* Botones de información de ferias (Ofertas y Recomendaciones) */
 .botones-info-ferias {
     position: absolute;

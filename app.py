@@ -53,7 +53,12 @@ categorias_colores = {
     'Ferreteria': '#8B5A00',
     'Herreria': '#4D4D4D',
     'Camaras': '#000000',
-    'Comida': '#CC7700'
+    'Comida': '#CC7700',
+    'Plantas': '#228B22',
+    'Quesos y pescado': '#1E90FF',
+    'Pollo y carnes': '#DC143C',
+    'Frutas y verduras': '#32CD32',
+    'Quesos': '#F0E68C'
 }
 
 ferias = [
@@ -79,9 +84,9 @@ ferias = [
                     [-34.896781588527176, -56.180407404899604],
                     [-34.89897266463721, -56.18674278259278]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Plantas', 'Flores', 'Especias', 'Frutos secos'],
+                    'Frutas y verduras': ['Frutas', 'Verduras', 'Plantas', 'Flores', 'Especias', 'Frutos secos'],
                     'Ropa': ['Ropa nueva', 'Zapatos', 'Accesorios'],
                     'Libros': ['Libros usados', 'Comics', 'Revistas']
                 },
@@ -153,7 +158,7 @@ ferias = [
                 'categoria_principal': 'Ropa',
                 'productos': {
                     'Ropa': ['Ropa deportiva', 'Zapatos', 'Mochilas', 'Gorras'],
-                    'Comida': ['Snacks', 'Bebidas']
+                    'Frutas y verduras': ['Snacks', 'Bebidas']
                 }
             },
             {
@@ -169,9 +174,9 @@ ferias = [
                     [-34.896807987382374, -56.18233859539033],
                     [-34.89631080751797, -56.18268728256226]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Verduras', 'Frutas', 'Plantas', 'Flores', 'Especias'],
+                    'Frutas y verduras': ['Verduras', 'Frutas', 'Plantas', 'Flores', 'Especias'],
                     'Ferreteria': ['Herramientas básicas']
                 }
             },
@@ -241,15 +246,69 @@ ferias = [
         'lng': -56.182,
         'cuadras': [
             {
-                'nombre': 'Calle Salto - Recorrido completo',
+                'nombre': 'Calle Salto - Cuadra 1',
                 'coordenadas': [
-                    [-34.91169061803468, -56.181665955354696],
-                    [-34.90716234917917, -56.18216673960329]
+                    [-34.91221027251413, -56.18162244558335],
+                    [-34.91171758490295, -56.181668043136604]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Productos frescos'],
-                    'Ropa': ['Ropa usada', 'Accesorios']
+                    'Frutas y verduras': ['Frutas', 'Verduras']
+                }
+            },
+            {
+                'nombre': 'Calle Salto - Cuadra 2',
+                'coordenadas': [
+                    [-34.91171758490295, -56.181668043136604],
+                    [-34.910809184368276, -56.181767284870155]
+                ],
+                'categoria_principal': 'Frutas y verduras',
+                'productos': {
+                    'Frutas y verduras': ['Frutas', 'Verduras']
+                }
+            },
+            {
+                'nombre': 'Calle Salto - Cuadra 3',
+                'coordenadas': [
+                    [-34.910809184368276, -56.181767284870155],
+                    [-34.90994036573643, -56.181855797767646]
+                ],
+                'categoria_principal': 'Quesos',
+                'productos': {
+                    'Quesos': ['Quesos']
+                }
+            },
+            {
+                'nombre': 'Calle Salto - Cuadra 4',
+                'coordenadas': [
+                    [-34.90994036573643, -56.181855797767646],
+                    [-34.909007750188735, -56.1819550395012]
+                ],
+                'categoria_principal': 'Frutas y verduras',
+                'productos': {
+                    'Frutas y verduras': ['Frutas', 'Verduras']
+                }
+            },
+            {
+                'nombre': 'Calle Salto - Cuadra 5',
+                'coordenadas': [
+                    [-34.909007750188735, -56.1819550395012],
+                    [-34.90807072484237, -56.18208646774292]
+                ],
+                'categoria_principal': 'Frutas y verduras',
+                'productos': {
+                    'Frutas y verduras': ['Frutas', 'Verduras']
+                }
+            },
+            {
+                'nombre': 'Calle Salto - Cuadra 6',
+                'coordenadas': [
+                    [-34.90807072484237, -56.18208646774292],
+                    [-34.90714468693991, -56.182166934013374]
+                ],
+                'categoria_principal': 'Frutas y verduras',
+                'productos': {
+                    'Frutas y verduras': ['Frutas', 'Verduras']
                 }
             }
         ]
@@ -267,9 +326,9 @@ ferias = [
                     [-34.88986640083746, -56.16682645270599],
                     [-34.8891860519139, -56.169361353226115]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Productos orgánicos'],
+                    'Frutas y verduras': ['Frutas', 'Verduras', 'Productos orgánicos'],
                     'Ropa': ['Ropa nueva', 'Zapatos']
                 }
             }
@@ -288,9 +347,9 @@ ferias = [
                     [-34.89068718380285, -56.17667370807447],
                     [-34.88980637272634, -56.17679857241883]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Productos de granja'],
+                    'Frutas y verduras': ['Frutas', 'Verduras', 'Productos de granja'],
                     'Ropa': ['Ropa usada']
                 }
             }
@@ -309,9 +368,9 @@ ferias = [
                     [-34.90685750900923, -56.166047944787074],
                     [-34.905833784203644, -56.1661575292588]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Productos frescos'],
+                    'Frutas y verduras': ['Frutas', 'Verduras', 'Productos frescos'],
                     'Ropa': ['Ropa', 'Accesorios']
                 }
             }
@@ -330,9 +389,9 @@ ferias = [
                     [-34.91090280595359, -56.170360333445714],
                     [-34.91081042578227, -56.16868663516422]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Productos locales'],
+                    'Frutas y verduras': ['Frutas', 'Verduras', 'Productos locales'],
                     'Ropa': ['Ropa usada', 'Zapatos']
                 }
             }
@@ -351,9 +410,9 @@ ferias = [
                     [-34.91048071389207, -56.17705693125584],
                     [-34.91043672499547, -56.17648475403061]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Productos frescos'],
+                    'Frutas y verduras': ['Frutas', 'Verduras', 'Productos frescos'],
                     'Ropa': ['Ropa', 'Calzado']
                 }
             }
@@ -372,9 +431,9 @@ ferias = [
                     [-34.90807534389788, -56.18306312419999],
                     [-34.90724257521355, -56.18315193027305]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Productos de estación'],
+                    'Frutas y verduras': ['Frutas', 'Verduras', 'Productos de estación'],
                     'Ropa': ['Ropa usada']
                 }
             }
@@ -393,9 +452,9 @@ ferias = [
                     [-34.90209198741333, -56.1679619550705],
                     [-34.90116368229832, -56.16805851459504]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Pescados', 'Quesos', 'Productos de mercado']
+                    'Frutas y verduras': ['Frutas', 'Verduras', 'Pescados', 'Quesos', 'Productos de mercado']
                 }
             },
             {
@@ -436,9 +495,9 @@ ferias = [
                     [-34.91078908381817, -56.19426766065802],
                     [-34.909952910158744, -56.19433021672227]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Productos frescos'],
+                    'Frutas y verduras': ['Frutas', 'Verduras', 'Productos frescos'],
                     'Ropa': ['Ropa usada', 'Accesorios']
                 }
             }
@@ -448,19 +507,55 @@ ferias = [
         'nombre': 'Feria Acevedo Díaz (Sábados)',
         'barrio': 'Cordón',
         'dia': 'Sábados',
-        'lat': -34.8995,
-        'lng': -56.1668,
+        'lat': -34.901,
+        'lng': -56.1666,
         'cuadras': [
             {
-                'nombre': 'Acevedo Díaz - Recorrido completo',
+                'nombre': 'Acevedo Díaz - Plantas',
                 'coordenadas': [
-                    [-34.89995795847101, -56.16678730930974],
-                    [-34.8991050295766, -56.16687705192749]
+                    [-34.902025994505166, -56.166438460350044],
+                    [-34.90202159497606, -56.16655111312866]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Plantas',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Productos frescos'],
-                    'Ropa': ['Ropa', 'Calzado']
+                    'Plantas': ['Plantas']
+                }
+            },
+            {
+                'nombre': 'Acevedo Díaz - Comida variada',
+                'coordenadas': [
+                    [-34.90202159497606, -56.16655111312866],
+                    [-34.901075690747724, -56.166663765907295]
+                ],
+                'categoria_principal': 'Frutas y verduras',
+                'productos': {
+                    'Frutas y verduras': ['Frutas', 'Verduras'],
+                    'Quesos y pescado': ['Pescado', 'Quesos'],
+                    'Pollo y carnes': ['Pollo']
+                }
+            },
+            {
+                'nombre': 'Acevedo Díaz - Frutas y Verduras',
+                'coordenadas': [
+                    [-34.901075690747724, -56.166663765907295],
+                    [-34.90001538515072, -56.16677641868592]
+                ],
+                'categoria_principal': 'Frutas y verduras',
+                'productos': {
+                    'Frutas y verduras': ['Frutas', 'Verduras']
+                }
+            },
+            {
+                'nombre': 'Acevedo Díaz - Varios',
+                'coordenadas': [
+                    [-34.90001538515072, -56.16677641868592],
+                    [-34.89913985278364, -56.16688907146454]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Limpieza': ['Artículos de limpieza', 'Papel higiénico'],
+                    'Ropa': ['Ropa'],
+                    'Mascotas': ['Artículos para mascotas']
                 }
             }
         ]
@@ -478,9 +573,9 @@ ferias = [
                     [-34.90527733926171, -56.172280018620846],
                     [-34.90533002215996, -56.17335319922175]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Productos locales'],
+                    'Frutas y verduras': ['Frutas', 'Verduras', 'Productos locales'],
                     'Ropa': ['Ropa usada']
                 }
             }
@@ -499,9 +594,9 @@ ferias = [
                     [-34.90475811179553, -56.17744792377785],
                     [-34.905612996184374, -56.17720060797018]
                 ],
-                'categoria_principal': 'Comida',
+                'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Comida': ['Frutas', 'Verduras', 'Productos frescos'],
+                    'Frutas y verduras': ['Frutas', 'Verduras', 'Productos frescos'],
                     'Ferreteria': ['Herramientas básicas']
                 }
             }
@@ -565,10 +660,10 @@ def tres_cruces():
 def calle_salto():
     feria = [f for f in ferias if f['nombre'] == 'Feria Calle Salto'][0]
     limites_feria = [
-        [-34.91200, -56.18150],
-        [-34.91200, -56.18250],
-        [-34.90700, -56.18250],
-        [-34.90700, -56.18150]
+        [-34.91250, -56.18140],
+        [-34.91250, -56.18240],
+        [-34.90680, -56.18240],
+        [-34.90680, -56.18140]
     ]
     return render_template('feria_generica.html', 
                          feria=feria, 
@@ -663,10 +758,10 @@ def julio_herrera():
 def acevedo_diaz_sabados():
     feria = [f for f in ferias if f['nombre'] == 'Feria Acevedo Díaz (Sábados)'][0]
     limites_feria = [
-        [-34.90020, -56.16650],
-        [-34.90020, -56.16710],
-        [-34.89890, -56.16710],
-        [-34.89890, -56.16650]
+        [-34.90230, -56.16620],
+        [-34.90230, -56.16710],
+        [-34.89880, -56.16710],
+        [-34.89880, -56.16620]
     ]
     return render_template('feria_generica.html', 
                          feria=feria, 
