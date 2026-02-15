@@ -70,14 +70,133 @@ ferias = [
         'lng': -56.1785,
         'cuadras': [
             {
-                'nombre': 'Tristán Narvaja - Desde 18 de Julio hasta La Paz',
+                'nombre': 'Tristán Narvaja - Plantas y Mascotas',
                 'coordenadas': [
-                    [-34.90199079826579, -56.176362633705146],
-                    [-34.9023251619308, -56.17727458477021],
-                    [-34.901502448887946, -56.1778485774994],
-                    [-34.90076771957824, -56.17830991744996],
+                    [-34.902025994505166, -56.176394820213325],
+                    [-34.90233836046859, -56.17724776268006]
+                ],
+                'categoria_principal': 'Plantas',
+                'productos': {
+                    'Plantas': ['Plantas'],
+                    'Mascotas': ['Artículos para mascotas']
+                }
+            },
+            {
+                'nombre': 'Tristán Narvaja - Ropa, Joyería, Limpieza y Verduras',
+                'coordenadas': [
+                    [-34.90233836046859, -56.17724776268006],
+                    [-34.901524446670116, -56.17783784866334]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa nueva'],
+                    'Antigüedades': ['Joyería'],
+                    'Limpieza': ['Artículos de limpieza'],
+                    'Frutas y verduras': ['Frutas', 'Verduras']
+                }
+            },
+            {
+                'nombre': 'Tristán Narvaja - Ropa, Verduras, Quesos y Pescados',
+                'coordenadas': [
+                    [-34.901524446670116, -56.17783784866334],
+                    [-34.900745721593374, -56.1782991886139]
+                ],
+                'categoria_principal': 'Frutas y verduras',
+                'productos': {
+                    'Ropa': ['Ropa'],
+                    'Frutas y verduras': ['Verduras', 'Frutas'],
+                    'Quesos y pescado': ['Quesos', 'Pescados']
+                }
+            },
+            {
+                'nombre': 'Tristán Narvaja - Ropa, Verduras, Huevos y Tecnología',
+                'coordenadas': [
+                    [-34.900745721593374, -56.1782991886139],
+                    [-34.89996258949352, -56.17877662181855]
+                ],
+                'categoria_principal': 'Frutas y verduras',
+                'productos': {
+                    'Ropa': ['Ropa'],
+                    'Frutas y verduras': ['Verduras', 'Frutas'],
+                    'Huevos': ['Huevos'],
+                    'Camaras': ['Tecnología']
+                }
+            },
+            {
+                'nombre': 'Tristán Narvaja - Artesanías y Libros',
+                'coordenadas': [
+                    [-34.89965461415012, -56.17807924747468],
+                    [-34.89996698913292, -56.17877125740051]
+                ],
+                'categoria_principal': 'Antigüedades',
+                'productos': {
+                    'Antigüedades': ['Artesanías de madera', 'Artesanías de metal'],
+                    'Libros': ['Libros']
+                }
+            },
+            {
+                'nombre': 'Tristán Narvaja - Puestos de Comida',
+                'coordenadas': [
                     [-34.89996698913292, -56.17877125740051],
-                    [-34.899245445121835, -56.17921650409699],
+                    [-34.90025736481198, -56.17951154708863]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Puestos de comida']
+                }
+            },
+            {
+                'nombre': 'Tristán Narvaja - Ropa, Frutos secos y Plantas',
+                'coordenadas': [
+                    [-34.89996699, -56.17877126],
+                    [-34.89927184, -56.17922187]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa'],
+                    'Frutas y verduras': ['Frutos secos'],
+                    'Plantas': ['Plantas']
+                }
+            },
+            {
+                'nombre': 'Tristán Narvaja - Libros',
+                'coordenadas': [
+                    [-34.89927184, -56.17922187],
+                    [-34.89885827, -56.17850840]
+                ],
+                'categoria_principal': 'Libros',
+                'productos': {
+                    'Libros': ['Libros']
+                }
+            },
+            {
+                'nombre': 'Tristán Narvaja - Antigüedades, Bronce, Ropa Vintage y Plantas',
+                'coordenadas': [
+                    [-34.89927184, -56.17922187],
+                    [-34.89986140, -56.18034303]
+                ],
+                'categoria_principal': 'Antigüedades',
+                'productos': {
+                    'Antigüedades': ['Antigüedades', 'Artículos de bronce', 'Ropa vintage'],
+                    'Plantas': ['Plantas']
+                }
+            },
+            {
+                'nombre': 'Tristán Narvaja - Ropa Vintage y Antigüedades',
+                'coordenadas': [
+                    [-34.89986140, -56.18034303],
+                    [-34.90023977, -56.18013918]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa vintage'],
+                    'Antigüedades': ['Antigüedades']
+                }
+            },
+            {
+                'nombre': 'Tristán Narvaja - Recorrido principal (continuación)',
+                'coordenadas': [
+                    [-34.89927184, -56.17922187],
                     [-34.898215914033884, -56.17982268333436],
                     [-34.89755155165228, -56.1802089214325],
                     [-34.89688278409271, -56.180643439292915],
@@ -86,49 +205,9 @@ ferias = [
                 ],
                 'categoria_principal': 'Frutas y verduras',
                 'productos': {
-                    'Frutas y verduras': ['Frutas', 'Verduras', 'Plantas', 'Flores', 'Especias', 'Frutos secos'],
-                    'Ropa': ['Ropa nueva', 'Zapatos', 'Accesorios'],
-                    'Libros': ['Libros usados', 'Comics', 'Revistas']
-                },
-                'negocios': [
-                    {
-                        'nombre': 'Frutas Don José',
-                        'descripcion': 'Frutas frescas de estación, directo del mercado modelo',
-                        'especialidad': 'Naranjas, manzanas y frutas exóticas'
-                    },
-                    {
-                        'nombre': 'Verdulería La Abundancia',
-                        'descripcion': 'Verduras orgánicas y productos de granja',
-                        'especialidad': 'Tomates, lechugas y vegetales orgánicos'
-                    }
-                ]
-            },
-            {
-                'nombre': 'Av. Uruguay',
-                'coordenadas': [
-                    [-34.89974260722322, -56.178229451179504],
-                    [-34.89996258949352, -56.17878198623658],
-                    [-34.900288162172274, -56.17956519126893]
-                ],
-                'categoria_principal': 'Ropa',
-                'productos': {
-                    'Ropa': ['Ropa nueva', 'Ropa usada', 'Zapatos', 'Carteras', 'Accesorios'],
-                    'Antigüedades': ['Joyas vintage', 'Relojes']
-                }
-            },
-            {
-                'nombre': 'Pdu (Propios y Desarrollo Urbano)',
-                'coordenadas': [
-                    [-34.89871308236705, -56.17822408676148],
-                    [-34.89921904705001, -56.179146766662605],
-                    [-34.89984379914075, -56.18029475212098],
-                    [-34.90028376255009, -56.18134617805482]
-                ],
-                'categoria_principal': 'Antigüedades',
-                'productos': {
-                    'Antigüedades': ['Objetos vintage', 'Cuadros', 'Porcelanas', 'Muebles antiguos'],
-                    'Libros': ['Libros antiguos', 'Mapas'],
-                    'Camaras': ['Cámaras vintage', 'Equipos fotográficos']
+                    'Frutas y verduras': ['Frutas', 'Verduras'],
+                    'Ropa': ['Ropa'],
+                    'Libros': ['Libros usados']
                 }
             },
             {
@@ -164,8 +243,7 @@ ferias = [
             {
                 'nombre': 'Gaboto',
                 'coordenadas': [
-                    [-34.90045534764091, -56.18001580238343],
-                    [-34.899870197011765, -56.180353760719306],
+                    [-34.89986140, -56.18034303],
                     [-34.89932903895997, -56.180675625801086],
                     [-34.898985863713776, -56.180874109268196],
                     [-34.89869548353938, -56.18104577064515],
