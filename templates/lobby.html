@@ -105,6 +105,7 @@
 
     <header class="lobby-header">
         <a href="/" class="logo"><img src="{{ url_for('static', filename='favicon.png') }}" alt="" class="logo-icon">Feriando.uy</a>
+        <span class="perfil-feriante" id="perfilFeriante" style="display: none;">Perfil Feriante</span>
         <nav class="header-nav">
             <a href="#" class="nav-btn" onclick="scrollToTop(event)">Inicio</a>
             <a href="#" class="nav-btn" onclick="scrollToSection(event, 'porque-feriando')">¿Por qué Feriando?</a>
@@ -825,6 +826,11 @@
                     // Poner inicial del nombre
                     const inicial = data.nombre ? data.nombre.charAt(0).toUpperCase() : 'U';
                     document.getElementById('userInitial').textContent = inicial;
+
+                    // Mostrar "Perfil Feriante" si es vendedor
+                    if (data.tipo === 'vendedor') {
+                        document.getElementById('perfilFeriante').style.display = 'inline';
+                    }
                 }
             } catch (error) {
                 console.log('Error verificando sesión:', error);
