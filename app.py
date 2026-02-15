@@ -28,12 +28,19 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'dev-key-change-in-production')
 
 # ============================================
-# USUARIO DE PRUEBA (SOLO PARA DESARROLLO LOCAL)
+# USUARIOS DE PRUEBA (SOLO PARA DESARROLLO LOCAL)
 # ============================================
-USUARIO_PRUEBA = {
-    'username': 'usuario1234',
-    'password': 'HA436276',
-    'nombre': 'Usuario de Prueba'
+USUARIOS_PRUEBA = {
+    'usuario1234': {
+        'password': 'HA436276',
+        'nombre': 'Usuario de Prueba',
+        'tipo': 'visitante'
+    },
+    'usuarioferiante': {
+        'password': 'HA436276',
+        'nombre': 'Feriante de Prueba',
+        'tipo': 'vendedor'
+    }
 }
 
 # Compresion gzip (opcional)
@@ -1153,11 +1160,18 @@ def api_login():
     username = data.get('username', '')
     password = data.get('password', '')
 
-    if username == USUARIO_PRUEBA['username'] and password == USUARIO_PRUEBA['password']:
+    if username in USUARIOS_PRUEBA and password == USUARIOS_PRUEBA[username]['password']:
+        usuario = USUARIOS_PRUEBA[username]
         session['logged_in'] = True
         session['username'] = username
-        session['nombre'] = USUARIO_PRUEBA['nombre']
-        return jsonify({'success': True, 'mensaje': 'Login exitoso', 'nombre': USUARIO_PRUEBA['nombre']})
+        session['nombre'] = usuario['nombre']
+        session['tipo'] = usuario['tipo']
+        return jsonify({
+            'success': True,
+            'mensaje': 'Login exitoso',
+            'nombre': usuario['nombre'],
+            'tipo': usuario['tipo']
+        })
     else:
         return jsonify({'success': False, 'mensaje': 'Usuario o contraseña incorrectos'}), 401
 
@@ -1169,7 +1183,12 @@ def api_logout():
 @app.route('/api/sesion')
 def api_sesion():
     if session.get('logged_in'):
-        return jsonify({'logged_in': True, 'username': session.get('username'), 'nombre': session.get('nombre')})
+        return jsonify({
+            'logged_in': True,
+            'username': session.get('username'),
+            'nombre': session.get('nombre'),
+            'tipo': session.get('tipo', 'visitante')
+        })
     return jsonify({'logged_in': False})
 
 @app.route('/terminos')
