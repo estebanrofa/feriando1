@@ -774,7 +774,7 @@ a.logo {
     color: #4A4A48;
     transition: all 0.3s ease;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    border-left: 4px solid #000;
+    border-left: 4px solid #D9822B;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -789,13 +789,13 @@ a.logo {
 .opcion-mi-puesto:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-    border-left-color: #333;
+    border-left-color: #c47424;
 }
 
 .opcion-mi-puesto h2 {
     font-size: 1.5em;
     margin: 0;
-    color: #000;
+    color: #D9822B;
 }
 
 .opcion-mapa .icono {
