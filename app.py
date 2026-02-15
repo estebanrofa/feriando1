@@ -58,7 +58,9 @@ categorias_colores = {
     'Quesos y pescado': '#1E90FF',
     'Pollo y carnes': '#DC143C',
     'Frutas y verduras': '#32CD32',
-    'Quesos': '#F0E68C'
+    'Quesos': '#F0E68C',
+    'Herramientas': '#5D4E37',
+    'Artesanías': '#E07020'
 }
 
 ferias = [
@@ -194,14 +196,22 @@ ferias = [
                 }
             },
             {
+                'nombre': 'Tristán Narvaja - Antigüedades y Artículos de mercado',
+                'coordenadas': [
+                    [-34.89988780, -56.18033767],
+                    [-34.90028816, -56.18135154]
+                ],
+                'categoria_principal': 'Antigüedades',
+                'productos': {
+                    'Antigüedades': ['Antigüedades', 'Artículos de mercado']
+                }
+            },
+            {
                 'nombre': 'Tristán Narvaja - Recorrido principal (continuación)',
                 'coordenadas': [
                     [-34.89927184, -56.17922187],
                     [-34.898215914033884, -56.17982268333436],
-                    [-34.89755155165228, -56.1802089214325],
-                    [-34.89688278409271, -56.180643439292915],
-                    [-34.896781588527176, -56.180407404899604],
-                    [-34.89897266463721, -56.18674278259278]
+                    [-34.89755155165228, -56.1802089214325]
                 ],
                 'categoria_principal': 'Frutas y verduras',
                 'productos': {
@@ -211,13 +221,11 @@ ferias = [
                 }
             },
             {
-                'nombre': 'Magallanes',
+                'nombre': 'Magallanes - Tramo 1',
                 'coordenadas': [
                     [-34.89911785436277, -56.18204355239869],
                     [-34.89842270122825, -56.18244588375092],
-                    [-34.897696743889895, -56.182891130447395],
-                    [-34.89719516961729, -56.183164715766914],
-                    [-34.89672439097846, -56.183481216430664]
+                    [-34.89769894, -56.18288845]
                 ],
                 'categoria_principal': 'Ferreteria',
                 'productos': {
@@ -226,13 +234,120 @@ ferias = [
                 }
             },
             {
-                'nombre': 'Minas',
+                'nombre': 'Magallanes - Ropa y Herramientas',
+                'coordenadas': [
+                    [-34.89769894, -56.18288845],
+                    [-34.89719517, -56.18318349]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa'],
+                    'Herramientas': ['Herramientas']
+                }
+            },
+            {
+                'nombre': 'Magallanes - Ropa, Antigüedades y Herramientas',
+                'coordenadas': [
+                    [-34.89719517, -56.18318349],
+                    [-34.89670679, -56.18348122]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa'],
+                    'Antigüedades': ['Antigüedades'],
+                    'Herramientas': ['Herramientas']
+                }
+            },
+            {
+                'nombre': '9 de Abril - Ropa y Antigüedades',
+                'coordenadas': [
+                    [-34.89719517, -56.18318349],
+                    [-34.89681679, -56.18235737]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa'],
+                    'Antigüedades': ['Antigüedades']
+                }
+            },
+            {
+                'nombre': '9 de Abril - Ropa, Antigüedades y Tecnología',
+                'coordenadas': [
+                    [-34.89681679, -56.18235737],
+                    [-34.89636581, -56.18263900]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa'],
+                    'Antigüedades': ['Antigüedades'],
+                    'Camaras': ['Tecnología']
+                }
+            },
+            {
+                'nombre': 'Gaboto - Ropa y Antigüedades',
+                'coordenadas': [
+                    [-34.89681679, -56.18235737],
+                    [-34.89737336, -56.18195772]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa'],
+                    'Antigüedades': ['Antigüedades']
+                }
+            },
+            {
+                'nombre': 'Galicia - Antigüedades y Artesanías',
+                'coordenadas': [
+                    [-34.89769894, -56.18288845],
+                    [-34.89737336, -56.18195772]
+                ],
+                'categoria_principal': 'Antigüedades',
+                'productos': {
+                    'Antigüedades': ['Antigüedades'],
+                    'Artesanías': ['Artesanías']
+                }
+            },
+            {
+                'nombre': 'Galicia - Artículos de mercado y Herramientas',
+                'coordenadas': [
+                    [-34.89737336, -56.18195772],
+                    [-34.89682999, -56.18056029]
+                ],
+                'categoria_principal': 'Antigüedades',
+                'productos': {
+                    'Antigüedades': ['Artículos de mercado'],
+                    'Herramientas': ['Herramientas']
+                }
+            },
+            {
+                'nombre': 'Galicia - Ropa y Artesanías',
+                'coordenadas': [
+                    [-34.89686518, -56.18063271],
+                    [-34.89754935, -56.18022770]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa'],
+                    'Artesanías': ['Artesanías']
+                }
+            },
+            {
+                'nombre': 'Galicia - Antigüedades y Herrería',
+                'coordenadas': [
+                    [-34.89754935, -56.18022770],
+                    [-34.89822911, -56.17981732]
+                ],
+                'categoria_principal': 'Antigüedades',
+                'productos': {
+                    'Antigüedades': ['Antigüedades'],
+                    'Herreria': ['Herrería']
+                }
+            },
+            {
+                'nombre': 'Minas - Tramo 1',
                 'coordenadas': [
                     [-34.90063133197708, -56.18228495121003],
-                    [-34.89944783005727, -56.182907223701484],
-                    [-34.898739480601485, -56.18333101272584],
-                    [-34.89798272784974, -56.18376016616822],
-                    [-34.89713357256563, -56.18428587913514]
+                    [-34.89944783005727, -56.182907223701484]
                 ],
                 'categoria_principal': 'Ropa',
                 'productos': {
@@ -241,45 +356,127 @@ ferias = [
                 }
             },
             {
+                'nombre': 'Minas - Ropa, Antigüedades y Juguetes',
+                'coordenadas': [
+                    [-34.89873948, -56.18334711],
+                    [-34.89797833, -56.18378699]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa', 'Ropa de Construcción', 'Jeans Levis'],
+                    'Antigüedades': ['Antigüedades', 'Juguetes Vintage'],
+                    'Frutas y verduras': ['Frutas', 'Verduras']
+                }
+            },
+            {
+                'nombre': 'Minas - Ropa y Artículos de mercado',
+                'coordenadas': [
+                    [-34.89797833, -56.18378699],
+                    [-34.89834351, -56.18482232]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa', 'Ropa de Segunda Mano'],
+                    'Antigüedades': ['Artículos de mercado']
+                }
+            },
+            {
+                'nombre': 'Minas - Ropa',
+                'coordenadas': [
+                    [-34.89797393, -56.18377894],
+                    [-34.89714457, -56.18428856]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa']
+                }
+            },
+            {
+                'nombre': 'Galicia - Frutas y Verduras',
+                'coordenadas': [
+                    [-34.89796733, -56.18378699],
+                    [-34.89769894, -56.18288845]
+                ],
+                'categoria_principal': 'Frutas y verduras',
+                'productos': {
+                    'Frutas y verduras': ['Frutas', 'Verduras']
+                }
+            },
+            {
+                'nombre': 'La Paz - Antigüedades y Herramientas',
+                'coordenadas': [
+                    [-34.89834351, -56.18482232],
+                    [-34.89873948, -56.18597567]
+                ],
+                'categoria_principal': 'Antigüedades',
+                'productos': {
+                    'Antigüedades': ['Antigüedades'],
+                    'Herramientas': ['Herramientas']
+                }
+            },
+            {
+                'nombre': 'La Paz - Antigüedades y Carteras',
+                'coordenadas': [
+                    [-34.89873948, -56.18597567],
+                    [-34.89859209, -56.18605614]
+                ],
+                'categoria_principal': 'Antigüedades',
+                'productos': {
+                    'Antigüedades': ['Antigüedades'],
+                    'Ropa': ['Carteras de mujer']
+                }
+            },
+            {
+                'nombre': 'La Paz - Verduras, Antigüedades y Varios',
+                'coordenadas': [
+                    [-34.89873948, -56.18597567],
+                    [-34.89884507, -56.18630290]
+                ],
+                'categoria_principal': 'Frutas y verduras',
+                'productos': {
+                    'Frutas y verduras': ['Verduras', 'Frutas'],
+                    'Antigüedades': ['Antigüedades'],
+                    'Ferreteria': ['Artículos de cocina', 'Artículos de pesca'],
+                    'Comida': ['Huevos']
+                }
+            },
+            {
+                'nombre': 'Damasceno - Ropa y Herramientas',
+                'coordenadas': [
+                    [-34.89873948, -56.18597567],
+                    [-34.89908046, -56.18577987]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa'],
+                    'Herramientas': ['Herramientas']
+                }
+            },
+            {
+                'nombre': 'Gaboto - Ropa Vintage, Antigüedades y Artesanías',
+                'coordenadas': [
+                    [-34.89988780, -56.18033767],
+                    [-34.89872628, -56.18104041]
+                ],
+                'categoria_principal': 'Antigüedades',
+                'productos': {
+                    'Ropa': ['Ropa Vintage'],
+                    'Antigüedades': ['Antigüedades', 'Lentes'],
+                    'Artesanías': ['Artesanías', 'Cuchillos artesanales'],
+                    'Herramientas': ['Herramientas']
+                }
+            },
+            {
                 'nombre': 'Gaboto',
                 'coordenadas': [
-                    [-34.89986140, -56.18034303],
-                    [-34.89932903895997, -56.180675625801086],
-                    [-34.898985863713776, -56.180874109268196],
-                    [-34.89869548353938, -56.18104577064515],
+                    [-34.89872628, -56.18104041],
                     [-34.89805752349036, -56.18151247501374],
-                    [-34.897375560717144, -56.18195772171021],
-                    [-34.896807987382374, -56.18233859539033],
-                    [-34.89631080751797, -56.18268728256226]
+                    [-34.897375560717144, -56.18195772171021]
                 ],
                 'categoria_principal': 'Frutas y verduras',
                 'productos': {
                     'Frutas y verduras': ['Verduras', 'Frutas', 'Plantas', 'Flores', 'Especias'],
                     'Ferreteria': ['Herramientas básicas']
-                }
-            },
-            {
-                'nombre': '9 de Abril',
-                'coordenadas': [
-                    [-34.89718637004131, -56.183170080184944],
-                    [-34.896807987382374, -56.18232250213624]
-                ],
-                'categoria_principal': 'Libros',
-                'productos': {
-                    'Libros': ['Libros usados', 'Comics', 'Revistas', 'Libros técnicos'],
-                    'Antigüedades': ['Vinilos', 'Revistas antiguas']
-                }
-            },
-            {
-                'nombre': 'Damasceno',
-                'coordenadas': [
-                    [-34.89873068119095, -56.18597567081452],
-                    [-34.89906065844092, -56.18578791618348]
-                ],
-                'categoria_principal': 'Camaras',
-                'productos': {
-                    'Camaras': ['Cámaras', 'Celulares', 'Cables', 'Electrónica usada'],
-                    'Ferreteria': ['Herramientas electrónicas']
                 }
             },
             {
@@ -298,20 +495,83 @@ ferias = [
                 }
             },
             {
-                'nombre': 'Cerro Largo',
+                'nombre': 'Cerro Largo - Antigüedades, Camisetas y Herrería',
                 'coordenadas': [
-                    [-34.89945662939097, -56.18292331695557],
-                    [-34.89910465530741, -56.18203282356263],
-                    [-34.89870428295369, -56.18105649948121],
-                    [-34.89846229871672, -56.180402040481574],
-                    [-34.89823351296432, -56.17981195449829],
-                    [-34.89785073537661, -56.178862452507026]
+                    [-34.89870428, -56.18105114],
+                    [-34.89822471, -56.17983341]
                 ],
-                'categoria_principal': 'Herreria',
+                'categoria_principal': 'Antigüedades',
                 'productos': {
-                    'Herreria': ['Repuestos metálicos', 'Cadenas', 'Rejas', 'Herrajes'],
-                    'Ferreteria': ['Tornillos', 'Clavos', 'Herramientas'],
-                    'Camaras': ['Electrónica', 'Cables']
+                    'Antigüedades': ['Antigüedades'],
+                    'Ropa': ['Camisetas de fútbol'],
+                    'Herreria': ['Herrería']
+                }
+            },
+            {
+                'nombre': 'Cerro Largo - Ropa, Antigüedades y Varios',
+                'coordenadas': [
+                    [-34.89822471, -56.17983341],
+                    [-34.89788153, -56.17890000]
+                ],
+                'categoria_principal': 'Ropa',
+                'productos': {
+                    'Ropa': ['Ropa'],
+                    'Antigüedades': ['Antigüedades', 'CDs'],
+                    'Plantas': ['Plantas'],
+                    'Comida': ['Arepas']
+                }
+            },
+            {
+                'nombre': 'Cerro Largo - Verduras, Frutas y Huevos',
+                'coordenadas': [
+                    [-34.89870868, -56.18104577],
+                    [-34.89911345, -56.18203819]
+                ],
+                'categoria_principal': 'Frutas y verduras',
+                'productos': {
+                    'Frutas y verduras': ['Verduras', 'Frutas'],
+                    'Antigüedades': ['Artículos de mercado'],
+                    'Comida': ['Huevos']
+                }
+            },
+            {
+                'nombre': 'Cerro Largo - Verduras, Herramientas y Calzado',
+                'coordenadas': [
+                    [-34.89911345, -56.18205428],
+                    [-34.89944343, -56.18291795]
+                ],
+                'categoria_principal': 'Frutas y verduras',
+                'productos': {
+                    'Frutas y verduras': ['Verduras', 'Frutas'],
+                    'Herramientas': ['Herramientas'],
+                    'Ropa': ['Calzado Deportivo'],
+                    'Comida': ['Pastas']
+                }
+            },
+            {
+                'nombre': 'Cerro Largo - Comida y Antigüedades',
+                'coordenadas': [
+                    [-34.89944343, -56.18291795],
+                    [-34.89982180, -56.18393719]
+                ],
+                'categoria_principal': 'Comida',
+                'productos': {
+                    'Comida': ['Comida', 'Huevos'],
+                    'Antigüedades': ['Antigüedades']
+                }
+            },
+            {
+                'nombre': 'Minas - Jardinería, Herrería y Artesanías',
+                'coordenadas': [
+                    [-34.89943463, -56.18292868],
+                    [-34.89873948, -56.18334711]
+                ],
+                'categoria_principal': 'Plantas',
+                'productos': {
+                    'Plantas': ['Jardinería', 'Plantas'],
+                    'Ferreteria': ['Artículos de Cocina', 'Cerrajería'],
+                    'Herreria': ['Herrería'],
+                    'Artesanías': ['Inciensos', 'Cuchillos Artesanales', 'Artículos para Mascotas']
                 }
             }
         ]
