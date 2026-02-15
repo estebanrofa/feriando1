@@ -113,7 +113,7 @@
             <a href="#" class="nav-btn" onclick="scrollToSection(event, 'contacto')">Contacto</a>
         </nav>
         <div class="auth-links" id="authLinks">
-            <a href="/login" class="auth-link">Iniciar sesión</a>
+            <a href="#" class="auth-link" onclick="abrirModalLogin(event)">Iniciar sesión</a>
             <a href="#" class="auth-link" onclick="abrirModalTipoUsuario(event)">Crear cuenta</a>
         </div>
         <div class="user-menu" id="userMenu" style="display: none;">
@@ -143,7 +143,7 @@
         <a href="#" class="menu-mobile-btn" onclick="scrollToSection(event, 'contacto'); cerrarMenu()">Contacto</a>
         <div class="menu-mobile-divider"></div>
         <div id="menuMobileAuth">
-            <a href="/login" class="menu-mobile-btn">Iniciar sesión</a>
+            <a href="#" class="menu-mobile-btn" onclick="abrirModalLogin(event); cerrarMenu()">Iniciar sesión</a>
             <a href="#" class="menu-mobile-btn" onclick="abrirModalTipoUsuario(event); cerrarMenu()">Crear cuenta</a>
         </div>
         <div id="menuMobileUser" style="display: none;">
@@ -449,13 +449,13 @@
             <h2 class="modal-titulo">Debés iniciar sesión</h2>
             <p class="modal-subtitulo">Para ver el detalle de las ferias necesitás tener una cuenta</p>
             <div class="modal-login-botones">
-                <a href="/login" class="btn-modal-login">Iniciar sesión</a>
+                <a href="#" class="btn-modal-login" onclick="cerrarModalLogin(event); abrirModalLogin(event);">Iniciar sesión</a>
                 <a href="#" class="btn-modal-registro" onclick="cerrarModalLogin(event); abrirModalTipoUsuario(event);">Crear cuenta</a>
             </div>
         </div>
     </div>
 
-    <!-- Modal Tipo de Usuario -->
+    <!-- Modal Tipo de Usuario (Crear cuenta) -->
     <div class="modal-overlay" id="modalTipoUsuario" onclick="cerrarModalTipoUsuario(event)">
         <div class="modal-contenido" onclick="event.stopPropagation()">
             <button class="modal-cerrar" onclick="cerrarModalTipoUsuario(event)">&times;</button>
@@ -493,6 +493,27 @@
                         <p>Necesito ayuda para dar de alta mi puesto</p>
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Iniciar Sesión (Tipo de usuario) -->
+    <div class="modal-overlay" id="modalLoginTipo" onclick="cerrarModalLoginTipo(event)">
+        <div class="modal-contenido" onclick="event.stopPropagation()">
+            <button class="modal-cerrar" onclick="cerrarModalLoginTipo(event)">&times;</button>
+
+            <h2 class="modal-titulo">¿Cómo usás Feriando?</h2>
+            <div class="modal-opciones">
+                <a href="/login?tipo=visitante" class="modal-opcion">
+                    <div class="modal-opcion-icono">🛒</div>
+                    <h3>Recorro la feria</h3>
+                    <p>Busco productos, exploro puestos y descubro nuevas ferias</p>
+                </a>
+                <a href="/login?tipo=vendedor" class="modal-opcion">
+                    <div class="modal-opcion-icono">🏪</div>
+                    <h3>Soy vendedor</h3>
+                    <p>Tengo un puesto y quiero que más gente me encuentre</p>
+                </a>
             </div>
         </div>
     </div>
@@ -535,9 +556,21 @@
             document.getElementById('modalPaso2').style.display = 'none';
         }
 
+        function abrirModalLogin(event) {
+            event.preventDefault();
+            document.getElementById('modalLoginTipo').classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarModalLoginTipo(event) {
+            document.getElementById('modalLoginTipo').classList.remove('visible');
+            document.body.style.overflow = '';
+        }
+
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 cerrarModalTipoUsuario();
+                cerrarModalLoginTipo();
             }
         });
 
