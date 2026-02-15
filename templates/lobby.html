@@ -160,7 +160,13 @@
                 <h2>Mapa de ferias</h2>
             </a>
         </div>
-        
+
+        <div class="seccion-mi-puesto" id="seccionMiPuesto" style="display: none;">
+            <a href="/mi-puesto" class="opcion-mi-puesto">
+                <h2>Mi Puesto</h2>
+            </a>
+        </div>
+
         <h2 class="ferias-titulo">Explorá las <span class="texto-verde">ferias</span></h2>
 
         <div class="filtros-wrapper">
@@ -827,9 +833,10 @@
                     const inicial = data.nombre ? data.nombre.charAt(0).toUpperCase() : 'U';
                     document.getElementById('userInitial').textContent = inicial;
 
-                    // Mostrar "Perfil Feriante" si es vendedor
+                    // Mostrar "Perfil Feriante" y "Mi Puesto" si es vendedor
                     if (data.tipo === 'vendedor') {
                         document.getElementById('perfilFeriante').style.display = 'inline';
+                        document.getElementById('seccionMiPuesto').style.display = 'block';
                     }
                 }
             } catch (error) {
