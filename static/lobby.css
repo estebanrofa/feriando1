@@ -609,8 +609,13 @@ a.logo {
     align-items: center;
     justify-content: center;
     padding: 10px 20px;
-    padding-top: 100px;
+    padding-top: 120px;
     position: relative;
+    gap: 15px;
+}
+
+.seccion-mapa.con-mi-puesto {
+    padding-top: 100px;
     gap: 10px;
 }
 
@@ -628,6 +633,10 @@ a.logo {
     color: #333;
     font-weight: bold;
     text-align: center;
+    margin: 140px 0 -50px 0;
+}
+
+.ferias-titulo.compacto {
     margin: 20px 0 -50px 0;
 }
 

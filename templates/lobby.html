@@ -834,6 +834,8 @@
                     if (data.tipo === 'vendedor') {
                         document.getElementById('perfilFeriante').style.display = 'inline';
                         document.getElementById('botonMiPuesto').style.display = 'flex';
+                        document.querySelector('.seccion-mapa').classList.add('con-mi-puesto');
+                        document.querySelector('.ferias-titulo').classList.add('compacto');
                     }
                 }
             } catch (error) {
